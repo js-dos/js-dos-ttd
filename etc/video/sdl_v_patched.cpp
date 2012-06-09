@@ -8,9 +8,7 @@
  */
 
 /** @file sdl_v.cpp Implementation of the SDL video driver. */
-#ifndef WITH_SDL
-#define WITH_SDL
-#endif
+
 #ifdef WITH_SDL
 
 #include "../stdafx.h"
@@ -72,7 +70,7 @@ static void UpdatePalette()
 		pal[i].unused = 0;
 	}
 
-//	SDL_CALL SDL_SetColors(_sdl_screen, pal, _local_palette.first_dirty, _local_palette.count_dirty);
+	SDL_CALL SDL_SetColors(_sdl_screen, pal, _local_palette.first_dirty, _local_palette.count_dirty);
 }
 
 static void InitPalette()
@@ -248,7 +246,7 @@ static bool CreateMainSurface(uint w, uint h)
 //	}
 
 	/* DO NOT CHANGE TO HWSURFACE, IT DOES NOT WORK */
-	newscreen = SDL_CALL SDL_SetVideoMode(w, h, bpp, SDL_SWSURFACE /*| SDL_HWPALETTE | (_fullscreen ? SDL_FULLSCREEN : SDL_RESIZABLE)*/);
+	newscreen = SDL_CALL SDL_SetVideoMode(w, h, bpp, SDL_SWSURFACE | SDL_HWPALETTE | (_fullscreen ? SDL_FULLSCREEN : SDL_RESIZABLE));
 	if (newscreen == NULL) {
 		DEBUG(driver, 0, "SDL: Couldn't allocate a window to draw on");
 		return false;
@@ -404,23 +402,6 @@ static int PollEvent()
 	SDL_Event ev;
 
 	if (!SDL_CALL SDL_PollEvent(&ev)) return -2;
-
-	DEBUG(driver, 1, "event type: %d", ev.type);
-
-	if (ev.type == 4) {
-		 Uint8 type;
-		  Uint8 state;
-		  Uint16 x, y;
-		  Sint16 xrel, yrel;
-
-		DEBUG(driver, 1, "motion event  type: %d, state: %d, x:y: %d:%d, xr:yr: %d:%d",
-				ev.motion.type, ev.motion.state, ev.motion.x, ev.motion.y, ev.motion.xrel, ev.motion.yrel);
-	}
-
-	if (ev.type == 5) {
-		DEBUG(driver, 1, "down event  type: %d, button: %d, state: %d, x:y: %d:%d",
-				ev.button.type, ev.button.button, ev.button.state, ev.button.x, ev.button.y);
-	}
 
 	switch (ev.type) {
 		case SDL_MOUSEMOTION:
