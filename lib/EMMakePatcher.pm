@@ -58,10 +58,14 @@ SETTINGSGEN
 		$_ =~ s|-lpthread||g;
 		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL|;
 		$_ =~ s|^STRIP.*||;
-		$_ =~ s|(^LIBS.*)|$1 --pre-js $etc/pre.js --preload-file /home/caiiiycuk/ttd/preload|;
+		$_ =~ s|(^LIBS.*=).*|$1 --pre-js $etc/pre.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
 
 		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
 		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;
+
+		$_ =~ s|-lstdc++||g;
+		$_ =~ s|-lc||g;
+		$_ =~ s|-L/usr/lib/i386-linux-gnu||g;
 	}
 
 	close(M);

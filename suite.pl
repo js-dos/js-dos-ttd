@@ -42,7 +42,7 @@ if ($opts{e}) {
 	system("$emscripten/emconfigure $source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-network --disable-unicode");
 	chdir('..');
 
-	system("cp $etc/video/sdl_v_patched.cpp $source/src/video/sdl_v_patched.cpp");
+	system("ln -s $etc/video/sdl_v_patched.cpp $source/src/video/sdl_v_patched.cpp");
 	patch(
 		'emcc-build', 
 		$emscripten, 

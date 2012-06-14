@@ -63,6 +63,9 @@ static void UpdatePalette()
 {
 	SDL_Color pal[256];
 
+	_local_palette.first_dirty = 0;
+	_local_palette.count_dirty = 256;
+
 	for (int i = 0; i != _local_palette.count_dirty; i++) {
 		pal[i].r = _local_palette.palette[_local_palette.first_dirty + i].r;
 		pal[i].g = _local_palette.palette[_local_palette.first_dirty + i].g;
@@ -659,6 +662,7 @@ void VideoDriver_SDL::MainLoop()
 	DEBUG(driver, 1, "SDL: using %sthreads", _draw_threaded ? "" : "no ");
 
 #ifdef EMSCRIPTEN
+	emscripten_hide_mouse();
 	emscripten_set_main_loop(__mainLoop, 0);
 #else
 	for (;;) {
