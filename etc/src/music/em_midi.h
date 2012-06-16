@@ -9,19 +9,20 @@
 
 /** @file extmidi.h Base support for playing music via an external application. */
 
-#ifndef MUSIC_EXTERNAL_H
-#define MUSIC_EXTERNAL_H
+#ifndef MUSIC_EMSCRIPTEN_H
+#define MUSIC_EMSCRIPTEN_H
 
 #include "music_driver.hpp"
 
-class MusicDriver_ExtMidi: public MusicDriver {
-private:
-	char *command;
-	char song[MAX_PATH];
-	pid_t pid;
+#include <SDL/SDL_mixer.h>
+#include <map>
+#include <string>
 
-	void DoPlay();
-	void DoStop();
+
+class MusicDriver_EmMidi: public MusicDriver {
+private:
+	std::map<std::string, Mix_Music*> loaded;
+	bool		playing;
 
 public:
 	/* virtual */ const char *Start(const char * const *param);
@@ -35,15 +36,15 @@ public:
 	/* virtual */ bool IsSongPlaying();
 
 	/* virtual */ void SetVolume(byte vol);
-	/* virtual */ const char *GetName() const { return "extmidi"; }
+	/* virtual */ const char *GetName() const { return "em_midi"; }
 };
 
-class FMusicDriver_ExtMidi: public MusicDriverFactory<FMusicDriver_ExtMidi> {
+class FMusicDriver_EmMidi: public MusicDriverFactory<FMusicDriver_EmMidi> {
 public:
 	static const int priority = 3;
-	/* virtual */ const char *GetName() { return "extmidi"; }
-	/* virtual */ const char *GetDescription() { return "External MIDI Driver"; }
-	/* virtual */ Driver *CreateInstance() { return new MusicDriver_ExtMidi(); }
+	/* virtual */ const char *GetName() { return "em_midi"; }
+	/* virtual */ const char *GetDescription() { return "Emscripten MIDI Driver"; }
+	/* virtual */ Driver *CreateInstance() { return new MusicDriver_EmMidi(); }
 };
 
-#endif /* MUSIC_EXTERNAL_H */
+#endif /* MUSIC_EMSCRIPTEN_H */
