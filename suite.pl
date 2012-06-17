@@ -42,7 +42,12 @@ if ($opts{e}) {
 	system("$emscripten/emconfigure $source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-network --disable-unicode");
 	chdir('..');
 
-	system("ln -s $etc/video/sdl_v_patched.cpp $source/src/video/sdl_v_patched.cpp");
+	#pathced sources
+	system("ln -s $etc/src/gfxinit_patched.cpp $source/src/gfxinit_patched.cpp");
+	system("ln -s $etc/src/video/sdl_v_patched.cpp $source/src/video/sdl_v_patched.cpp");
+	system("ln -s $etc/src/music/em_midi.h $source/src/music/em_midi.h");
+	system("ln -s $etc/src/music/em_midi.cpp $source/src/music/em_midi.cpp");
+	
 	patch(
 		'emcc-build', 
 		$emscripten, 
