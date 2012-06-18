@@ -31,7 +31,7 @@ void MusicDriver_EmMidi::Stop() {
 }
 
 void MusicDriver_EmMidi::PlaySong(const char *filename) {
-	static std::string server_prefix = "http://localhost/gm/";
+	static std::string server_prefix = "http://play-ttd.com/gm/";
 
 	std::string file(filename);
 	//GM_TT00.OGG == 11
