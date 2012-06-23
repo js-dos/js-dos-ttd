@@ -53,7 +53,7 @@ OBSOLETE_SETTINGSGEN:
 SETTINGSGEN
 		}
 
-		$_ =~ s|^TTD.*|TTD            = openttd.html|;
+		$_ =~ s|^TTD.*|TTD            = openttd.js|;
 		$_ =~ s|-lSDL||g;
 		$_ =~ s|-lpthread||g;
 		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL|;

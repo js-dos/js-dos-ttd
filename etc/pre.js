@@ -55,6 +55,7 @@ Module['SAVE_GAME'] = function(file) {
   xhr.send(array.buffer);
 };
 
+Module['noInitialRun'] = true;
 
 Module['preRun'] = function() { 
   readUUID();

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Transport tycoon deluxe</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+  <body onload="bodyLoaded();">
+<center>
+    <div id="status" class="loader">Downloading...</div>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+    <div>
+      <input id="play_button" type="button" class="button red" value="Play" onclick="play();" style="display: none;"/>
+      <input id="full_button" type="button" class="button" value="Fullscreen" onclick="Module.requestFullScreen()"  style="display: none;"/>
+    </div>
+    <p class="copyright">This is <a href="http://www.openttd.org/" target="_blank">OpenTTD</a> compiled to JavaScript using <a href="https://github.com/kripken/emscripten">Emscripten</a>, © <a href="http://caiiiycuk.info" target="_blank">Guryanov Aleksander</a>,&nbsp;2012</p>
+</center>
+
+    <script type='text/javascript'>
+      function play() {
+        document.getElementById('play_button').style.display = 'none';
+        document.getElementById('full_button').style.display = 'inline';
+        document.getElementById('status').style.display = 'block';
+
+        Module['removeRunDependency']();
+      }
+
+      function bodyLoaded() {
+        document.getElementById('play_button').style.display = 'inline';
+        document.getElementById('status').style.display = 'none';
+      }
+
+      // connect to canvas
+      var Module = {
+        print: function() {},
+        printErr: function(text) {
+          if (0) { // XXX disabled for safety typeof dump == 'function') {
+            dump(text + '\n'); // fast, straight to the real console
+          } else {
+            console.log(text);
+          }
+        },
+        canvas: document.getElementById('canvas'),
+        setStatus: function(text) {
+          if (Module.setStatus.interval) clearInterval(Module.setStatus.interval);
+          document.getElementById('status').innerHTML = text;
+          if (text) {
+            var counter = 0;
+            Module.setStatus.interval = setInterval(function() {
+              counter++;
+              counter %= 3;
+              var dots = ' ';
+              for (var i = 0; i < counter; i++) dots += '.';
+              dots += '*';
+              for (var i = counter; i < 2; i++) dots += '.';
+              document.getElementById('status').innerHTML = text.replace('...', dots);
+            }, 300);
+          } else {
+            document.getElementById('status').style.display = 'none';
+          }
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Downloading: ' + (this.totalDependencies-left) + '/' + this.totalDependencies + '...' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+    </script>      
+    
+    <script type='text/javascript' src='openttd.js'>
+    </script>
+  </body>
+</html>
