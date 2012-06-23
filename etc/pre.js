@@ -21,14 +21,14 @@ function guidGen() {
     var S4 = function() {
        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     };
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    return (S4()+S4()+S4()+S4()+S4()+S4()+S4()+S4());
 };
 
 function readUUID() {
   var guid = getCookie('ttd-save-uuid');
   if (guid == null || guid == "") {
     guid = guidGen();
-    setCookie('ttd-save-uuid', guid);
+    setCookie('ttd-save-uuid', guid, 365*20);
   }
 
   Module['UUID'] = guid;
