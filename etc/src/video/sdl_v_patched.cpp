@@ -585,17 +585,17 @@ void __mainLoop() {
 
 		/* determine which directional keys are down */
 		_dirkeys =
-#if SDL_VERSION_ATLEAST(1, 3, 0)
-			(keys[SDL_SCANCODE_LEFT]  ? 1 : 0) |
-			(keys[SDL_SCANCODE_UP]    ? 2 : 0) |
-			(keys[SDL_SCANCODE_RIGHT] ? 4 : 0) |
-			(keys[SDL_SCANCODE_DOWN]  ? 8 : 0);
-#else
-			(keys[SDLK_LEFT]  ? 1 : 0) |
-			(keys[SDLK_UP]    ? 2 : 0) |
-			(keys[SDLK_RIGHT] ? 4 : 0) |
-			(keys[SDLK_DOWN]  ? 8 : 0);
-#endif
+//#if SDL_VERSION_ATLEAST(1, 3, 0)
+//			(keys[SDL_SCANCODE_LEFT]  ? 1 : 0) |
+//			(keys[SDL_SCANCODE_UP]    ? 2 : 0) |
+//			(keys[SDL_SCANCODE_RIGHT] ? 4 : 0) |
+//			(keys[SDL_SCANCODE_DOWN]  ? 8 : 0);
+//#else
+			(keys[/*SDLK_LEFT*/1104]  ? 1 : 0) |
+			(keys[/*SDLK_UP*/1106]    ? 2 : 0) |
+			(keys[/*SDLK_RIGHT*/1103] ? 4 : 0) |
+			(keys[/*SDLK_DOWN*/1105]  ? 8 : 0);
+//#endif
 		if (old_ctrl_pressed != _ctrl_pressed) HandleCtrlChanged();
 
 		/* The gameloop is the part that can run asynchroniously. The rest
