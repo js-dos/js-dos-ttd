@@ -43,7 +43,7 @@ Module['SAVE_GAME'] = function(file) {
   }
 
   var fs_object = FS.findObject(file);
-  var contents = fs_object['contents'];
+  var contents = fs_object.contents;
   var array = new Uint8Array(contents);
 
   var xhr = new XMLHttpRequest();
@@ -69,7 +69,7 @@ Module['preRun'] = function() {
 };
 
 //'-d', '3'
-Module['arguments'] = ['-d', '3', '-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'];
+Module['arguments'] = ['-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'];
 
 Module['print'] = function(text) {
 	console.log(text);

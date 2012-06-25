@@ -53,6 +53,10 @@ OBSOLETE_SETTINGSGEN:
 SETTINGSGEN
 		}
 
+#O2
+#-s PRECISE_I64_MATH=0 - break code
+#-O2 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0
+
 		$_ =~ s|^TTD.*|TTD            = openttd.js|;
 		$_ =~ s|-lSDL||g;
 		$_ =~ s|-lpthread||g;
