@@ -28,13 +28,15 @@
     <!-- <tr><td></td></tr> -->
     <tr align="right"><td>
       <div style="position: relative; float:left;">
+        <a href="http://www.youtube.com/watch?v=3Ovut2taLdM" target="_blank"><img src="youtube.png" alt="Watch in game video" width="24px" height="24px"></img></a>
         <g:plusone annotation="none"></g:plusone>
         <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
       </div>
       <div style="position: relative; float:right;">
         <a href="javascript: small();">x1</a>&nbsp
         <a href="javascript: medium();">x1.25</a>&nbsp
-        <a href="javascript: big();">x1.5</a>
+        <a href="javascript: big();">x1.5</a><br/>
+        <input id="cursor-checkbox" type="checkbox" checked="checked" onclick="updateCursor()">Never hide system cursor</input>
       </div>
     </td></tr>
   </table>
@@ -49,12 +51,37 @@
 </center>
 
     <script type='text/javascript'>
+      var isPlaying = false;
+
+      function isCursorVisible() {
+        return document.getElementById('cursor-checkbox').checked;
+      }
+
+      function updateCursor() {
+        if (isPlaying) {
+          if (isCursorVisible()) {
+            showCursor();
+          } else {
+            hideCursor();
+          }
+        }
+      }
+
+      function hideCursor() {
+        Module['canvas'].className = Module['canvas'].className + ' no-cursor';
+      }
+
+      function showCursor() {
+         Module['canvas'].className = 
+           Module['canvas'].className.replace(/no-cursor/g , '');
+      }
+
       function play() {
         document.getElementById('play_button').style.display = 'none';
         document.getElementById('full_button').style.display = 'inline';
         document.getElementById('status').style.display = 'block';
 
-        Module['canvas'].className = Module['canvas'].className + ' no-cursor';
+        isPlaying = true;
         Module['removeRunDependency']();
       }
 
@@ -90,6 +117,7 @@
             }, 300);
           } else {
             document.getElementById('status').style.display = 'none';
+            updateCursor();
           }
         },
         totalDependencies: 0,
