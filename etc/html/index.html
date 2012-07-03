@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Transport tycoon deluxe</title>
+    <meta name="description" content="Transport tycoon deluxe game in your browser. Play it online." />
+    <meta name="keywords" content="TTD,Transport tycoon deluxe,game,online,play,play online" />
+    <meta name="author" content="Guryanov Aleksander" />
     <link href="style.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript">
@@ -22,7 +25,7 @@
   <body onload="bodyLoaded();">
 <center>
   <div id="status" class="loader">Downloading...</div>
-  <canvas id="canvas" class="medium" oncontextmenu="event.preventDefault()"></canvas>
+  <canvas id="canvas" class="medium canvas-margin" oncontextmenu="event.preventDefault()"></canvas>
 
   <table id="table" class="medium-width">
     <!-- <tr><td></td></tr> -->
@@ -92,6 +95,7 @@
 
       // connect to canvas
       var Module = {
+        fullScreen: false,
         print: function() {},
         printErr: function(text) {
           if (0) { // XXX disabled for safety typeof dump == 'function') {
@@ -124,34 +128,69 @@
         monitorRunDependencies: function(left) {
           this.totalDependencies = Math.max(this.totalDependencies, left);
           Module.setStatus(left ? 'Downloading: ' + (this.totalDependencies-left) + '/' + this.totalDependencies + '...' : 'All downloads complete.');
+        },
+        onFullScreen: function() {
+          var isFullScreen = 
+            document['webkitFullScreenElement'] === Module['canvas'] ||
+            document['mozFullScreenElement'] === Module['canvas'] ||
+            document['fullScreenElement'] === Module['canvas'];
+
+          Module['fullScreen'] = !Module['fullScreen'];
+
+          if (typeof document['webkitFullScreenElement'] === 'undefined' &&
+            typeof document['mozFullScreenElement'] === 'undefined' &&
+            typeof document['fullScreenElement'] === 'undefined') {
+            isFullScreen = Module['fullScreen'];
+          }
+
+          if (isFullScreen) {
+            Module['canvas'].className = 
+              Module['canvas'].className.replace(/canvas-margin/g , 'canvas-no-margin');
+
+            if (Module['canvas'].clientWidth && Module['canvas'].clientHeight) {
+              Module['scaleX'] = Module['canvas'].clientWidth / 640;
+              Module['scaleY'] = Module['canvas'].clientHeight / 480;
+            }
+          } else {
+            Module['canvas'].className = 
+              Module['canvas'].className.replace(/canvas-no-margin/g , 'canvas-margin');
+
+            medium();
+          }
         }
       };
+
       Module.setStatus('Downloading...');
     </script>      
 
     <script type='text/javascript'>
       function big() {
-        Module['scale'] = 1.5;
+        Module['scaleX'] = 1.5;
+        Module['scaleY'] = 1.5;
         Module['canvas'].className = 
            Module['canvas'].className.replace(/big|medium|small/ , 'big');
         document.getElementById('table').className = 'big-width';
       }
 
       function medium() {
-        Module['scale'] = 1.25;
+        Module['scaleX'] = 1.25;
+        Module['scaleY'] = 1.25;
         Module['canvas'].className = 
          Module['canvas'].className.replace(/big|medium|small/ , 'medium');
         document.getElementById('table').className = 'medium-width';
       }
 
       function small() {
-        Module['scale'] = 1;
+        Module['scaleX'] = 1;
+        Module['scaleY'] = 1;
+
         Module['canvas'].className = 
           Module['canvas'].className.replace(/big|medium|small/ , 'small');
         document.getElementById('table').className = 'small-width';
       }
 
-      Module['scale'] = 1.25;
+      Module['scaleX'] = 1.25;
+      Module['scaleY'] = 1.25;
     </script>
    
     <script type="text/javascript">

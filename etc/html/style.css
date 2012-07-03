@@ -11,7 +11,14 @@ canvas {
 	background: #FFFFFF url('play-ttd.jpeg') no-repeat center center;
 	border: 1px solid black;
 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
+}
+
+.canvas-margin {
 	margin-top: 30px;
+}
+
+.canvas-no-margin {
+	margin-top: 0px;
 }
 
 .no-cursor {
@@ -61,7 +68,7 @@ div {
 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
 	text-shadow: 0 1px 0 black, 0 2px 0 black;
 	width: 700px;
-	margin: 0;
+	margin-top: 30px;
 }
 
 .copyright {
