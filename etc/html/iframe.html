@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Transport tycoon deluxe</title>
+    <meta name="description" content="Transport tycoon deluxe game in your browser. Play it online." />
+    <meta name="keywords" content="TTD,Transport tycoon deluxe,game,online,play,play online" />
+    <meta name="author" content="Guryanov Aleksander" />
+    <link href="style-iframe.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32891320-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </head>
+  <body onload="bodyLoaded();">
+<center>
+  <div id="status" class="loader">Downloading...</div>
+  <canvas id="canvas" class="medium canvas-margin" oncontextmenu="event.preventDefault()"></canvas>
+
+  <table id="table" class="medium-width">
+    <!-- <tr><td></td></tr> -->
+    <tr align="right"><td>
+      <div style="position: relative; float:left;">
+        <a href="http://www.youtube.com/watch?v=3Ovut2taLdM" target="_blank"><img src="youtube.png" alt="Watch in game video" width="24px" height="24px"></img></a>
+        <g:plusone annotation="none"></g:plusone>
+        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+      </div>
+      <div style="position: relative; float:right;">
+        <a href="javascript: small();">x1</a>&nbsp
+        <a href="javascript: medium();">x1.25</a>&nbsp
+       <!-- <a href="javascript: big();">x1.5</a><br/> -->
+        <input id="cursor-checkbox" type="checkbox" checked="checked" onclick="updateCursor()">Never hide system cursor</input>
+      </div>
+    </td></tr>
+  </table>
+
+    <div>
+      <input id="play_button" type="button" class="button red" value="Play" onclick="play();" style="display: none;"/>
+      <input id="full_button" type="button" class="button" value="Fullscreen" onclick="Module.requestFullScreen()"  style="display: none;"/>
+    </div>
+
+    <p class="copyright">This is <a href="http://www.openttd.org/" target="_blank">OpenTTD</a> compiled to JavaScript using <a href="https://github.com/kripken/emscripten">Emscripten</a>, © <a href="http://caiiiycuk.info" target="_blank">Guryanov Aleksander</a>,&nbsp;2012</p>
+    <p class="copyright">Feedback: <a href="https://github.com/caiiiycuk/play-ttd/issues" target="_blank">Report a bug</a> or send an <a href="mailto:caiiiycuk@gmail.com">email</a> to me.</p>
+</center>
+
+    <script type='text/javascript'>
+      var isPlaying = false;
+
+      function isCursorVisible() {
+        return document.getElementById('cursor-checkbox').checked;
+      }
+
+      function updateCursor() {
+        if (isPlaying) {
+          if (isCursorVisible()) {
+            showCursor();
+          } else {
+            hideCursor();
+          }
+        }
+      }
+
+      function hideCursor() {
+        Module['canvas'].className = Module['canvas'].className + ' no-cursor';
+      }
+
+      function showCursor() {
+         Module['canvas'].className = 
+           Module['canvas'].className.replace(/no-cursor/g , '');
+      }
+
+      function play() {
+        document.getElementById('play_button').style.display = 'none';
+        //document.getElementById('full_button').style.display = 'inline';
+        document.getElementById('status').style.display = 'block';
+
+        isPlaying = true;
+        Module['removeRunDependency']();
+      }
+
+      function bodyLoaded() {
+        document.getElementById('play_button').style.display = 'inline';
+        document.getElementById('status').style.display = 'none';
+      }
+
+      // connect to canvas
+      var Module = {
+        fullScreen: false,
+        print: function() {},
+        printErr: function(text) {
+          if (0) { // XXX disabled for safety typeof dump == 'function') {
+            dump(text + '\n'); // fast, straight to the real console
+          } else {
+            console.log(text);
+          }
+        },
+        canvas: document.getElementById('canvas'),
+        setStatus: function(text) {
+          if (Module.setStatus.interval) clearInterval(Module.setStatus.interval);
+          document.getElementById('status').innerHTML = text;
+          if (text) {
+            var counter = 0;
+            Module.setStatus.interval = setInterval(function() {
+              counter++;
+              counter %= 3;
+              var dots = ' ';
+              for (var i = 0; i < counter; i++) dots += '.';
+              dots += '*';
+              for (var i = counter; i < 2; i++) dots += '.';
+              document.getElementById('status').innerHTML = text.replace('...', dots);
+            }, 300);
+          } else {
+            document.getElementById('status').style.display = 'none';
+            updateCursor();
+          }
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Downloading: ' + (this.totalDependencies-left) + '/' + this.totalDependencies + '...' : 'All downloads complete.');
+        },
+        onFullScreen: function() {
+          var isFullScreen = 
+            document['webkitFullScreenElement'] === Module['canvas'] ||
+            document['mozFullScreenElement'] === Module['canvas'] ||
+            document['fullScreenElement'] === Module['canvas'];
+
+          Module['fullScreen'] = !Module['fullScreen'];
+
+          if (typeof document['webkitFullScreenElement'] === 'undefined' &&
+            typeof document['mozFullScreenElement'] === 'undefined' &&
+            typeof document['fullScreenElement'] === 'undefined') {
+            isFullScreen = Module['fullScreen'];
+          }
+
+          if (isFullScreen) {
+            Module['canvas'].className = 
+              Module['canvas'].className.replace(/canvas-margin/g , 'canvas-no-margin');
+
+            if (Module['canvas'].clientWidth && Module['canvas'].clientHeight) {
+              Module['scaleX'] = Module['canvas'].clientWidth / 640;
+              Module['scaleY'] = Module['canvas'].clientHeight / 480;
+            }
+          } else {
+            Module['canvas'].className = 
+              Module['canvas'].className.replace(/canvas-no-margin/g , 'canvas-margin');
+
+            medium();
+          }
+        }
+      };
+
+      Module.setStatus('Downloading...');
+    </script>      
+
+    <script type='text/javascript'>
+      function big() {
+        Module['scaleX'] = 1.5;
+        Module['scaleY'] = 1.5;
+        Module['canvas'].className = 
+           Module['canvas'].className.replace(/big|medium|small/ , 'big');
+        document.getElementById('table').className = 'big-width';
+      }
+
+      function medium() {
+        Module['scaleX'] = 1.25;
+        Module['scaleY'] = 1.25;
+        Module['canvas'].className = 
+         Module['canvas'].className.replace(/big|medium|small/ , 'medium');
+        document.getElementById('table').className = 'medium-width';
+      }
+
+      function small() {
+        Module['scaleX'] = 1;
+        Module['scaleY'] = 1;
+
+        Module['canvas'].className = 
+          Module['canvas'].className.replace(/big|medium|small/ , 'small');
+        document.getElementById('table').className = 'small-width';
+      }
+
+      Module['scaleX'] = 1.25;
+      Module['scaleY'] = 1.25;
+    </script>
+   
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+
+    <script type='text/javascript' src='openttd.js'>
+    </script>
+  </body>
+</html>
