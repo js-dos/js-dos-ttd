@@ -16,13 +16,14 @@
 
 #include "em_midi.h"
 
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+#endif
 
 static FMusicDriver_EmMidi iFMusicDriver_EmMidi;
 
 const char *MusicDriver_EmMidi::Start(const char * const *) {
-	Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
 	playing = false;
-
 	return NULL;
 }
 
@@ -31,32 +32,24 @@ void MusicDriver_EmMidi::Stop() {
 }
 
 void MusicDriver_EmMidi::PlaySong(const char *filename) {
+#ifdef EMSCRIPTEN
 	static std::string server_prefix = "http://play-ttd.com/gm/";
 
 	std::string file(filename);
-	//GM_TT00.OGG == 11
 	file = server_prefix + file.substr(file.length() - 11);
-	DEBUG(driver, 1, "play %s", file.c_str());
 
-	Mix_Music* music = 0;
-
-	std::map<std::string, Mix_Music*>::iterator i = loaded.find(file);
-
-	if (i != loaded.end()) {
-		music = i->second;
-	} else {
-		music = Mix_LoadMUS(file.c_str());
-		loaded.insert(std::make_pair(file, music));
-	}
-
-	Mix_HaltMusic();
-	Mix_PlayMusic(music, 1);
+	std::string playScript("Module['PLAY_MUSIC']('");
+	playScript.append(file).append("');");
+	emscripten_run_script(playScript.c_str());
 	playing = true;
+#endif	
 }
 
 void MusicDriver_EmMidi::StopSong() {
-	Mix_HaltMusic();
+#ifdef EMSCRIPTEN	
+	emscripten_run_script("Module['STOP_MUSIC']();");
 	playing = false;
+#endif	
 }
 
 bool MusicDriver_EmMidi::IsSongPlaying() {

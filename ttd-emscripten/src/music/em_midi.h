@@ -21,7 +21,6 @@
 
 class MusicDriver_EmMidi: public MusicDriver {
 private:
-	std::map<std::string, Mix_Music*> loaded;
 	bool		playing;
 
 public:

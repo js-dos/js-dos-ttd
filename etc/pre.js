@@ -34,6 +34,18 @@ function readUUID() {
   Module['UUID'] = guid;
 };
 
+Module['MUSIC'] = new Audio();
+
+Module['PLAY_MUSIC'] = function(url) {
+  Module['MUSIC'].src = url;
+  Module['MUSIC'].play();
+}
+
+Module['STOP_MUSIC'] = function() {
+  Module['MUSIC'].src = Module['MUSIC'].src; // rewind
+  Module['MUSIC'].pause();
+}
+
 Module['SAVE_GAME'] = function(file) {
   file = file.replace(/\/\//g, "/");
   
