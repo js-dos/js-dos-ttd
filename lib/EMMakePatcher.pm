@@ -64,11 +64,11 @@ SETTINGSGEN
 		$_ =~ s|^STRIP.*||;
 		$_ =~ s|(^LIBS.*=).*|$1 --pre-js $etc/pre.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
 
-		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
-		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;
+#		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
+#		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;
 
-		$_ =~ s|gfxinit.o|gfxinit_patched.o|;
-		$_ =~ s|gfxinit.cpp|gfxinit_patched.cpp|;
+#		$_ =~ s|gfxinit.o|gfxinit_patched.o|;
+#		$_ =~ s|gfxinit.cpp|gfxinit_patched.cpp|;
 
 		$_ =~ s|music/extmidi.o|music/em_midi.o|;
 		$_ =~ s|music/extmidi.cpp|music/em_midi.cpp|;
