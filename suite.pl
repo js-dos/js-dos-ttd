@@ -58,7 +58,7 @@ if ($opts{e}) {
 }
 
 if ($opts{n}) {
-	print "Configure for gcc\n";
+	print "Building gcc\n";
 
 	chdir('gcc-build');
 	system("VERBOSE=1 make -j3");
