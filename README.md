@@ -1,4 +1,4 @@
 play-ttd
 ========
 
-Code base of http://plat-ttd.com.
+Code base of http://play-ttd.com.
