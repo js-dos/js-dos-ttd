@@ -18,46 +18,49 @@
 
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
+
+extern "C" {
+extern void em_midi_volume(byte);
+extern void em_midi_play(const char*);
+extern bool em_midi_is_playing();
+extern void	em_midi_stop();
+}
+
 #endif
 
 static FMusicDriver_EmMidi iFMusicDriver_EmMidi;
 
 const char *MusicDriver_EmMidi::Start(const char * const *) {
-	playing = false;
 	return NULL;
 }
 
 void MusicDriver_EmMidi::Stop() {
-	playing = false;
 }
 
 void MusicDriver_EmMidi::PlaySong(const char *filename) {
 #ifdef EMSCRIPTEN
-	static std::string server_prefix = "http://play-ttd.com/gm/";
-
-	std::string file(filename);
-	file = server_prefix + file.substr(file.length() - 11);
-
-	std::string playScript("Module['PLAY_MUSIC']('");
-	playScript.append(file).append("');");
-	emscripten_run_script(playScript.c_str());
-	playing = true;
+	em_midi_play(filename);
 #endif	
 }
 
 void MusicDriver_EmMidi::StopSong() {
 #ifdef EMSCRIPTEN	
-	emscripten_run_script("Module['STOP_MUSIC']();");
-	playing = false;
+	em_midi_stop();
 #endif	
 }
 
 bool MusicDriver_EmMidi::IsSongPlaying() {
-	return playing;
+#ifdef EMSCRIPTEN	
+	return em_midi_is_playing();
+#endif	
+
+	return false;
 }
 
 void MusicDriver_EmMidi::SetVolume(byte vol){
-	DEBUG(driver, 1, "em_midi: set volume not implemented");
+#ifdef EMSCRIPTEN	
+	em_midi_volume(vol);
+#endif
 }
 
 #endif /* __MORPHOS__ */

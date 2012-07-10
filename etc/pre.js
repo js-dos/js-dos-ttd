@@ -34,17 +34,35 @@ function readUUID() {
   Module['UUID'] = guid;
 };
 
-Module['MUSIC'] = new Audio();
+// --
+// -- EM_MIDI --
+// --
 
-Module['PLAY_MUSIC'] = function(url) {
-  Module['MUSIC'].src = url;
-  Module['MUSIC'].play();
-}
+Module['EM_MIDI_AUDIO'] = new Audio();
 
-Module['STOP_MUSIC'] = function() {
-  Module['MUSIC'].src = Module['MUSIC'].src; // rewind
-  Module['MUSIC'].pause();
-}
+var _em_midi_play = function(ptr) {
+  var filename = Pointer_stringify(ptr);
+  var url = 'http://play-ttd.com/gm/' + filename.substr(-11);
+  console.log('Playing song: ' + url);
+  
+  Module['EM_MIDI_AUDIO'].src = url;
+  Module['EM_MIDI_AUDIO'].play();
+};
+
+var _em_midi_stop = function() {
+  Module['EM_MIDI_AUDIO'].src = Module['EM_MIDI_AUDIO'].src; // rewind
+  Module['EM_MIDI_AUDIO'].pause();
+};
+
+var _em_midi_is_playing = function() {
+  return !(Module['EM_MIDI_AUDIO'].paused || Module['EM_MIDI_AUDIO'].ended);
+};
+
+var _em_midi_volume = function(vol) {
+  Module['EM_MIDI_AUDIO'].volume = vol / 256;
+};
+
+// -------------
 
 Module['SAVE_GAME'] = function(file) {
   file = file.replace(/\/\//g, "/");

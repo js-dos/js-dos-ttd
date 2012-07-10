@@ -20,9 +20,6 @@
 
 
 class MusicDriver_EmMidi: public MusicDriver {
-private:
-	bool		playing;
-
 public:
 	/* virtual */ const char *Start(const char * const *param);
 
