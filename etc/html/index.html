@@ -23,6 +23,18 @@
   </head>
   <body onload="bodyLoaded();">
 <center>
+<!-- FACEBOOK SDK-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- -->
+
+
   <div id="status" class="loader">Downloading...</div>
   <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 640px; height: 480px;">
   </canvas>
@@ -49,11 +61,10 @@
     <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
   </div>
 
-  
+    <div class="fb-comments" data-href="http://play-ttd.com/" data-num-posts="3" data-width="470"></div>  
 
     <p class="copyright">Feedback: <a href="https://github.com/caiiiycuk/play-ttd/issues" target="_blank">Report a bug</a> or send an <a href="mailto:caiiiycuk@gmail.com">email</a> to me.</p>
 
-  <div class="fb-comments" data-href="http://play-ttd.com/" data-num-posts="2" data-width="470"></div>
 </center>
 
     <script type='text/javascript'>

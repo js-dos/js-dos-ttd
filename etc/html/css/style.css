@@ -96,3 +96,10 @@ div {
 .share {
 	padding-left: 160px;
 }
+
+.fb-comments {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    width: 510px;
+    border: 1px groove #CECECE;
+}
