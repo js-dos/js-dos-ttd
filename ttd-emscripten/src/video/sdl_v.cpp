@@ -25,8 +25,13 @@
 #include "../fileio_func.h"
 #include "sdl_v.h"
 #include <SDL.h>
+
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
+
+extern  "C" {
+	void playttd_set_canvas_size(int w, int h);
+}
 #endif
 
 static FVideoDriver_SDL iFVideoDriver_SDL;
@@ -263,6 +268,10 @@ static bool CreateMainSurface(uint w, uint h)
 	_screen.pitch = newscreen->pitch / (bpp / 8);
 	_screen.dst_ptr = newscreen->pixels;
 	_sdl_screen = newscreen;
+
+	// Force creation of surface (for emscripten)
+	SDL_CALL SDL_LockSurface(_sdl_screen);
+	SDL_CALL SDL_UnlockSurface(_sdl_screen);
 
 	Blitter *blitter = BlitterFactoryBase::GetCurrentBlitter();
 	blitter->PostResize();
@@ -687,21 +696,25 @@ bool VideoDriver_SDL::ChangeResolution(int w, int h)
 {
 	if (_draw_threaded) _draw_mutex->BeginCritical();
 	bool ret = CreateMainSurface(w, h);
+	if (ret) playttd_set_canvas_size(w, h);
 	if (_draw_threaded) _draw_mutex->EndCritical();
 	return ret;
 }
 
+
 bool VideoDriver_SDL::ToggleFullscreen(bool fullscreen)
 {
-	_fullscreen = fullscreen;
-	GetVideoModes(); // get the list of available video modes
-	if (_num_resolutions == 0 || !CreateMainSurface(_cur_resolution.width, _cur_resolution.height)) {
-		/* switching resolution failed, put back full_screen to original status */
-		_fullscreen ^= true;
-		return false;
-	}
-	return true;
+	// _fullscreen = fullscreen;
+	// GetVideoModes(); // get the list of available video modes
+	// if (_num_resolutions == 0 || !CreateMainSurface(_cur_resolution.width, _cur_resolution.height)) {
+	// 	_fullscreen ^= true;
+	// 	return false;
+	// }
+	// return true;
+	return false;
 }
+
+
 
 bool VideoDriver_SDL::AfterBlitterChange()
 {

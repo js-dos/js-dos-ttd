@@ -62,7 +62,22 @@ var _em_midi_volume = function(vol) {
   Module['EM_MIDI_AUDIO'].volume = vol / 256;
 };
 
-// -------------
+// --
+// -- MISC --
+// --
+
+var _playttd_set_canvas_size = function(width, height) {
+  width = width + 'px';
+  height = height + 'px';
+
+  if (Module['canvas'].style.width !== width ||
+     Module['canvas'].style.height !== height) {
+    Module['canvas'].style.width = width;
+    Module['canvas'].style.height = height;
+  }
+}
+
+// ----------
 
 Module['SAVE_GAME'] = function(file) {
   file = file.replace(/\/\//g, "/");

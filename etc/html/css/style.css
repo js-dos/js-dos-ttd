@@ -1,5 +1,6 @@
 body {
 	font: 1em Verdana,sans-serif;
+	background: #a0cef0 url('../img/background.jpg') no-repeat right top;
 }
 
 table {
@@ -7,48 +8,47 @@ table {
 }
 
 canvas { 
-	background: #FFFFFF url('play-ttd.jpeg') no-repeat center center;
+	background: #393a3e;
 	border: 1px solid black;
 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
-}
-
-.canvas-margin {
 	margin-top: 30px;
+	display: none;
 }
 
-.canvas-no-margin {
-	margin-top: 0px;
+.teaser {
+	background: #393a3e url('../img/teaser.jpg') no-repeat center center;
+	width: 640px;
+	height: 480px;
+
+	border: 1px solid black;
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
+	margin-top: 30px;
+
+	color: black;
+	font-size: 24px;
+	text-align: left;
+	vertical-align: center;
+}
+
+.teaser p {
+	background: rgba(255, 255, 255, 0.85) url('../img/openttd-128.gif') no-repeat left center;
+	
+	border-radius: 5px;
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
+	padding: 10px 10px 10px 158px;
+
+	margin: 120px 20px 0px 20px; 
+}
+
+.teaser span {
+	display: block;
+	font-size:14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .no-cursor {
 	cursor: none;
-}
-
-.big-width {
-	width: 960px;
-}
-
-.big {
-	width: 960px;
-	height: 720px;	
-}
-
-.medium-width {
-	width: 800px;
-}
-
-.medium {
-	width: 800px;
-	height: 600px;		
-}
-
-.small-width {
-	width: 640px;
-}
-
-.small {
-	width: 640px;
-	height: 480px;
 }
 
 textarea { 
@@ -56,7 +56,7 @@ textarea {
 }
 
 div { 
-	text-align: center; 
+	margin: 7px;
 }
 
 .loader {
@@ -76,7 +76,7 @@ div {
 
 .button {
     font-size: 1em;
-    padding: 10px 20px;
+    padding: 5px;
     background: none repeat scroll 0% 0% rgb(234, 236, 234) !important;
     color: rgb(34, 34, 34) !important;
     border-radius: 5px 5px 5px 5px;
@@ -89,11 +89,10 @@ div {
     text-decoration: none;
 }
 
-.red {
-	background: none repeat scroll 0% 0% rgb(234, 136, 134) !important;
-	border: 1px solid rgb(170, 70, 70);
+.green {
+	background: none repeat scroll 0% 0% rgb(134, 234, 134) !important;
 }
 
-p {
-	margin: 20px;
+.share {
+
 }
