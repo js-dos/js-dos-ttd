@@ -5,42 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Transport tycoon deluxe</title>
     <meta name="description" content="Transport tycoon deluxe game in your browser. Play it online." />
-    <meta name="keywords" content="TTD,Transport tycoon deluxe,game,online,play,play online" />
+    <meta name="keywords" content="TTD,Transport tycoon deluxe,game,online,play,play online,test" />
     <meta name="author" content="Guryanov Aleksander" />
     <link href="css/style.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32891320-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
   </head>
   <body onload="bodyLoaded();">
 <center>
-<!-- FACEBOOK SDK-->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<!-- -->
-
-
   <div id="status" class="loader">Downloading...</div>
-  <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 640px; height: 480px;">
+  <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 1024px; height: 768px;">
   </canvas>
   <div id="teaser" class="teaser">
     <p>
-      This is an open source simulation game based upon Transport Tycoon Deluxe.
+      This is a JavaScript speed test based on upon Transport Tycoon Deluxe.
       <span>  
       Powered by: <a href="http://www.openttd.org/" target="_blank">OpenTTD</a> game; <a href="https://github.com/kripken/emscripten">Emscripten</a> compiler 
       </span>
@@ -48,24 +24,7 @@
     </p>
   </div>
 
-  <!-- 
-  <div>
-        <input id="cursor-checkbox" type="checkbox" checked="checked" onclick="updateCursor()">Never hide system cursor</input>
-  </div> 
-  -->
-
-  <div class="share">
-    <a href="http://www.youtube.com/watch?v=3Ovut2taLdM" target="_blank"><img src="img/youtube.png" alt="Watch in game video" width="24px" height="24px"></img></a>
-    <g:plusone annotation="none"></g:plusone>
-
-    <a href="https://twitter.com/caiiiycuk" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
-    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-  </div>
-
-    <div class="fb-comments" data-href="http://play-ttd.com/" data-num-posts="3" data-width="470"></div>  
-
-    <p class="copyright">Feedback: <a href="https://github.com/caiiiycuk/play-ttd/issues" target="_blank">Report a bug</a> or send an <a href="mailto:caiiiycuk@gmail.com">email</a> to me.</p>
+  <p class="copyright">Feedback: <a href="https://github.com/caiiiycuk/play-ttd/issues" target="_blank">Report a bug</a> or send an <a href="mailto:caiiiycuk@gmail.com">email</a> to me.</p>
 
 </center>
 
@@ -104,7 +63,7 @@
       }
 
       function bodyLoaded() {
-        document.getElementById('play_button').value = 'Play';
+        document.getElementById('play_button').value = 'Test!';
         document.getElementById('status').style.display = 'none';
       }
 
@@ -160,7 +119,7 @@
     <script type='text/javascript' src='js/common.js'>
     </script>
 
-    <script type='text/javascript' src='js/game.js'>
+    <script type='text/javascript' src='js/test.js'>
     </script>
 
     <script type='text/javascript' src='openttd.js'>

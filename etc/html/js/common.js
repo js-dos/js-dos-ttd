@@ -71,7 +71,7 @@ var _playttd_set_canvas_size = function(width, height) {
   height = height + 'px';
 
   if (Module['canvas'].style.width !== width ||
-     Module['canvas'].style.height !== height) {
+    Module['canvas'].style.height !== height) {
     Module['canvas'].style.width = width;
     Module['canvas'].style.height = height;
   }
@@ -100,22 +100,8 @@ Module['SAVE_GAME'] = function(file) {
   xhr.send(array.buffer);
 };
 
-Module['noInitialRun'] = true;
-
-Module['preRun'] = function() { 
-  readUUID();
-
-	SDL.defaults.copyOnLock = false;
-	var save_path = 'http://play-ttd.com/save/' + Module['UUID'] + '/';
-
-	FS.createPath('/', 'home/caiiiycuk/play-ttd/etc/preload/save', true, true);
-	FS.createPreloadedFile('/home/caiiiycuk/play-ttd/etc/preload/save', 'saved_on_server.sav', 
-		save_path + 'saved_on_server.sav', true, true);
-};
-
-//'-d', '3'
-Module['arguments'] = ['-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'];
-
 Module['print'] = function(text) {
-	console.log(text);
+  console.log(text);
 };
+
+Module['noInitialRun'] = true;
