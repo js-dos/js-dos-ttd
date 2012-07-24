@@ -1,5 +1,6 @@
 Module['preRun'] = function() { 
   readUUID();
+  createMusicFiles();
 
   SDL.defaults.copyOnLock = false;
   var save_path = 'http://play-ttd.com/save/' + Module['UUID'] + '/';
