@@ -31,6 +31,7 @@
 
 extern  "C" {
 	void playttd_set_canvas_size(int w, int h);
+	void playttd_set_main_loop(void (*func)());
 }
 #endif
 
@@ -672,7 +673,7 @@ void VideoDriver_SDL::MainLoop()
 
 #ifdef EMSCRIPTEN
 	emscripten_hide_mouse();
-	emscripten_set_main_loop(__mainLoop, 0);
+	playttd_set_main_loop(__mainLoop);
 #else
 	for (;;) {
 		__mainLoop();
