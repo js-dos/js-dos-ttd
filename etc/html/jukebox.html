@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>PlayTTD: Jukebox</title>
+    <meta name="description" content="Listen transport tycoon music in high quality" />
+    <meta name="keywords" content="PlayTTD,TTD,Transport Tycoon Deluxe,jukebox,music,player" />
+    <meta name="author" content="Guryanov Aleksander" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.5; user-scalable=no;">
+
+	<!-- <link rel="stylesheet" href="css/jukebox/not.the.skin.css" type="text/css" />
+	<link rel="stylesheet" href="css/jukebox/circle.player.css" type="text/css" /> -->
+
+	<link rel="stylesheet" href="css/jukebox/jukebox.css" type="text/css" />
+	<link rel="stylesheet" href="css/jukebox/jplayer.blue.monday.css" type="text/css" />
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jukebox/jquery.transform.js"></script>
+	<script type="text/javascript" src="js/jukebox/jquery.grab.js"></script>
+	<script type="text/javascript" src="js/jukebox/jquery.jplayer.js"></script>
+	<script type="text/javascript" src="js/jukebox/jplayer.playlist.min.js"></script>
+	<script type="text/javascript" src="js/jukebox/mod.csstransforms.min.js"></script>
+	<script type="text/javascript" src="js/jukebox/circle.player.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			new jPlayerPlaylist({
+				jPlayer: "#jquery_jplayer_1",
+				cssSelectorAncestor: "#jp_container_1"
+			}, [
+				{
+					title:"Tycoon DELUXE Theme",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt00.ogg",
+				},
+				{
+					title:"Snarl Up",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt01.ogg",
+				},
+				{
+					title:"Easy Driver",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt02.ogg",
+				},
+				{
+					title:"Little Red Diesel",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt03.ogg",
+				},
+				{
+					title:"City Groove",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt04.ogg",
+				},
+				{
+					title:"Aliens Ate My Railway",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt05.ogg",
+				},
+				{
+					title:"Stoke It",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt06.ogg",
+				},
+				{
+					title:"Don't Walk!",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt07.ogg",
+				},
+				{
+					title:"Sawyer's Tune",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt08.ogg",
+				},
+				{
+					title:"Fell Apart On Me",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt09.ogg",
+				},
+				{
+					title:"Can't Get There From Here",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt10.ogg",
+				},
+				{
+					title:"Hard Drivin'",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt11.ogg",
+				},
+				{
+					title:"Road Hog",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt12.ogg",
+				},
+				{
+					title:"Hold That Train!",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt13.ogg",
+				},
+				{
+					title:"Broomer's Oil Rag",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt14.ogg",
+				},
+				{
+					title:"Goss Groove",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt15.ogg",
+				},
+				{
+					title:"Small Town",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt16.ogg",
+				},
+				{
+					title:"Cruise Control",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt17.ogg",
+				},
+				{
+					title:"Stroll On",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt18.ogg",
+				},
+				{
+					title:"Funk Central",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt19.ogg",
+				},
+				{
+					title:"Jammit",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt20.ogg",
+				},
+				{
+					title:"Movin' On",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt21.ogg",
+				},
+			], {
+				supplied: "oga",
+				playlistOptions: { autoPlay: false }
+			});
+
+			$('.jp-play').bind('click', function () {
+				$('#header').hide();
+				$('#header-adv').show();
+			});
+
+// jquery_jplayer_1 cp-jplayer 
+// 			var myCirclePlayer = new CirclePlayer("#jquery_jplayer_1",
+// 			{
+// 				oga: "http://play-ttd.com/gm/gm_tt00.ogg"
+// 			}, {
+// 				cssSelectorAncestor: "#cp_container_1"
+// 			});
+		});
+	</script>
+
+	<script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32891320-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+	<body>
+		<!-- The jPlayer div must not be hidden. Keep it at the root of the body element to avoid any such problems. -->
+		<div id="jp_container_1" class="jp-video jp-video-270p jukebox">
+			<h1 id="header">Press play button to listen transport tycoon music in high quality</h1>
+			<h1 id="header-adv" style="display: none;">You can play Transport Tycoon Deluxe online on <a href="/">http://play-ttd.com</a></h1>
+			<div class="jp-type-playlist">
+				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+				<div class="jp-gui">
+					<!--<div class="jp-video-play">
+						<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+					</div> -->
+					<div class="jp-interface">
+						<div class="jp-progress">
+							<div class="jp-seek-bar">
+								<div class="jp-play-bar"></div>
+							</div>
+						</div>
+						<div class="jp-current-time"></div>
+						<div class="jp-duration"></div>
+						<div class="jp-title">
+							<ul>
+								<li></li>
+							</ul>
+						</div>
+						<div class="jp-controls-holder">
+							<ul class="jp-controls">
+								<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
+								<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+								<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+								<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
+								<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+								<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+								<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+								<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+							</ul>
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+							<ul class="jp-toggles">
+								<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
+								<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
+								<!--<li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+								<li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+								<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+								<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>-->
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="jp-playlist">
+					<ul>
+						<!-- The method Playlist.displayPlaylist() uses this unordered list -->
+						<li></li>
+					</ul>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+
+		</div>
+	<script type="text/javascript">
+		// <div class="prototype-wrapper"> <!-- A wrapper to emulate use in a webpage and center align -->
+
+
+		// 	<!-- The container for the interface can go where you want to display it. Show and hide it as you need. -->
+
+		// 	<div id="cp_container_1" class="cp-container">
+		// 		<div class="cp-buffer-holder"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
+		// 			<div class="cp-buffer-1"></div>
+		// 			<div class="cp-buffer-2"></div>
+		// 		</div>
+		// 		<div class="cp-progress-holder"> <!-- .cp-gt50 only needed when progress is > than 50% -->
+		// 			<div class="cp-progress-1"></div>
+		// 			<div class="cp-progress-2"></div>
+		// 		</div>
+		// 		<div class="cp-circle-control"></div>
+		// 		<ul class="cp-controls">
+		// 			<li><a href="#" class="cp-play" tabindex="1">play</a></li>
+		// 			<li><a href="#" class="cp-pause" style="display:none;" tabindex="1">pause</a></li> <!-- Needs the inline style here, or jQuery.show() uses display:inline instead of display:block -->
+		// 		</ul>
+		// 	</div>
+
+		// </div> -->
+	</script>
+	</body>
+</html>

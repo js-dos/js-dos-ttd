@@ -1,0 +1,17 @@
+body {
+	font: 1em Verdana,sans-serif;
+	background: #CECECE url('../../img/background_2.jpg') no-repeat left top;
+}
+
+.jukebox {
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
+}
+
+.jukebox h1 {
+	font-size: 1em;
+	text-align: center;
+	color: black;
+	background: rgba(255,255,255,1);
+	margin: 0px;
+	padding: 10px;
+}
