@@ -40,29 +40,15 @@ static FVideoDriver_SDL iFVideoDriver_SDL;
 static SDL_Surface *_sdl_screen;
 static bool _all_modes;
 
-/** Whether the drawing is/may be done in a separate thread. */
-static bool _draw_threaded;
-/** Thread used to 'draw' to the screen, i.e. push data to the screen. */
-static ThreadObject *_draw_thread = NULL;
-/** Mutex to keep the access to the shared memory controlled. */
-static ThreadMutex *_draw_mutex = NULL;
 /** Should we keep continue drawing? */
 static volatile bool _draw_continue;
 static Palette _local_palette;
 
-#define MAX_DIRTY_RECTS 100
-static SDL_Rect _dirty_rects[MAX_DIRTY_RECTS];
-static int _num_dirty_rects;
+static bool shouldUpdateSurface;
 
 void VideoDriver_SDL::MakeDirty(int left, int top, int width, int height)
 {
-	if (_num_dirty_rects < MAX_DIRTY_RECTS) {
-		_dirty_rects[_num_dirty_rects].x = left;
-		_dirty_rects[_num_dirty_rects].y = top;
-		_dirty_rects[_num_dirty_rects].w = width;
-		_dirty_rects[_num_dirty_rects].h = height;
-	}
-	_num_dirty_rects++;
+	shouldUpdateSurface = true;
 }
 
 static void UpdatePalette()
@@ -116,35 +102,11 @@ static void CheckPaletteAnim()
 
 static void DrawSurfaceToScreen()
 {
-	int n = _num_dirty_rects;
-	if (n == 0) return;
-
-	_num_dirty_rects = 0;
-	if (n > MAX_DIRTY_RECTS) {
-		SDL_CALL SDL_UpdateRect(_sdl_screen, 0, 0, 0, 0);
-	} else {
-		SDL_CALL SDL_UpdateRects(_sdl_screen, n, _dirty_rects);
+	if (shouldUpdateSurface) {
+		shouldUpdateSurface = false;
+		SDL_CALL SDL_LockSurface(_sdl_screen);
+		SDL_CALL SDL_UnlockSurface(_sdl_screen);
 	}
-}
-
-static void DrawSurfaceToScreenThread(void *)
-{
-	/* First tell the main thread we're started */
-	_draw_mutex->BeginCritical();
-	_draw_mutex->SendSignal();
-
-	/* Now wait for the first thing to draw! */
-	_draw_mutex->WaitForSignal();
-
-	while (_draw_continue) {
-		CheckPaletteAnim();
-		/* Then just draw and wait till we stop */
-		DrawSurfaceToScreen();
-		_draw_mutex->WaitForSignal();
-	}
-
-	_draw_mutex->EndCritical();
-	_draw_thread->Exit();
 }
 
 static const Dimension _default_resolutions[] = {
@@ -262,7 +224,7 @@ static bool CreateMainSurface(uint w, uint h)
 	}
 
 	/* Delay drawing for this cycle; the next cycle will redraw the whole screen */
-	_num_dirty_rects = 0;
+	shouldUpdateSurface = false;
 
 	_screen.width = newscreen->w;
 	_screen.height = newscreen->h;
@@ -507,7 +469,7 @@ static int PollEvent()
 			/* Force a redraw of the entire screen. Note
 			 * that SDL 1.2 seems to do this automatically
 			 * in most cases, but 1.3 / 2.0 does not. */
-		        _num_dirty_rects = MAX_DIRTY_RECTS + 1;
+			 shouldUpdateSurface = true;
 			break;
 		}
 	}
@@ -534,8 +496,6 @@ const char *VideoDriver_SDL::Start(const char * const *parm)
 	SDL_CALL SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 	SDL_CALL SDL_EnableUNICODE(1);
 
-	_draw_threaded = GetDriverParam(parm, "no_threads") == NULL && GetDriverParam(parm, "no_thread") == NULL;
-
 	return NULL;
 }
 
@@ -548,35 +508,20 @@ void __mainLoop() {
 	static uint32 cur_ticks = SDL_CALL SDL_GetTicks();
 	static uint32 last_cur_ticks = cur_ticks;
 	static uint32 next_tick = cur_ticks + MILLISECONDS_PER_TICK;
-	static uint32 mod;
-	static int numkeys;
-	static Uint8 *keys;
 
-	SDL_CALL SDL_LockSurface(_sdl_screen);
 	uint32 prev_cur_ticks = cur_ticks; // to check for wrapping
 	InteractiveRandom(); // randomness
 
 	while (PollEvent() == -1) {}
-	//if (_exit_game) break;
 
-	mod = SDL_CALL SDL_GetModState();
-#if SDL_VERSION_ATLEAST(1, 3, 0)
-	keys = SDL_CALL SDL_GetKeyboardState(&numkeys);
-#else
-	keys = SDL_CALL SDL_GetKeyState(&numkeys);
-#endif
-#if defined(_DEBUG)
-	if (_shift_pressed)
-#else
+	uint32 mod = SDL_CALL SDL_GetModState();
+	
+	int numkeys;
+	Uint8 *keys = SDL_CALL SDL_GetKeyboardState(&numkeys);
+
 	/* Speedup when pressing tab, except when using ALT+TAB
 	 * to switch to another application */
-#if SDL_VERSION_ATLEAST(1, 3, 0)
-	if (keys[SDL_SCANCODE_TAB] && (mod & KMOD_ALT) == 0)
-#else
-	if (keys[SDLK_TAB] && (mod & KMOD_ALT) == 0)
-#endif /* SDL_VERSION_ATLEAST(1, 3, 0) */
-#endif /* defined(_DEBUG) */
-	{
+	if (keys[SDLK_TAB] && (mod & KMOD_ALT) == 0) {
 		if (!_networking && _game_mode != GM_MENU) _fast_forward |= 2;
 	} else if (_fast_forward & 2) {
 		_fast_forward = 0;
@@ -593,83 +538,34 @@ void __mainLoop() {
 		_ctrl_pressed  = !!(mod & KMOD_CTRL);
 		_shift_pressed = !!(mod & KMOD_SHIFT);
 
-		/* determine which directional keys are down */
 		_dirkeys =
-//#if SDL_VERSION_ATLEAST(1, 3, 0)
-//			(keys[SDL_SCANCODE_LEFT]  ? 1 : 0) |
-//			(keys[SDL_SCANCODE_UP]    ? 2 : 0) |
-//			(keys[SDL_SCANCODE_RIGHT] ? 4 : 0) |
-//			(keys[SDL_SCANCODE_DOWN]  ? 8 : 0);
-//#else
 			(keys[SDLK_LEFT]  ? 1 : 0) |
 			(keys[SDLK_UP]    ? 2 : 0) |
 			(keys[SDLK_RIGHT] ? 4 : 0) |
 			(keys[SDLK_DOWN]  ? 8 : 0);
-//#endif
-		if (old_ctrl_pressed != _ctrl_pressed) HandleCtrlChanged();
 
-		/* The gameloop is the part that can run asynchroniously. The rest
-		 * except sleeping can't. */
-		if (_draw_threaded) _draw_mutex->EndCritical();
+		if (old_ctrl_pressed != _ctrl_pressed) HandleCtrlChanged();
 
 		GameLoop();
 
-		if (_draw_threaded) _draw_mutex->BeginCritical();
-
 		UpdateWindows();
+
 		_local_palette = _cur_palette;
-	} else {
-		/* Release the thread while sleeping */
-		if (_draw_threaded) _draw_mutex->EndCritical();
-		CSleep(1);
-		if (_draw_threaded) _draw_mutex->BeginCritical();
 
-		NetworkDrawChatMessage();
-		DrawMouseCursor();
-	}
-
-	/* End of the critical part. */
-	if (_draw_threaded && !HasModalProgress()) {
-		_draw_mutex->SendSignal();
-	} else {
-		/* Oh, we didn't have threads, then just draw unthreaded */
 		CheckPaletteAnim();
-
 		DrawSurfaceToScreen();
-	}
-
-	SDL_CALL SDL_UnlockSurface(_sdl_screen);
-//	DEBUG(driver, 1, "%d %d %d %d %d", _screen.pitch, _screen.width, _screen.height, (size_t)_screen.dst_ptr, (size_t)_sdl_screen->pixels);
+	} 
+	
+	//CSleep(1); 
+	//NetworkDrawChatMessage();
+	//DrawMouseCursor();
 }
 
 void VideoDriver_SDL::MainLoop()
 {
 	CheckPaletteAnim();
 
-	if (_draw_threaded) {
-		/* Initialise the mutex first, because that's the thing we *need*
-		 * directly in the newly created thread. */
-		_draw_mutex = ThreadMutex::New();
-		if (_draw_mutex == NULL) {
-			_draw_threaded = false;
-		} else {
-			_draw_mutex->BeginCritical();
-			_draw_continue = true;
-
-			_draw_threaded = ThreadObject::New(&DrawSurfaceToScreenThread, NULL, &_draw_thread);
-
-			/* Free the mutex if we won't be able to use it. */
-			if (!_draw_threaded) {
-				_draw_mutex->EndCritical();
-				delete _draw_mutex;
-			} else {
-				/* Wait till the draw mutex has started itself. */
-				_draw_mutex->WaitForSignal();
-			}
-		}
-	}
-
-	DEBUG(driver, 1, "SDL: using %sthreads", _draw_threaded ? "" : "no ");
+	DEBUG(driver, 1, "SDL: using no threads");
 
 #ifdef EMSCRIPTEN
 	emscripten_hide_mouse();
@@ -679,39 +575,20 @@ void VideoDriver_SDL::MainLoop()
 		__mainLoop();
 	}
 #endif
-
-	if (_draw_threaded) {
-		_draw_continue = false;
-		/* Sending signal if there is no thread blocked
-		 * is very valid and results in noop */
-		_draw_mutex->SendSignal();
-		_draw_mutex->EndCritical();
-		_draw_thread->Join();
-
-		delete _draw_mutex;
-		delete _draw_thread;
-	}
 }
 
 bool VideoDriver_SDL::ChangeResolution(int w, int h)
 {
-	if (_draw_threaded) _draw_mutex->BeginCritical();
 	bool ret = CreateMainSurface(w, h);
-	if (ret) playttd_set_canvas_size(w, h);
-	if (_draw_threaded) _draw_mutex->EndCritical();
+	if (ret)  {
+		playttd_set_canvas_size(w, h);
+	}
 	return ret;
 }
 
 
 bool VideoDriver_SDL::ToggleFullscreen(bool fullscreen)
 {
-	// _fullscreen = fullscreen;
-	// GetVideoModes(); // get the list of available video modes
-	// if (_num_resolutions == 0 || !CreateMainSurface(_cur_resolution.width, _cur_resolution.height)) {
-	// 	_fullscreen ^= true;
-	// 	return false;
-	// }
-	// return true;
 	return false;
 }
 
