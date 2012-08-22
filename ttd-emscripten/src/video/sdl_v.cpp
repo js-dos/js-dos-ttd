@@ -564,17 +564,7 @@ void __mainLoop() {
 void VideoDriver_SDL::MainLoop()
 {
 	CheckPaletteAnim();
-
-	DEBUG(driver, 1, "SDL: using no threads");
-
-#ifdef EMSCRIPTEN
-	emscripten_hide_mouse();
 	playttd_set_main_loop(__mainLoop);
-#else
-	for (;;) {
-		__mainLoop();
-	}
-#endif
 }
 
 bool VideoDriver_SDL::ChangeResolution(int w, int h)
