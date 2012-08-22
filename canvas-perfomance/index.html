@@ -1,0 +1,59 @@
+<html>
+<head>
+<body>
+
+<div style="padding: 20px;">
+<div id="fps">FPS: N/A</div>
+<canvas id="canvas" width="1024px" height="768px" style="border: 1px solid black;"></canvas>
+</div>
+
+<script type="text/javascript" src="image.js"></script>
+<script type="text/javascript" src="putImageRender.js"></script>
+<script type="text/javascript" src="drawImageRender.js"></script>
+
+<script type="text/javascript">
+function requestAnimation (func) {
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = window[';'] ||
+                                   window['mozRequestAnimationFrame'] ||
+                                   window['webkitRequestAnimationFrame'] ||
+                                   window['msRequestAnimationFrame'] ||
+                                   window['oRequestAnimationFrame'] ||
+                                   window['setTimeout'];
+  }
+  window.requestAnimationFrame(func);
+};
+
+var FPSCounter = new function () {
+  _this = this;
+  this.startTime = Date.now();
+  this.frameCount = 0;
+  this.inc = function () {
+    var duration = Date.now() - _this.startTime;
+    _this.frameCount++;
+    
+    if (duration > 2000 /* 2 sec */) {
+      document.getElementById("fps").innerHTML = Math.floor(_this.frameCount * 1000 / duration);
+      _this.frameCount = 0;
+      this.startTime = Date.now();  
+    }
+  }
+};
+
+var putRender = new PutImageRender(getImageData(1024, 768), getImageData(1024, 768));
+var drawRender = new DrawImageRender();
+
+function test() {
+  putRender.render();
+  // drawRender.render();
+	FPSCounter.inc();
+  requestAnimation(test);
+};
+
+test();
+
+</script>
+
+</body>
+</head>
+</html>
