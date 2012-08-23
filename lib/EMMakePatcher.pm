@@ -55,7 +55,11 @@ SETTINGSGEN
 
 #O2
 #-s PRECISE_I64_MATH=0 - break code
+#--closure 0
+#java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js openttd.js --js_output_file closured.js
 #-O2 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 --llvm-lto 0
+#perl -e "print \"\\n\//@ sourceMappingURL=closured.js.map\";" >> closured.js
+#java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --create_source_map closured.js.map --source_map_format=V3 --js openttd.js --js_output_file closured.js
 
 		$_ =~ s|^TTD.*|TTD            = openttd.js|;
 		$_ =~ s|-lSDL||g;
