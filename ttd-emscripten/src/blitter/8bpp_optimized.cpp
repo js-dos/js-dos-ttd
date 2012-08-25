@@ -20,7 +20,7 @@ static FBlitter_8bppOptimized iFBlitter_8bppOptimized;
 
 extern "C" {
 	const uint8 *playttd_blitter_skipTopPixels(const uint8 *src, int skipCount);
-	const uint8 *playttd_blitter_drawLine(uint8 *dst, const uint8 *src, int width, int skip_left, BlitterMode mode, const uint8 *bp_remap)
+	const uint8 *playttd_blitter_drawLine(uint8 *dst, const uint8 *src, int width, int skip_left, BlitterMode mode, const uint8 *bp_remap);
 }
 
 void Blitter_8bppOptimized::Draw(Blitter::BlitterParams *bp, BlitterMode mode, ZoomLevel zoom)
