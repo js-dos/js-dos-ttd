@@ -18,53 +18,9 @@
 /** Instantiation of the 8bpp optimised blitter factory. */
 static FBlitter_8bppOptimized iFBlitter_8bppOptimized;
 
-void DrawWithRemap(uint8 *dst, const uint8 *src, uint pixels, const uint8 *bp_remap) {
-	uint m;
-	while (pixels > 0) {
-		m = bp_remap[*src];
-		if (m != 0) {
-			*dst = m;
-		}
-		++dst; 
-		++src;
-		--pixels;
-	}
-}
-
-void DrawTransparent(uint8 *dst, const uint8 *src, uint pixels, const uint8 *bp_remap) {
-	src += pixels;
-	while (pixels > 0) {
-		*dst = bp_remap[*dst];
-		++dst;
-		--pixels;
-	}
-}
-
-void DrawCopy(uint8 *dst, const uint8 *src, uint pixels) {
-	while (pixels > 0) {
-		*dst = *src;
-		++dst; 
-		++src;
-		--pixels;
-	}
-}
-
-void Draw(BlitterMode mode, uint8 *dst, const uint8 *src, uint pixels, const uint8 *bp_remap) {
-	switch (mode) {
-		case BM_COLOUR_REMAP: {
-			DrawWithRemap(dst, src, pixels, bp_remap);
-			break;
-		}
-
-		case BM_TRANSPARENT: {
-			DrawTransparent(dst, src, pixels, bp_remap);
-			break;
-		}
-
-		default:
-			DrawCopy(dst, src, pixels);
-			break;
-	}
+extern "C" {
+	const uint8 *playttd_blitter_skipTopPixels(const uint8 *src, int skipCount);
+	const uint8 *playttd_blitter_drawLine(uint8 *dst, const uint8 *src, int width, int skip_left, BlitterMode mode, const uint8 *bp_remap)
 }
 
 void Blitter_8bppOptimized::Draw(Blitter::BlitterParams *bp, BlitterMode mode, ZoomLevel zoom)
@@ -86,63 +42,11 @@ void Blitter_8bppOptimized::Draw(Blitter::BlitterParams *bp, BlitterMode mode, Z
 	uint8 *dst_line = (uint8 *)bp->dst + bp->top * bp_pitch + bp->left;
 
 	/* Skip over the top lines in the source image */
-	for (int y = 0; y < bp_skip_top; y++) {
-		for (;;) {
-			uint trans = *src++;
-			uint pixels = *src++;
-			if (trans == 0 && pixels == 0) break;
-			src += pixels;
-		}
-	}
-
-	const uint8 *src_next = src;
+	src = playttd_blitter_skipTopPixels(src, bp_skip_top);
 
 	for (int y = 0; y < bp_height; y++) {
-		uint8 *dst = dst_line;
+		src = playttd_blitter_drawLine(dst_line, src, bp_width, bp_skip_left, mode, bp_remap);
 		dst_line += bp_pitch;
-
-		uint skip_left = bp_skip_left;
-		int width = bp_width;
-
-		for (;;) {
-			src = src_next;
-			uint trans = *src++;
-			uint pixels = *src++;
-			src_next = src + pixels;
-			if (trans == 0 && pixels == 0) break;
-			if (width <= 0) continue;
-
-			if (skip_left != 0) {
-				if (skip_left < trans) {
-					trans -= skip_left;
-					skip_left = 0;
-				} else {
-					skip_left -= trans;
-					trans = 0;
-				}
-				if (skip_left < pixels) {
-					src += skip_left;
-					pixels -= skip_left;
-					skip_left = 0;
-				} else {
-					src += pixels;
-					skip_left -= pixels;
-					pixels = 0;
-				}
-			}
-			if (skip_left != 0) continue;
-
-			/* Skip transparent pixels */
-			dst += trans;
-			width -= trans;
-			if (width <= 0 || pixels == 0) continue;
-			pixels = min<uint>(pixels, (uint)width);
-			width -= pixels;
-
-			::Draw(mode, dst, src, pixels, bp_remap);
-			dst += pixels; 
-			src += pixels;
-		}
 	}
 }
 
