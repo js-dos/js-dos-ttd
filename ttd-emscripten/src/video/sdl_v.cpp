@@ -44,11 +44,19 @@ static bool _all_modes;
 static volatile bool _draw_continue;
 static Palette _local_palette;
 
-static bool shouldUpdateSurface;
+#define MAX_DIRTY_RECTS 100
+static SDL_Rect _dirty_rects[MAX_DIRTY_RECTS];
+static int _num_dirty_rects;
 
 void VideoDriver_SDL::MakeDirty(int left, int top, int width, int height)
 {
-	shouldUpdateSurface = true;
+	if (_num_dirty_rects < MAX_DIRTY_RECTS) {
+		_dirty_rects[_num_dirty_rects].x = left;
+		_dirty_rects[_num_dirty_rects].y = top;
+		_dirty_rects[_num_dirty_rects].w = width;
+		_dirty_rects[_num_dirty_rects].h = height;
+	}
+	_num_dirty_rects++;
 }
 
 static void UpdatePalette()
@@ -102,11 +110,22 @@ static void CheckPaletteAnim()
 
 static void DrawSurfaceToScreen()
 {
-	if (shouldUpdateSurface) {
-		shouldUpdateSurface = false;
-		SDL_CALL SDL_LockSurface(_sdl_screen);
-		SDL_CALL SDL_UnlockSurface(_sdl_screen);
+	int n = _num_dirty_rects;
+	
+	if (n == 0) {
+		return;
 	}
+
+	_num_dirty_rects = 0;
+
+	if (n > MAX_DIRTY_RECTS) {
+		SDL_CALL SDL_UpdateRect(_sdl_screen, 0, 0, 0, 0);
+	} else {
+		SDL_CALL SDL_UpdateRects(_sdl_screen, n, _dirty_rects);
+	}
+
+	SDL_CALL SDL_LockSurface(_sdl_screen);
+	SDL_CALL SDL_UnlockSurface(_sdl_screen);
 }
 
 static const Dimension _default_resolutions[] = {
@@ -224,7 +243,7 @@ static bool CreateMainSurface(uint w, uint h)
 	}
 
 	/* Delay drawing for this cycle; the next cycle will redraw the whole screen */
-	shouldUpdateSurface = false;
+	_num_dirty_rects = 0;
 
 	_screen.width = newscreen->w;
 	_screen.height = newscreen->h;
@@ -469,7 +488,7 @@ static int PollEvent()
 			/* Force a redraw of the entire screen. Note
 			 * that SDL 1.2 seems to do this automatically
 			 * in most cases, but 1.3 / 2.0 does not. */
-			 shouldUpdateSurface = true;
+		        _num_dirty_rects = MAX_DIRTY_RECTS + 1;
 			break;
 		}
 	}
