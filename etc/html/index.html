@@ -7,7 +7,7 @@
     <meta name="description" content="PlayTTD is an open source browser game based upon Transport Tycoon Deluxe." />
     <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
     <meta name="author" content="Guryanov Aleksander" />
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="evolution/css/style.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -22,158 +22,68 @@
     </script>
   </head>
   <body>
-<center>
-<!-- FACEBOOK SDK
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
--->
+
+  <div class="content-container">
+    <div class="content">
+      <div class="left">
+      <h1>PlayTTD: The browser game based upon on Transport Tycoon Deluxe</h1>
+      PlayTTD are business simulation game, presented in an isometric view in 2D. Player is in control of a transport company, and can compete against rival companies to make as much profit as possible by transporting passengers and various goods by road, rail, sea and air. The game is <strong>awesome</strong>!
+        <div class="menu">
+          <div class="screenshot">
+            <div><img src="http://media.openttd.org/images/screens/0.4.8/desert_junction_thumb.png"></img></div>
+            <div>In game screenshot</div>
+          </div>
+          <div class="controls">
+            <a href="play_just_now.html" target="_self" class="button green">Play just now</a>
+            <a href="#" class="button">Achievements</a>
+            <a href="#" class="button">Customize</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-container">
+      <div class="box">
+        <div class="copyright margin-in-bottom">
+          2012<br/>
+          Guryanov Aleksander<br/><br/>
+          Powered by:<br/>
+          <a href="https://github.com/kripken/emscripten">emscripten</a><br/>
+          <a href="http://www.openttd.org">OpenTTD</a>
+        </div>
+        <div class="contact margin-in-bottom">
+          <span class="head">Contact</span>
+          <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
+          <div class="social">
+            <g:plusone annotation="none"></g:plusone>
+            <a href="https://twitter.com/caiiiycuk" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a></br>
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+          </div>
+        </div>
+        <div class="bug margin-in-bottom">
+          <span class="head">Resources</span>
+          <a href="jukebox.html">Jukebox</a><br/>
+          <a href="perfomance_test.html">Perfomance test</a><br/>
+          <a href="https://github.com/caiiiycuk/play-ttd/issues">Report a bug</a>
+        </div>
+      </div>
+    </div>
 
 
-  <div id="status" class="loader">Downloading...</div>
-  <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 640px; height: 480px;">
-  </canvas>
-  <div id="teaser" class="teaser">
-    <p>
-      PlayTTD is an open source browser game based upon Transport Tycoon Deluxe.
-      <span class="teaser-text">  
-      Powered by: <a href="http://www.openttd.org/" target="_blank">OpenTTD</a> game; <a href="https://github.com/kripken/emscripten">Emscripten</a> compiler 
-      </span>
-      <input id="play_button" type="button" class="button green" value="Loading, please wait..." onclick="play();"/>
-      <span id="note" class="teaser-note">Press '<b>Play</b>' button to start the game.</span>
-    </p>
   </div>
 
-  <!-- 
-  <div>
-        <input id="cursor-checkbox" type="checkbox" checked="checked" onclick="updateCursor()">Never hide system cursor</input>
-  </div> 
-  -->
+  <!-- GOOGLE -->
 
-  <div class="share">
-    <a href="http://www.youtube.com/watch?v=3Ovut2taLdM" target="_blank"><img src="img/youtube.png" alt="Watch in game video" width="24px" height="24px"></img></a>
-    <g:plusone annotation="none"></g:plusone>
+  <script type="text/javascript">
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+  </script>
 
-    <a href="https://twitter.com/caiiiycuk" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
-    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-  </div>
+  <!-- TWITTER -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
 
-<!-- <div class="fb-comments" data-href="http://play-ttd.com/" data-num-posts="3" data-width="470"></div> -->
-
-    <p><a href="jukebox.html">PlayTTD jukebox</a>, <a href="perfomance_test.html">PlayTTD perfomance test</a></p>
-    <p class="copyright">Feedback: <a href="https://github.com/caiiiycuk/play-ttd/issues" target="_blank">Report a bug</a> or send an <a href="mailto:caiiiycuk@gmail.com">email</a> to me.</p>
-
-</center>
-
-    <script type='text/javascript'>
-      var isPlaying = false;
-
-      function isCursorVisible() {
-        return document.getElementById('cursor-checkbox').checked;
-      }
-
-      function updateCursor() {
-        if (isPlaying) {
-          if (isCursorVisible()) {
-            showCursor();
-          } else {
-            hideCursor();
-          }
-        }
-      }
-
-      function hideCursor() {
-        Module['canvas'].className = Module['canvas'].className + ' no-cursor';
-      }
-
-      function showCursor() {
-         Module['canvas'].className = 
-           Module['canvas'].className.replace(/no-cursor/g , '');
-      }
-
-      function play() {
-        document.getElementById('status').style.display = 'block';
-        document.getElementById('teaser').style.display = 'none';
-        document.getElementById('canvas').style.display = 'block';
-        isPlaying = true;
-        Module['removeRunDependency']();
-      }
-
-      function bodyLoaded() {
-        document.getElementById('play_button').value = 'Play';
-        document.getElementById('status').style.display = 'none';
-        document.getElementById('note').style.display = 'inline';
-      }
-
-      // connect to canvas
-      var Module = {
-        fullScreen: false,
-        print: function() {},
-        printErr: function(text) {
-          if (0) { // XXX disabled for safety typeof dump == 'function') {
-            dump(text + '\n'); // fast, straight to the real console
-          } else {
-            console.log(text);
-          }
-        },
-        canvas: document.getElementById('canvas'),
-        setStatus: function(text) {
-          if (Module.setStatus.interval) clearInterval(Module.setStatus.interval);
-          document.getElementById('status').innerHTML = text;
-          if (text) {
-            var counter = 0;
-            Module.setStatus.interval = setInterval(function() {
-              counter++;
-              counter %= 3;
-              var dots = ' ';
-              for (var i = 0; i < counter; i++) dots += '.';
-              dots += '*';
-              for (var i = counter; i < 2; i++) dots += '.';
-              document.getElementById('status').innerHTML = text.replace('...', dots);
-            }, 300);
-          } else {
-            document.getElementById('status').style.display = 'none';
-            //updateCursor();
-          }
-        },
-        totalDependencies: 0,
-        monitorRunDependencies: function(left) {
-          this.totalDependencies = Math.max(this.totalDependencies, left);
-          Module.setStatus(left ? 'Downloading: ' + (this.totalDependencies-left) + '/' + this.totalDependencies + '...' : 'All downloads complete.');
-        }
-      };
-
-      Module.setStatus('Downloading...');
-      //FIXME: should move to pre-js
-      Module['kNb'] = Module.setStatus;
-    </script>      
-
-    <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
-
-    <script type='text/javascript' src='js/common.js'>
-    </script>
-
-    <script type='text/javascript' src='js/game.js'>
-    </script>
-
-    <script type='text/javascript' src='openttd_120825.js'>
-    </script>
-
-    <script type="text/javascript">
-      bodyLoaded();
-    </script>
 
   </body>
 </html>
