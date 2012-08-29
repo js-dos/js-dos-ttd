@@ -3,125 +3,46 @@ body {
 	background: #c4cdca;
 }
 
-canvas { 
+div { 
+	margin: 0px;
+}
+
+.canvas-container {
+	position: absolute; 
+	top: 0px; 
+	bottom: 0px; 
+	left: 0px;
+	right: 0px;
+	background: #393a3e;
+	overflow: hidden;
+}
+
+.canvas-test-container {
+	margin-top: 20px;
+	width: 1024px;
+	height: 768px;
 	background: #393a3e;
 	border: 1px solid black;
 }
 
-.teaser {
-	background: #393a3e url('../img/teaser.jpg') no-repeat center center;
-	width: 640px;
-	height: 480px;
-
-	border: 1px solid black;
-	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
-	margin-top: 30px;
-
-	color: black;
-	font-size: 24px;
-	text-align: left;
-	vertical-align: center;
-}
-
-.teaser p {
-	background: rgba(255, 255, 255, 0.85) url('../img/openttd-128.gif') no-repeat left center;
-	
-	border-radius: 5px;
-	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
-	padding: 10px 10px 10px 158px;
-
-	margin: 120px 20px 0px 20px; 
-}
-
-.teaser .teaser-note {
-	color: #333;
-	font-size: 12px;
-	display: none;
-}
-
-.teaser .teaser-text {
-	display: block;
-	font-size:14px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.no-cursor {
-	cursor: none;
-}
-
-textarea { 
-	font-family: monospace; width: 80%; 
-}
-
-div { 
-	margin: 7px;
-}
-
 .loader {
 	position: absolute;
+	margin: 30px 0px 0px 30px;
 	background: #301D10;
 	color: #FFFFE5;
 	padding: 10px;
 	border-radius: 10px;
 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
 	text-shadow: 0 1px 0 black, 0 2px 0 black;
-	margin-top: 30px;
-	margin-left: 30px;
-}
-
-.loader-2 {
-	background: #301D10;
-	color: #FFFFE5;
-	padding: 10px;
-	border-radius: 10px;
-	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
-	text-shadow: 0 1px 0 black, 0 2px 0 black;
-	margin-top: 30px;
-	width: 640px;
 }
 
 .fps {
+	position: absolute;
+	margin: 30px 0px 0px 30px;
 	background: rgba(255, 255, 255, 0.8);
 	color: #000000;
 	padding: 10px;
 	border-radius: 10px;
 	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
 	width: 120px;
-	margin-top: 30px;
-}
-
-.copyright {
-	font-size: 0.8em;
-}
-
-.button {
-    font-size: 1em;
-    padding: 5px;
-    background: none repeat scroll 0% 0% rgb(234, 236, 234) !important;
-    color: rgb(34, 34, 34) !important;
-    border-radius: 5px 5px 5px 5px;
-    border: 1px solid rgb(170, 170, 170);
-    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.4) inset, 0px 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-transition-duration: 0.2s;
-    -moz-user-select: none;
-    cursor: pointer;
-    font-family: verdana,sans-serif;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.green {
-	background: none repeat scroll 0% 0% rgb(134, 234, 134) !important;
-}
-
-.share {
-	padding-left: 160px;
-}
-
-.fb-comments {
-    background: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    width: 510px;
-    border: 1px groove #CECECE;
 }

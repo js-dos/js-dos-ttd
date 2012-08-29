@@ -23,21 +23,16 @@
   </head>
   <body>
 
-  <center>
+  <div id="canvas-container" class="canvas-container">
     <div id="status" class="loader">Downloading...</div>
     <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 100%; height: 100%;">
-    </canvas>
-  </center>
+  </div>
 
     <script type='text/javascript'>
       function bodyLoaded() {
-        var width = Math.round(document.body.clientWidth);
-        var height = Math.round(document.body.clientHeight);
-        
-        Module['canvas'].style.width = width + 'px';
-        Module['canvas'].style.height = height + 'px';
+        var width = Math.round(document.getElementById('canvas-container').clientWidth);
+        var height = Math.round(document.getElementById('canvas-container').clientHeight);
         Module['arguments'].push('-r', width+'x'+height);
-        
         Module['removeRunDependency']();
       }
 

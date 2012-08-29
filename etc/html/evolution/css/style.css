@@ -47,13 +47,12 @@ body {
 	font-size: 0.9em;
 	color: #AAA;
 	text-decoration: none;
-	border-bottom: 1px dashed #AAA;
 	line-height: 150%;
+	text-decoration: underline;
 }
 
 .contact-container a:hover {
 	color: #FFF;
-	border-bottom: 1px dashed #FFF;
 }
 
 .box {
