@@ -1,7 +1,7 @@
 Module['update_fps'] = function() {}
 
 Module['playttd_prerun'] = function() { 
-  readUUID();
+  Module['UUID'] = UUID;
   createMusicFiles();
 
   var save_path = 'http://play-ttd.com/save/' + Module['UUID'] + '/';

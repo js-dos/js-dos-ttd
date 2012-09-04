@@ -23,6 +23,9 @@
   </head>
   <body>
 
+  <div class="header">
+    Hello, <span id="player-name"></span> <a href="#">[change]</a>
+  </div>
   <div class="content-container">
     <div class="content">
       <div class="left">
@@ -85,6 +88,15 @@
       </div>
     </div>
   </div>
+
+  <!-- THIS -->
+  <script type='text/javascript' src='js/cookie.js'></script>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+      document.getElementById('player-name').innerHTML = playerName();
+    }, false);
+  </script>
 
   <!-- GOOGLE -->
 

@@ -1,38 +1,10 @@
-function setCookie(c_name,value,exdays) {
-  var exdate=new Date();
-  exdate.setDate(exdate.getDate() + exdays);
-  var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-  document.cookie=c_name + "=" + c_value;
-};
+//
+// -- COOKIE CHECK
+//
 
-function getCookie(c_name) {
-  var i,x,y,ARRcookies=document.cookie.split(";");
-  for (i=0;i<ARRcookies.length;i++) {
-    x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-    x=x.replace(/^\s+|\s+$/g,"");
-    if (x==c_name) {
-      return unescape(y);
-    }
-  }
-};
-
-function guidGen() {
-    var S4 = function() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    };
-    return (S4()+S4()+S4()+S4()+S4()+S4()+S4()+S4());
-};
-
-function readUUID() {
-  var guid = getCookie('ttd-save-uuid');
-  if (guid == null || guid == "") {
-    guid = guidGen();
-    setCookie('ttd-save-uuid', guid, 365*20);
-  }
-
-  Module['UUID'] = guid;
-};
+if (!UUID) {
+  throw "UUID not set unable to start game";
+}
 
 // --
 // -- MUSIC MOCKS

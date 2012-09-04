@@ -5,9 +5,25 @@ body {
 	padding: 0px;
 }
 
+.header {
+	background: #000;
+	color: white;
+	padding-left: 13%;
+	padding-right: 13%;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	text-align: right;
+	font: 0.7em;
+}
+
+.header a {
+	color: #AAA;
+	text-decoration: none;
+	border-bottom: 1px dotted #AAA;
+}
+
 .content-container {
 	background: #000;
-	padding-top: 17px;
 	width: 100%;
 }
 
