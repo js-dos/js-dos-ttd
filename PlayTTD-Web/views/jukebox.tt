@@ -134,13 +134,14 @@
 		});
 	</script>
 
+
+
 <div id="jp_container_1" class="jp-video jp-video-270p jukebox">
 	<h1 id="header">
 		Press play button to listen transport tycoon music in high quality
 	</h1>
 	<h1 id="header-adv" style="display: none;">
-		You can play Transport Tycoon Deluxe online on
-		<a href="/">http://play-ttd.com</a>
+		<a href="/" target="_self">Here you can play Transport Tycoon Deluxe online</a>
 	</h1>
 	<div class="jp-type-playlist">
 		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -214,3 +215,4 @@
 	</div>
 
 </div>
+

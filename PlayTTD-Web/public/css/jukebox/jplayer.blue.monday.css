@@ -31,17 +31,17 @@ div.jp-video {
 	position:relative;
 }
 div.jp-audio {
-	width:420px;
+	width:800px;
 }
 div.jp-video-270p {
-	width:480px;
+	width:800px;
 }
 div.jp-video-360p {
-	width:640px;
+	width:800px;
 }
 div.jp-video-full {
 	/* Rules for IE6 (full-screen) */
-	width:480px;
+	width:800px;
 	height:270px;
 	/* Rules for IE7 (full-screen) - Otherwise the relative container causes other page items that are not position:static (default) to appear over the video/gui. */
 	position:static !important; position:relative
@@ -370,8 +370,7 @@ div.jp-type-playlist div.jp-title,
 div.jp-type-single div.jp-playlist {
 	border-top:none;
 }
-div.jp-title ul,
-div.jp-playlist ul {
+div.jp-title ul {
 	list-style-type:none;
 	margin:0;
 	padding:0 20px;
@@ -382,9 +381,23 @@ div.jp-title li {
 	padding:5px 0;
 	font-weight:bold;
 }
+
+div.jp-playlist ul {
+	width: 100%;
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
+	font-size:.72em;
+	overflow: hidden;
+}
+
 div.jp-playlist li {
-	padding:5px 0 4px 20px;
+	margin: 3px 2% 0px 2%;
 	border-bottom:1px solid #BBB;
+	
+	float:left;
+  	display:inline;
+  	width: 45%;
 }
 
 div.jp-playlist li div {
@@ -394,13 +407,12 @@ div.jp-playlist li div {
 /* Note that the first-child (IE6) and last-child (IE6/7/8) selectors do not work on IE */
 
 div.jp-type-playlist div.jp-playlist li:last-child {
-	padding:5px 0 5px 20px;
+	padding:0px 0 5px 0px;
 	border-bottom:none;
 }
 div.jp-type-playlist div.jp-playlist li.jp-playlist-current {
 	list-style-type:square;
 	list-style-position:inside;
-	padding-left:7px;
 }
 div.jp-type-playlist div.jp-playlist a {
 	color: #333;
