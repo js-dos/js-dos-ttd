@@ -1,0 +1,216 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.transform.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.grab.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.jplayer.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/mod.csstransforms.min.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/circle.player.js"></script>
+
+<script type="text/javascript">
+		$(document).ready(function(){
+			new jPlayerPlaylist({
+				jPlayer: "#jquery_jplayer_1",
+				cssSelectorAncestor: "#jp_container_1"
+			}, [
+				{
+					title:"Tycoon DELUXE Theme",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt00.ogg",
+				},
+				{
+					title:"Snarl Up",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt01.ogg",
+				},
+				{
+					title:"Easy Driver",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt02.ogg",
+				},
+				{
+					title:"Little Red Diesel",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt03.ogg",
+				},
+				{
+					title:"City Groove",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt04.ogg",
+				},
+				{
+					title:"Aliens Ate My Railway",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt05.ogg",
+				},
+				{
+					title:"Stoke It",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt06.ogg",
+				},
+				{
+					title:"Don't Walk!",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt07.ogg",
+				},
+				{
+					title:"Sawyer's Tune",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt08.ogg",
+				},
+				{
+					title:"Fell Apart On Me",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt09.ogg",
+				},
+				{
+					title:"Can't Get There From Here",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt10.ogg",
+				},
+				{
+					title:"Hard Drivin'",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt11.ogg",
+				},
+				{
+					title:"Road Hog",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt12.ogg",
+				},
+				{
+					title:"Hold That Train!",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt13.ogg",
+				},
+				{
+					title:"Broomer's Oil Rag",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt14.ogg",
+				},
+				{
+					title:"Goss Groove",
+					artist:"John Broomhall/RichNagel",
+					oga: "http://play-ttd.com/gm/gm_tt15.ogg",
+				},
+				{
+					title:"Small Town",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt16.ogg",
+				},
+				{
+					title:"Cruise Control",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt17.ogg",
+				},
+				{
+					title:"Stroll On",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt18.ogg",
+				},
+				{
+					title:"Funk Central",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt19.ogg",
+				},
+				{
+					title:"Jammit",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt20.ogg",
+				},
+				{
+					title:"Movin' On",
+					artist:"John Broomhall",
+					oga: "http://play-ttd.com/gm/gm_tt21.ogg",
+				},
+			], {
+				supplied: "oga",
+				playlistOptions: { autoPlay: false }
+			});
+
+			$('.jp-play').bind('click', function () {
+				$('#header').hide();
+				$('#header-adv').show();
+			});
+		});
+	</script>
+
+<div id="jp_container_1" class="jp-video jp-video-270p jukebox">
+	<h1 id="header">
+		Press play button to listen transport tycoon music in high quality
+	</h1>
+	<h1 id="header-adv" style="display: none;">
+		You can play Transport Tycoon Deluxe online on
+		<a href="/">http://play-ttd.com</a>
+	</h1>
+	<div class="jp-type-playlist">
+		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+		<div class="jp-gui">
+
+			<div class="jp-interface">
+				<div class="jp-progress">
+					<div class="jp-seek-bar">
+						<div class="jp-play-bar"></div>
+					</div>
+				</div>
+				<div class="jp-current-time"></div>
+				<div class="jp-duration"></div>
+				<div class="jp-title">
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+				<div class="jp-controls-holder">
+					<ul class="jp-controls">
+						<li>
+							<a href="javascript:;" class="jp-previous" tabindex="1">previous</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-play" tabindex="1">play</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-pause" tabindex="1">pause</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-next" tabindex="1">next</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-stop" tabindex="1">stop</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a>
+						</li>
+					</ul>
+					<div class="jp-volume-bar">
+						<div class="jp-volume-bar-value"></div>
+					</div>
+					<ul class="jp-toggles">
+						<li>
+							<a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="jp-playlist">
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+		<div class="jp-no-solution">
+			<span>Update Required</span>
+			To play the media you will need to either update your browser to a recent version or update your
+			<a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>
+			.
+		</div>
+	</div>
+
+</div>

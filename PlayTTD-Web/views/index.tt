@@ -1,148 +1,43 @@
-  
-<!-- 
-    Credit goes to the Ruby on Rails team for this page 
-    has been heavily based on the default Rails page that is 
-    built with a scaffolded application.
+<h1>PlayTTD: The browser game based upon Transport Tycoon Deluxe</h1>
+<p>
+  It's 1950. You're presented with a vast game world made up of numerous small towns and raw material resources. You've got $200,000 and you've got to prove yourself; to set the wheels in motion to become The Transport Tycoon.
+</p>
+<p>
+  Matched against a batch of ruthless rivals, you'll have to act quickly; to build the key routes that will rake in the cash. Build stations, airports, docks and a linking a road, rail, air and ship network. Then, move passengers, mail or goods to the most lucrative destination. As the years roll by you'll be able to buy more advanced and faster vehicles and vessels; if you can afford them!
+</p>
+<div class="menu">
+  <div class="cover">
+    <div class="screenshot"></div>
+    <h3>MAKE TRACKS. MAKE CONNECTIONS. MAKE IT BIG.</h3>
+    <ul class="cover-list">
+      <li>
+        Build stations, docks, airports and make money by connecting areas requiring transport services
+      </li>
+      <li>
+        Construct complex road - rail - air - sea networks using a simple to use interface
+      </li>
+      <li>
+        Experience cut-throat rivalry as you try to grab your piece of the action or choose to play in non-competitive mode
+      </li>
+      <li>
+        Delve into a massive randomly generated world that is affected by your actions with cities, mines, power plants, oil rigs
+      </li>
+      <li>
+        Deal with characteristic town councils that express individual and varying attitudes
+      </li>
+      <li>
+        Cope with disasters such as mine collapses, bus, lorry and aircraft malfunctions
+      </li>
+      <li>
+        Use new transport methods as they are introduced over time including futuristic monorails
+      </li>
+      <li>Compete with other player in achievements</li>
+    </ul>
 
-    Thanks a lot to them for their work.
-
-    See Ruby on Rails if you want a kickass framework in Ruby:
-    http://www.rubyonrails.org/
--->
-
-<div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Join the community</h3>
-            <ul class="links">
-
-              <li><a href="http://perldancer.org/">PerlDancer</a></li>
-              <li><a href="http://twitter.com/PerlDancer/">Official Twitter</a></li>
-              <li><a href="http://github.com/sukria/Dancer/">GitHub Community</a></li>
-            </ul>
-          </li>
-          
-          <li>
-            <h3>Browse the documentation</h3>
-
-            <ul class="links">
-              <li><a
-              href="http://search.cpan.org/dist/Dancer/lib/Dancer/Introduction.pod">Introduction</a></li>
-              <li><a href="http://search.cpan.org/dist/Dancer/lib/Dancer/Cookbook.pod">Cookbook</a></li>
-              <li><a href="http://search.cpan.org/dist/Dancer/lib/Dancer/Deployment.pod">Deployment Guide</a></li>
-              <li><a
-              href="http://search.cpan.org/dist/Dancer/lib/Dancer/Tutorial.pod"
-              title="a tutorial to build a small blog engine with Dancer">Tutorial</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <h3>Your application's environment</h3>
-
-            <ul>
-                <li>Location: <code>/home/caiiiycuk/play-ttd/PlayTTD-Web</code></li>
-                <li>Template engine: <code><% settings.template %></code></li>
-                <li>Logger: <code><% settings.logger %></code></li>
-                <li>Environment: <code><% settings.environment %></code></li>
-            </ul>
-
-          </li>
-        </ul>
-
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Perl is dancing</h1>
-          <h2>You&rsquo;ve joined the dance floor!</h2>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get dancing:</h2>
-                    
-          <h3><a href="#" id="about_env_link">About your application's environment</a></h3>
-
-          <div id="about-content" style="display: none;">
-            <table>
-                <tbody>
-                <tr>
-                    <td>Perl version</td>
-                    <td><tt><% perl_version %></tt></td>
-                </tr>
-                <tr>
-                    <td>Dancer version</td>
-                    <td><tt><% dancer_version %></tt></td>
-                </tr>
-                <tr>
-                    <td>Backend</td>
-                    <td><tt><% settings.apphandler %></tt></td>
-                </tr>
-                <tr>
-                    <td>Appdir</td>
-                    <td><tt>/home/caiiiycuk/play-ttd/PlayTTD-Web</tt></td>
-                </tr>
-                <tr>
-                    <td>Template engine</td>
-                    <td><tt><% settings.template %></tt></td>
-                </tr>
-                <tr>
-                    <td>Logger engine</td>
-                    <td><tt><% settings.logger %></tt></td>
-                </tr>
-                <tr>
-                    <td>Running environment</td>
-                    <td><tt><% settings.environment %></tt></td>
-                </tr>
-                </tbody>
-            </table>
-          </div>
-
-    <script type="text/javascript">
-    $('#about_env_link').click(function() {
-        $('#about-content').slideToggle('fast', function() {
-            // ok
-        });
-        return( false );
-    });
-    </script>
-
-
-          <ol>          
-            <li>
-              <h2>Tune your application</h2>
-
-              <p>
-              Your application is configured via a global configuration file,
-              <tt>config.yml</tt> and an "environment" configuration file,
-              <tt>environments/development.yml</tt>. Edit those files if you
-              want to change the settings of your application.
-              </p>
-            </li>
-
-            <li>
-              <h2>Add your own routes</h2>
-
-              <p>
-              The default route that displays this page can be removed,
-              it's just here to help you get started. The template used to
-              generate this content is located in 
-              <code>views/index.tt</code>.
-              You can add some routes to <tt>lib/PlayTTD/Web.pm</tt>. 
-              </p>
-            </li>
-
-            <li>
-                <h2>Enjoy web development again</h2>
-
-                <p>
-                Once you've made your changes, restart your standalone server
-                (bin/app.pl) and you're ready to test your web application.
-                </p>
-            </li>
-
-          </ol>
-        </div>
-      </div>
+    <div class="controls">
+      <a href="/play/" target="_self" class="button green">Play now</a>
+      <a href="#" class="button">Achievements</a>
+      <a href="#" class="button">Customize</a>
     </div>
+  </div>
+</div>

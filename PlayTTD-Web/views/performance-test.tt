@@ -1,38 +1,13 @@
-<!doctype html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>PlayTTD: Transport Tycoon Deluxe game in browser</title>
-    <meta name="description" content="PlayTTD is an open source browser game based upon Transport Tycoon Deluxe." />
-    <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
-    <meta name="author" content="Guryanov Aleksander" />
-    <link href="css/primal_style.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32891320-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-  <body>
-
-  <div id="canvas-container" class="canvas-container">
+<center>
+  <div class="canvas-test-container">
+    <div id="fps" class="fps">FPS: N/A</div>
     <div id="status" class="loader">Downloading...</div>
-    <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 100%; height: 100%;">
+    <canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 1024px; height: 768px;"></canvas>
   </div>
+</center>
 
-    <script type='text/javascript'>
+<script type='text/javascript'>
       function bodyLoaded() {
-        var width = Math.round(document.getElementById('canvas-container').clientWidth);
-        var height = Math.round(document.getElementById('canvas-container').clientHeight);
-        Module['arguments'].push('-r', width+'x'+height);
         Module['removeRunDependency']();
       }
 
@@ -77,9 +52,9 @@
       Module.setStatus('Downloading...');
       //FIXME: should move to pre-js
       Module['kNb'] = Module.setStatus;
-    </script>      
+    </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
         po.src = 'https://apis.google.com/js/plusone.js';
@@ -87,21 +62,14 @@
       })();
     </script>
 
-    <script type='text/javascript' src='js/cookie.js'>
-    </script>
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/common.js'></script>
 
-    <script type='text/javascript' src='js/common.js'>
-    </script>
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/test.js'></script>
 
-    <script type='text/javascript' src='js/game.js'>
-    </script>
+<script type='text/javascript' src='<% request.uri_base %>/openttd.js'></script>
 
-    <script type='text/javascript' src='openttd_120825.js'>
-    </script>
-
-    <script type="text/javascript">
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
       bodyLoaded();
-    </script>
-
-  </body>
-</html>
+    }, false);
+</script>
