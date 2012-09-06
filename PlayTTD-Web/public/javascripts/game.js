@@ -4,7 +4,7 @@ Module['playttd_prerun'] = function() {
   Module['UUID'] = UUID;
   createMusicFiles();
 
-  var save_path = 'http://play-ttd.com/save/' + Module['UUID'] + '/';
+  var save_path = '/save/' + Module['UUID'] + '/';
 
   Module["FS_createPath"]('/', 'home/caiiiycuk/play-ttd/etc/preload/save', true, true);
   Module["FS_createPreloadedFile"]('/home/caiiiycuk/play-ttd/etc/preload/save', 'saved_on_server.sav', 

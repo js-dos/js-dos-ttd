@@ -60,5 +60,53 @@ get '/jukebox/' => sub {
       };
 };
 
+# Save
+
+post '/save/:uuid/:file' => sub {
+	writeSaveFile(param('file'), param('uuid'), request->{body});
+};
+
+get '/save/:file' => sub {
+	readSaveFile(param('file'));
+};
+
+get '/save/:uuid/:file' => sub {
+	readSaveFile(param('file'), param('uuid'));
+};
+
+sub writeSaveFile {
+	my ($file, $uuid, $body) = @_;
+
+	my $asset = config->{'data'} . 'save/';
+	my $saveFolder = $asset . $uuid;
+
+	mkdir($saveFolder);
+
+	my $saveFile = $saveFolder . '/' . $file;
+
+	open F, ">$saveFile";
+	binmode F;
+	print F $body;
+	close F;
+};
+
+sub readSaveFile {
+	my ($file, $uuid) = @_;
+
+	my $asset = config->{'data'} . 'save/';
+	
+	my $saveFile;
+	if ($uuid) {
+ 		$saveFile = $asset . $uuid . '/' . $file;
+	} else {
+		$saveFile = $asset . $file
+	}
+
+	if (-e $saveFile) {
+		send_file($saveFile, system_path => 1);
+	} else {
+		send_file($asset . 'empty_slot.sav', system_path => 1);
+	}
+};
 
 true;

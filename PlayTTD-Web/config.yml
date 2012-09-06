@@ -5,6 +5,9 @@
 # Your application's name
 appname: "PlayTTD::Web"
 
+# Data directory
+data: "/var/www/data/play-ttd/"
+
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
 layout: "main"

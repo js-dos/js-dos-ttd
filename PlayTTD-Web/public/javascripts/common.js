@@ -49,11 +49,11 @@ Module['SAVE_GAME'] = function(file) {
   }
 
   var fs_object = Module["FS_findObject"](file);
-  var contents = fs_object.v;
+  var contents = fs_object.v || fs_object.contents;
   var array = new Uint8Array(contents);
 
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://play-ttd.com/save/save.php", true);
+  xhr.open("POST", "/save/" + Module['UUID'] + "/saved_on_server.sav", true);
   xhr.setRequestHeader('X-UUID', Module['UUID']);
   xhr.onload = function(e) { 
     alert('This game is saved on the server!');
