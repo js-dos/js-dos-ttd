@@ -4,7 +4,7 @@ use Dancer ':syntax';
 
 # Routing
 
-post '/save/:uuid/:file' => sub {
+post '/push-save/:uuid/:file' => sub {
 	PlayTTD::Save::write(param('file'), param('uuid'), request->{body});
 };
 
