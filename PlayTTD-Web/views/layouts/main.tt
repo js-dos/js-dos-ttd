@@ -29,7 +29,7 @@
   <body>
 
   <div class="header">
-    Hello, <span id="player-name"></span> <a href="#">[change]</a>
+    &nbsp;<!--Hello, <span id="player-name"></span> <a href="#">[change]</a>-->
   </div>
   
   <div class="content-container">
@@ -70,9 +70,9 @@
   <!-- THIS -->
 
   <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(){
-      document.getElementById('player-name').innerHTML = playerName();
-    }, false);
+    // document.addEventListener("DOMContentLoaded", function(){
+    //   document.getElementById('player-name').innerHTML = playerName();
+    // }, false);
   </script>
 
   <!-- GOOGLE -->
