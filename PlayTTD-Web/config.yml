@@ -27,3 +27,10 @@ template: "template_toolkit"
 engines:
   template_toolkit:
     encoding:  'utf8'
+
+plugins:
+    Redis:
+        server: '127.0.0.1:6379'
+        debug: 0
+        encoding: utf8
+        reconnect: 60

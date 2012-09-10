@@ -1,0 +1,23 @@
+<form id="customzie-form" class="form" method="POST">
+	<% IF error %>
+	<p class="error"><% error %></p>
+	<% END %>
+
+	<h2>Edit your profile</h2>
+
+	<label for="name">Your name:</label>
+	<input id="name" name="name" type="text" value="<% vars.player.name %>"></input>
+
+	<label for="password">Password:</label>
+	<input id="password" name="password" type="password"></input>
+
+	<h2>Game options</h2>
+
+	<input if="no-sound" name="no-sound" type="checkbox" <% IF vars.player.noSound %>checked<% END %>></input>
+	<label for="no-sound">No sound</label>
+
+	<div>
+    	<a href="javascript: document.getElementById('customzie-form').submit();" target="_self" class="button green">Save</a>
+		<a href="/" class="button">Cancel</a>
+	</div>
+</form>

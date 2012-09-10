@@ -27,7 +27,3 @@ function makeUUID() {
   setCookie('ttd-save-uuid', uuid, 365*20);
   return uuid;
 };
-
-function playerName() {
-  return getCookie('ttd-player-name') || 'player#' + UUID;
-}

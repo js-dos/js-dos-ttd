@@ -30,7 +30,7 @@
   <body>
 
   <div class="header">
-    &nbsp;<!--Hello, <span id="player-name"></span> <a href="#">[change]</a>-->
+    Hello, <span id="player-name"><% vars.player.name %></span> <a href="/login/">[change]</a>
   </div>
   
   <div class="content-container">
@@ -67,14 +67,6 @@
       </div>
     </div>
   </div>
-
-  <!-- THIS -->
-
-  <script type="text/javascript">
-    // document.addEventListener("DOMContentLoaded", function(){
-    //   document.getElementById('player-name').innerHTML = playerName();
-    // }, false);
-  </script>
 
   <!-- GOOGLE -->
 

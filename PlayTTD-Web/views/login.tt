@@ -1,0 +1,18 @@
+<form id="login-form" class="form" method="POST">
+	<% IF error %>
+	<p class="error"><% error %></p>
+	<% END %>
+
+	<h2>Login or <a href="/customize/" taget="_self" class="customize">customize</a> your profile</h2>
+
+	<label for="name">Your name:</label>
+	<input id="name" name="name" type="text"></input>
+
+	<label for="password">Password:</label>
+	<input id="password" name="password" type="password"></input>
+
+	<div>
+    	<a href="javascript: document.getElementById('login-form').submit();" target="_self" class="button green">Login</a>
+		<a href="/" class="button">Cancel</a>
+	</div>
+</form>

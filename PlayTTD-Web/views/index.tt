@@ -37,7 +37,7 @@
     <div class="controls">
       <a href="/play/" target="_self" class="button green">Play now</a>
       <a href="#" class="button">Achievements</a>
-      <a href="#" class="button">Customize</a>
+      <a href="/customize/" class="button">Customize</a>
     </div>
   </div>
 </div>

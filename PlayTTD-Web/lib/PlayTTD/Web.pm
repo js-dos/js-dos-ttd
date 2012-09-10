@@ -10,5 +10,8 @@ use PlayTTD::Jukebox;
 use PlayTTD::Play;
 use PlayTTD::PerformanceTest;
 use PlayTTD::Index;
+use PlayTTD::Pre;
+use PlayTTD::Customize;
+use PlayTTD::Login;
 
 true;
