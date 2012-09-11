@@ -131,6 +131,10 @@ body {
 	margin-right: 10px;
 }
 
+.controls div {
+	display: inline-block;
+}
+
 .button {
     font-size: 1em;
     padding: 7px 20px 7px 20px;
@@ -200,4 +204,32 @@ body {
 
 .form div {
 	margin: 50px 5px 5px 5px;
+}
+
+p.achievement {
+	margin-top: 0px;
+    background-color: #FCC;
+    position: relative;
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #AAA;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+p.achievement:after {
+    content:"";
+    border-color: #FCC transparent transparent transparent;
+    border-style: solid;
+    border-width: 10px;
+    position:absolute;
+    width:0;
+    height:0;
+    bottom:-20px;
+    left:7px
+}
+
+p.achievement span {
+	font-weight: bold;
+	padding-right: 10px;
 }

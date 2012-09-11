@@ -4,18 +4,20 @@ use Dancer ':syntax';
 use Dancer::Plugin::Redis;
 use Digest::MD5 qw(md5_base64);
 
+use PlayTTD::Achievement;
+
 sub new {
     my $class = shift;
     my $uuid = shift;
 
     my $self = loadFromStorage($uuid);
 
-    unless ($self) {
-        $self = bless { uuid => $uuid }, $class;
-        $self->{name} = 'player#' . $self->{uuid};
-        $self->{password} = '';
-        $self->{noSound} = 0;
-    }
+    $self = bless { uuid => $uuid }, $class unless $self;
+    $self->{name} = 'player#' . $self->{uuid} unless $self->{name};
+    $self->{password} = '' unless $self->{password};
+    $self->{noSound} = 0 unless $self->{noSound};
+    $self->{achievements} = [] unless $self->{achievements};
+    $self->{activated} = 0 unless $self->{activated};
 
     return $self;
 }
@@ -31,15 +33,7 @@ sub loadFromStorage {
 
 sub setName {
     my ($self, $name) = @_;
-
-    if (nameIsNotUsed($name)) {
-        $self->{name} = $name;
-    } else {
-        my $uuid = uuidByName($name);
-        if ($self->{uuid} eq $uuid) {
-            $self->{name} = $name;
-        }
-    }
+    $self->{name} = $name;
 }
 
 sub setPassword {
@@ -68,9 +62,20 @@ sub makePassword {
 
 sub update {
     my $self = shift;
-    debug to_yaml $self;
+
+    unless ($self->{activated}) {
+        $self->{activated} = 1;
+        $self->addAchievement(PlayTTD::Achievement::ActivatedProfile());
+    }
+
     redis->set($self->{uuid}, to_yaml($self));
     redis->set($self->{name}, $self->{uuid});
+}
+
+sub addAchievement {
+    my ($self, $achievement) = @_;
+    push @{ $self->{achievements} }, $achievement;
+    redis->set('lastAchievement#' . $self->{uuid}, $achievement);
 }
 
 sub nameIsUsed {
@@ -93,6 +98,13 @@ sub name {
 sub uuid {
     my $self = shift;
     return $self->{uuid};
+}
+
+sub popLastAchievement {
+    my ($self) = @_;
+    my $achievement = redis->get('lastAchievement#' . $self->{uuid});
+    redis->del('lastAchievement#' . $self->{uuid}) if ($achievement);
+    return PlayTTD::Achievement::LongName( $achievement );
 }
 
 1;

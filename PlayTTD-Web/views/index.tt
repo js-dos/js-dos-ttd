@@ -36,8 +36,14 @@
 
     <div class="controls">
       <a href="/play/" target="_self" class="button green">Play now</a>
-      <a href="#" class="button">Achievements</a>
       <a href="/customize/" class="button">Customize</a>
+      <div>
+        <% lastAchievement = vars.player.popLastAchievement %>
+        <% IF lastAchievement %>
+        <p class="achievement"><span>+1:</span><% lastAchievement %></p>
+        <% END %>
+        <a href="#" class="button">Achievements</a>
+      </div>
     </div>
   </div>
 </div>
