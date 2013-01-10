@@ -66,7 +66,7 @@ SETTINGSGEN
 		$_ =~ s|-lpthread||g;
 		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL|;
 		$_ =~ s|^STRIP.*||;
-		$_ =~ s|(^LIBS.*=).*|$1 --pre-js /home/caiiiycuk/play-ttd/etc/html/js/pre.js --pre-js /home/caiiiycuk/play-ttd/etc/html/js/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
+		$_ =~ s|(^LIBS.*=).*|$1 -s TOTAL_MEMORY=256000000 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
 
 #		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
 #		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;

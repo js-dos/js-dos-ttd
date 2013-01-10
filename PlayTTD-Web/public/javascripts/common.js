@@ -65,4 +65,4 @@ Module['print'] = function(text) {
   console.log(text);
 };
 
-Module['noInitialRun'] = true;
+//Module['noInitialRun'] = true;
