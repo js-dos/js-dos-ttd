@@ -116,8 +116,6 @@ static void DrawSurfaceToScreen()
 		return;
 	}
 
-	_num_dirty_rects = 0;
-
 	if (n > MAX_DIRTY_RECTS) {
 		SDL_CALL SDL_UpdateRect(_sdl_screen, 0, 0, 0, 0);
 	} else {
@@ -126,6 +124,8 @@ static void DrawSurfaceToScreen()
 
 	SDL_CALL SDL_LockSurface(_sdl_screen);
 	SDL_CALL SDL_UnlockSurface(_sdl_screen);
+
+	_num_dirty_rects = 0;
 }
 
 static const Dimension _default_resolutions[] = {

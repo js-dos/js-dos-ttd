@@ -1,4 +1,13 @@
 //
+// -- DISABLE DEFAULTS FOR KEYS
+//
+window.addEventListener("keydown", function(event) {
+  if(event.preventDefault) {
+    event.preventDefault();
+  }
+});
+
+//
 // -- COOKIE CHECK
 //
 

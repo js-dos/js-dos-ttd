@@ -54,9 +54,10 @@ SETTINGSGEN
 		}
 
 #O2
+#catching in __ZN14ScriptInstance8GameLoopEv (settings.js)
 #-s PRECISE_I64_MATH=0 - break code
 #--closure 0
-#-O2 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 --llvm-lto 0
+#-O2 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=0
 #java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js openttd.js --js_output_file closured.js
 #perl -e "print \"\\n\//@ sourceMappingURL=closured.js.map\";" >> closured.js
 #java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --create_source_map closured.js.map --source_map_format=V3 --js openttd.js --js_output_file closured.js

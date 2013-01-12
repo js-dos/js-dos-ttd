@@ -8,7 +8,7 @@ Module['playttd_prerun'] = function() {
 
   Module["FS_createPath"]('/', 'home/caiiiycuk/play-ttd/etc/preload/save', true, true);
   Module["FS_createPreloadedFile"]('/home/caiiiycuk/play-ttd/etc/preload/save', 'saved_on_server.sav', 
-    save_path + 'saved_on_server.sav', true, true);
+    'http://play-ttd.com' + save_path + 'saved_on_server.sav', true, true);
 };
 
 //'-d', '3'
