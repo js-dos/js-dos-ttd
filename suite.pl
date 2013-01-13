@@ -35,11 +35,13 @@ if ($opts{e}) {
 
 	system('rm -rfv emcc-build');
 	system('mkdir emcc-build');
-	system("cp -rn $gcc_source/* $em_source/");
+	system("cp -rnv $gcc_source/* $em_source/");
 
 	chdir('emcc-build');
 	system("$emscripten/emconfigure $em_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-network --disable-unicode");
 	chdir('..');
+
+	system("cp -v $gcc_source/src/rev.cpp $em_source/src/rev.cpp");
 
 	patch(
 		'emcc-build', 

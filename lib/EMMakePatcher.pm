@@ -81,6 +81,8 @@ SETTINGSGEN
 		$_ =~ s|-lstdc++||g;
 		$_ =~ s|-lc||g;
 		$_ =~ s|-L/usr/lib/i386-linux-gnu||g;
+
+		$_ =~ s|^.*rev\.cpp\.in.*$||g;
 	}
 
 	close(M);

@@ -44,9 +44,11 @@ static bool _all_modes;
 static volatile bool _draw_continue;
 static Palette _local_palette;
 
-#define MAX_DIRTY_RECTS 100
+#define MAX_DIRTY_RECTS 500
 static SDL_Rect _dirty_rects[MAX_DIRTY_RECTS];
 static int _num_dirty_rects;
+static int _num_dirty_pixels;
+static int _num_pixels;
 
 void VideoDriver_SDL::MakeDirty(int left, int top, int width, int height)
 {
@@ -57,6 +59,7 @@ void VideoDriver_SDL::MakeDirty(int left, int top, int width, int height)
 		_dirty_rects[_num_dirty_rects].h = height;
 	}
 	_num_dirty_rects++;
+	_num_dirty_pixels += width * height;
 }
 
 static void UpdatePalette()
@@ -110,22 +113,21 @@ static void CheckPaletteAnim()
 
 static void DrawSurfaceToScreen()
 {
-	int n = _num_dirty_rects;
-	
-	if (n == 0) {
+	if (_num_dirty_rects == 0 || _num_dirty_pixels == 0) {
 		return;
 	}
 
-	if (n > MAX_DIRTY_RECTS) {
+	if (_num_dirty_rects > MAX_DIRTY_RECTS || _num_dirty_pixels > _num_pixels) {
 		SDL_CALL SDL_UpdateRect(_sdl_screen, 0, 0, 0, 0);
 	} else {
-		SDL_CALL SDL_UpdateRects(_sdl_screen, n, _dirty_rects);
+		SDL_CALL SDL_UpdateRects(_sdl_screen, _num_dirty_rects, _dirty_rects);
 	}
 
 	SDL_CALL SDL_LockSurface(_sdl_screen);
 	SDL_CALL SDL_UnlockSurface(_sdl_screen);
 
 	_num_dirty_rects = 0;
+	_num_dirty_pixels = 0;
 }
 
 static const Dimension _default_resolutions[] = {
@@ -244,6 +246,8 @@ static bool CreateMainSurface(uint w, uint h)
 
 	/* Delay drawing for this cycle; the next cycle will redraw the whole screen */
 	_num_dirty_rects = 0;
+	_num_dirty_pixels = 0;
+	_num_pixels = newscreen->w * newscreen->h;
 
 	_screen.width = newscreen->w;
 	_screen.height = newscreen->h;
