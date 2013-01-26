@@ -1,7 +1,7 @@
-play-ttd
+Transport Tycoon Deluxe online game
 ========
 
-Code base of http://play-ttd.com
+http://play-ttd.com
 
 Changes for 1.2.3.p1
 =================
