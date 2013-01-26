@@ -11,6 +11,7 @@ use EMMakePatcher;
 
 my $emscripten 	= '/home/caiiiycuk/em-sandbox/emscripten';
 my $gcc_source	= "$FindBin::Bin/ttd-source";
+my $ttd_patch	= "$FindBin::Bin/ttd-patch";
 my $em_source	= "$FindBin::Bin/ttd-emscripten";
 my $etc 		= "$FindBin::Bin/etc";
 my $root 		= $FindBin::Bin;
@@ -26,7 +27,7 @@ if ($opts{g}) {
 	system('rm -rfv gcc-build');
 	system('mkdir gcc-build');
 	chdir('gcc-build');
-	system("$gcc_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-network --disable-unicode --enable-debug=3");
+	system("$gcc_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-unicode --enable-debug=3");
 	chdir('..');
 }
 
@@ -34,11 +35,14 @@ if ($opts{e}) {
 	print "Configure for emscripten\n";
 
 	system('rm -rfv emcc-build');
+	system("rm -rfv $em_source");
 	system('mkdir emcc-build');
-	system("cp -rnv $gcc_source/* $em_source/");
+	system("mkdir $em_source");
+	system("cp -rv $gcc_source/* $em_source/");
+	system("cp -rv $ttd_patch/* $em_source/");
 
 	chdir('emcc-build');
-	system("$emscripten/emconfigure $em_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-network --disable-unicode");
+	system("$emscripten/emconfigure $em_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-unicode");
 	chdir('..');
 
 	system("cp -v $gcc_source/src/rev.cpp $em_source/src/rev.cpp");
