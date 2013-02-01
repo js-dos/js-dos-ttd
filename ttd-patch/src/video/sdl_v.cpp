@@ -580,7 +580,7 @@ void __mainLoop() {
 	} 
 	
 	//CSleep(1); 
-	//NetworkDrawChatMessage();
+	NetworkDrawChatMessage();
 	//DrawMouseCursor();
 }
 

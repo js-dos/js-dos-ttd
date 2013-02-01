@@ -60,7 +60,7 @@
 #include "game/game.hpp"
 #include "game/game_config.hpp"
 #include "town.h"
-
+#include "subsidy_func.h"
 
 
 #include <stdarg.h>
@@ -855,27 +855,27 @@ int ttd_main(int argc, char *argv[])
 
 	_video_driver->MainLoop();
 
-	WaitTillSaved();
-
-	/* only save config if we have to */
-	if (save_config) {
-		SaveToConfig();
-		SaveHotkeysToConfig();
-		SaveToHighScore();
-	}
-
+//	WaitTillSaved();
+//
+//	/* only save config if we have to */
+//	if (save_config) {
+//		SaveToConfig();
+//		SaveHotkeysToConfig();
+//		SaveToHighScore();
+//	}
+//
 exit:
-	/* Reset windowing system, stop drivers, free used memory, ... */
-	ShutdownGame();
-
-	free(BaseGraphics::ini_set);
-	free(BaseSounds::ini_set);
-	free(BaseMusic::ini_set);
-	free(_ini_musicdriver);
-	free(_ini_sounddriver);
-	free(_ini_videodriver);
-	free(_ini_blitter);
-
+//	/* Reset windowing system, stop drivers, free used memory, ... */
+//	ShutdownGame();
+//
+//	free(BaseGraphics::ini_set);
+//	free(BaseSounds::ini_set);
+//	free(BaseMusic::ini_set);
+//	free(_ini_musicdriver);
+//	free(_ini_sounddriver);
+//	free(_ini_videodriver);
+//	free(_ini_blitter);
+//
 	return 0;
 }
 
@@ -1172,6 +1172,7 @@ static void CheckCaches()
 
 	extern void RebuildTownCaches();
 	RebuildTownCaches();
+	RebuildSubsidisedSourceAndDestinationCache();
 
 	uint i = 0;
 	FOR_ALL_TOWNS(t) {
