@@ -60,8 +60,6 @@ SETTINGSGEN
 #__ZN4SQVM7ExecuteER11SQObjectPtriiiS1_jNS_13ExecutionTypeE
 
 #-s PRECISE_I64_MATH=0 - break code
-#--closure 0
-#-O2 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2
 #java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js openttd.js --js_output_file closured.js
 #perl -e "print \"\\n\//@ sourceMappingURL=closured.js.map\";" >> closured.js
 #java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --create_source_map closured.js.map --source_map_format=V3 --js openttd.js --js_output_file closured.js
@@ -71,7 +69,7 @@ SETTINGSGEN
 		$_ =~ s|-lpthread||g;
 		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL|;
 		$_ =~ s|^STRIP.*||;
-		$_ =~ s|(^LIBS.*=).*|$1 -s TOTAL_MEMORY=256000000 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
+		$_ =~ s|(^LIBS.*=).*|$1 -O2 --closure 0 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2 -s TOTAL_MEMORY=256000000 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/preload|;
 
 #		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
 #		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;
