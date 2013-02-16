@@ -1,49 +1,34 @@
-<h1>PlayTTD: The browser game based upon Transport Tycoon Deluxe</h1>
+<h3>Transport Tycoon Deluxe Online</h3>
 <p>
-  It's 1950. You're presented with a vast game world made up of numerous small towns and raw material resources. You've got $200,000 and you've got to prove yourself; to set the wheels in motion to become The Transport Tycoon.
+  This is a open-source recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome of firefox. 
 </p>
-<p>
-  Matched against a batch of ruthless rivals, you'll have to act quickly; to build the key routes that will rake in the cash. Build stations, airports, docks and a linking a road, rail, air and ship network. Then, move passengers, mail or goods to the most lucrative destination. As the years roll by you'll be able to buy more advanced and faster vehicles and vessels; if you can afford them!
-</p>
-<div class="menu">
-  <div class="cover">
-    <div class="screenshot"></div>
-    <h3>MAKE TRACKS. MAKE CONNECTIONS. MAKE IT BIG.</h3>
-    <ul class="cover-list">
-      <li>
-        Build stations, docks, airports and make money by connecting areas requiring transport services
-      </li>
-      <li>
-        Construct complex road - rail - air - sea networks using a simple to use interface
-      </li>
-      <li>
-        Experience cut-throat rivalry as you try to grab your piece of the action or choose to play in non-competitive mode
-      </li>
-      <li>
-        Delve into a massive randomly generated world that is affected by your actions with cities, mines, power plants, oil rigs
-      </li>
-      <li>
-        Deal with characteristic town councils that express individual and varying attitudes
-      </li>
-      <li>
-        Cope with disasters such as mine collapses, bus, lorry and aircraft malfunctions
-      </li>
-      <li>
-        Use new transport methods as they are introduced over time including futuristic monorails
-      </li>
-      <li>Compete with other player in achievements</li>
-    </ul>
 
-    <div class="controls">
-      <a href="/play/" target="_self" class="button green">Play now</a>
-      <a href="/customize/" class="button">Customize</a>
-      <div>
-        <% lastAchievement = vars.player.popLastAchievement %>
-        <% IF lastAchievement %>
-        <p class="achievement"><span>+1:</span><% lastAchievement %></p>
-        <% END %>
-        <a href="#" class="button">Achievements</a>
-      </div>
-    </div>
-  </div>
-</div>
+<p>
+  In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).
+</p>
+
+<p>
+  <strong>Multiplayer</strong> mode is highly experimental, server can take up to 255 players in 15 companies. You should login to play in multiplayer mode.
+</p>
+
+<p>
+  Play <a href="/play/">single-player</a> | <a href="#">multiplayer</a>
+</p>
+
+<h3>Game music</h3>
+</p>You can listen  music from game on <noindex><a href="/jukebox/">jukebox</a></noindex> page.</p>
+
+<h3>Performance</h3>
+
+<p>
+  You can run <noindex><a href="/performance-test/">performance test</a></noindex> based on game sources.
+</p>
+
+<h3>Support</h3>
+
+<p>
+  <a href="https://github.com/caiiiycuk/play-ttd">Report a bug</a> or contact <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
+
+  <noindex><p>Powered by <a href="https://github.com/kripken/emscripten">emscripten</a> and <a href="http://www.openttd.org/">openttd</a></p></noindex>
+
+</p>

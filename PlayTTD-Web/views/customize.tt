@@ -1,23 +1,28 @@
-<form id="customzie-form" class="form" method="POST">
+<h3>Edit your profile [<noindex><a href="/login/">logout</a></noindex>]</h3>
+<form id="customize-form" class="form" method="POST">
 	<% IF error %>
 	<p class="error"><% error %></p>
 	<% END %>
 
-	<h2>Edit your profile</h2>
+	<p class="padding">
+		<label for="name" class="w120">Your name:</label>
+		<input id="name" class="w350" name="name" type="text" value="<% vars.player.name %>"></input>
+	</p>
 
-	<label for="name">Your name:</label>
-	<input id="name" name="name" type="text" value="<% vars.player.name %>"></input>
+	<p class="padding">
+		<label for="password" class="w120">Password:</label>
+		<input id="password" class="w350" name="password" type="password"></input>
+	</p>
 
-	<label for="password">Password:</label>
-	<input id="password" name="password" type="password"></input>
+	<h3>Game options</h3>
 
-	<h2>Game options</h2>
+	<p class="padding">
+		<input if="no-sound" name="no-sound" type="checkbox" <% IF vars.player.noSound %>checked<% END %>></input>
+		<label for="no-sound">No sound</label>
+	</p>
 
-	<input if="no-sound" name="no-sound" type="checkbox" <% IF vars.player.noSound %>checked<% END %>></input>
-	<label for="no-sound">No sound</label>
-
-	<div>
-    	<a href="javascript: document.getElementById('customzie-form').submit();" target="_self" class="button green">Save</a>
-		<a href="/" class="button">Cancel</a>
-	</div>
+	<p class="padding">
+		<input type="submit" value="Save"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/">go back</a>
+	</p>
 </form>

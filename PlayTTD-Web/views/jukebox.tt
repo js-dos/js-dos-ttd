@@ -1,10 +1,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.transform.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.grab.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jquery.jplayer.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/mod.csstransforms.min.js"></script>
-<script type="text/javascript" src="<% request.uri_base %>/javascripts/jukebox/circle.player.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/jquery.transform.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/jquery.grab.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/jquery.jplayer.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/mod.csstransforms.min.js"></script>
+<script type="text/javascript" src="<% request.uri_base %>/legacy/javascripts/jukebox/circle.player.js"></script>
 
 <script type="text/javascript">
 		$(document).ready(function(){

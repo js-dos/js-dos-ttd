@@ -8,7 +8,7 @@
     <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
     <meta name="author" content="Guryanov Aleksander" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
-    <link rel="stylesheet" href="<% request.uri_base %>/css/primal_style.css" />
+    <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/empty.css" />
 
     <script type="text/javascript">
       var _gaq = _gaq || [];

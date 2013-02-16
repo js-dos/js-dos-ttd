@@ -1,0 +1,22 @@
+.jukebox {
+	box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(0, 0, 0, 0.25);
+	
+	margin-left: auto;
+	margin-right: auto;
+
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.jukebox h1 {
+	font-size: 1em;
+	text-align: center;
+	color: black;
+	background: rgba(255,255,255,1);
+	margin: 0px;
+	padding: 10px;
+}
+
+.jukebox h1 a {
+	color: #000;
+}

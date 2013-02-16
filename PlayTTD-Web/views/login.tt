@@ -3,16 +3,20 @@
 	<p class="error"><% error %></p>
 	<% END %>
 
-	<h2>Login or <a href="/customize/" taget="_self" class="customize">customize</a> your profile</h2>
+	<h3>Login</h3>
 
-	<label for="name">Your name:</label>
-	<input id="name" name="name" type="text"></input>
+	<p class="padding">
+		<label for="name" class="w120">Your name:</label>
+		<input id="name" class="w350" name="name" type="text"></input>
+	</p>
 
-	<label for="password">Password:</label>
-	<input id="password" name="password" type="password"></input>
+	<p class="padding">
+		<label for="password" class="w120">Password:</label>
+		<input id="password" class="w350" name="password" type="password"></input>
+	</p>
 
-	<div>
-    	<a href="javascript: document.getElementById('login-form').submit();" target="_self" class="button green">Login</a>
-		<a href="/" class="button">Cancel</a>
-	</div>
+	<p class="padding">
+    	<input type="submit" value="Save"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/" class="button">go back</a>
+	</p>
 </form>

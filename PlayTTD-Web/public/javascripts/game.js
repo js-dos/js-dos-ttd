@@ -12,4 +12,5 @@ Module['playttd_prerun'] = function() {
 };
 
 //'-d', '3'
-Module['arguments'] = ['-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'];
+Module['arguments'] = ['-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'//];
+, '-d1', '-n', '91.228.153.235:3980#abc'];

@@ -1,17 +1,21 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html>
   <head>
-	<meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
-    <title>PlayTTD: Transport Tycoon Deluxe game in browser</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Transport Tycoon Deluxe Online</title>
     <meta name="description" content="PlayTTD is an open source browser game based upon Transport Tycoon Deluxe." />
     <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
     <meta name="author" content="Guryanov Aleksander" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
-    <link rel="stylesheet" href="<% request.uri_base %>/css/style.css" />
-    <% FOREACH href = css %>
-      <link rel="stylesheet" href="<% request.uri_base %>/<% href %>" />
-    <% END %>
+    <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/styles.css">
+    <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="<% request.uri_base %>/javascripts/style.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -24,62 +28,42 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-
     <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
   </head>
   <body>
 
-  <div class="header">
-    Hello, <span id="player-name"><% vars.player.name %></span> <a href="/login/">[change]</a>
-  </div>
-  
-  <div class="content-container">
-    <div class="content">
-      <div class="left">
-		<% content %>
-      </div>
-    </div>
-  </div>
+      <header>
+        <h1>Transport Tycoon Deluxe</h1>
+        <p>Online game</p>
+      </header>
 
-  <div class="contact-container">
-    <div class="box">
-      <div class="copyright margin-in-bottom">
-        2012<br/>
-        Guryanov Aleksander<br/><br/>
-        Powered by:<br/>
-        <a href="https://github.com/kripken/emscripten">emscripten</a><br/>
-        <a href="http://www.openttd.org">OpenTTD</a>
-      </div>
-      <div class="contact margin-in-bottom">
-        <span class="head">Contact</span>
-        <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
-        <div class="social">
-          <g:plusone annotation="none"></g:plusone>
-          <a href="https://twitter.com/caiiiycuk" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false"></a></br>
-          <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fplay-ttd.com&amp;send=false&amp;layout=button_count&amp;width=0&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=17" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+      <div id="banner">
+        <span id="logo"></span>
+
+        <noindex><a href="/customize/" class="button fork"><strong><% vars.player.name %></strong></a></noindex>
+
+        <div class="downloads">
+          <span>Play:</span>
+          <ul>
+            <li><a href="/play/" class="button">Single-player</a></li>
+            <li><a href="#" class="button">Multiplayer</a></li>
+          </ul>
         </div>
-      </div>
-      <div class="bug margin-in-bottom">
-        <span class="head">Resources</span>
-        <a href="/jukebox/">Jukebox</a><br/>
-        <a href="/performance-test/">Performance test</a><br/>
-        <a href="https://github.com/caiiiycuk/play-ttd/issues">Report a bug</a>
-      </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+      	<% content %>
+      </section>
+      <footer>
+        <p>Project maintained by <noindex><a href="https://github.com/caiiiycuk">Guryanov Aleksander
+ (caiiiycuk)</a></noindex></p>
+      </footer>
     </div>
-  </div>
-
-  <!-- GOOGLE -->
-
-  <script type="text/javascript">
-    (function() {
-      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-      po.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-    })();
-  </script>
-
-  <!-- TWITTER -->
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> 
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
   </body>
 </html>
