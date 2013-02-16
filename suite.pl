@@ -27,7 +27,7 @@ if ($opts{g}) {
 	system('rm -rfv gcc-build');
 	system('mkdir gcc-build');
 	chdir('gcc-build');
-	system("$gcc_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-unicode --enable-debug=3");
+	system("$gcc_source/configure --without-libtimidity --without-allegro --without-cocoa --without-zlib --without-liblzma --without-liblzo2 --without-png --without-freetype --without-fontconfig --without-icu --without-iconv --without-psp-config --without-ccache --without-distcc --without-threads --endian=LE --disable-unicode --enable-dedicated");
 	chdir('..');
 }
 
