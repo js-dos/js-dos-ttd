@@ -3,6 +3,8 @@ Transport Tycoon Deluxe online game
 
 http://play-ttd.com
 
+Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>
+
 Changes for 1.2.3.p1
 =================
 - OpenTTD 1.2.3 sources
