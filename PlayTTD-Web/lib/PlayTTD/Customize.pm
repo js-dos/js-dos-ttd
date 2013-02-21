@@ -19,6 +19,7 @@ post '/customize/' => sub {
 
 	my $name = param 'name';
 	my $password = param 'password';
+	my $newPassword = param('new-password') || $password;
 	my $noSound = param 'no-sound';
 
 	try {
@@ -28,7 +29,7 @@ post '/customize/' => sub {
 			changeName($player, $name);
 		}
 
-		$player->setPassword($password);
+		$player->setPassword($newPassword);
 		$player->setNoSound(defined $noSound);
 		$player->update();
 

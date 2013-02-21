@@ -15,6 +15,14 @@ if (!UUID) {
   throw "UUID not set unable to start game";
 }
 
+//
+// -- STARTUP SCRIPT
+//
+
+Module['getStartupScript'] = function() {
+  return 'name ' + Engine['player-name'];
+};
+
 // --
 // -- MUSIC MOCKS
 // --

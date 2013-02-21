@@ -8,7 +8,7 @@
 </p>
 
 <p>
-  <strong>Multiplayer</strong> mode is highly experimental, server can take up to 255 players in 15 companies. You should login to play in multiplayer mode.
+  <strong>Multiplayer</strong> mode is highly experimental, server can take up to 255 players in 15 companies. You should be invaited to play for now.
 </p>
 
 <p>
@@ -27,8 +27,6 @@
 <h3>Support</h3>
 
 <p>
-  <a href="https://github.com/caiiiycuk/play-ttd">Report a bug</a> or contact <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
-
-  <noindex><p>Powered by <a href="https://github.com/kripken/emscripten">emscripten</a> and <a href="http://www.openttd.org/">openttd</a></p></noindex>
-
+	Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>, <a href="https://github.com/caiiiycuk/play-ttd">report a bug</a> or contact <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
 </p>
+<noindex><p>Powered by <a href="https://github.com/kripken/emscripten">emscripten</a> and <a href="http://www.openttd.org/">openttd</a></p></noindex>

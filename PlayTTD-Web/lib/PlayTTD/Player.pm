@@ -4,25 +4,25 @@ use Dancer ':syntax';
 use Dancer::Plugin::Mongo;
 use Digest::MD5 qw(md5_base64);
 
+use Data::Dumper;
+
 sub new {
     my $class = shift;
     my $uuid = shift;
 
-    my $self = loadFromStorage($uuid);
+    my $self = playerByUUID($uuid);
 
-    $self = bless { uuid => $uuid }, $class unless $self;
-    $self->{name} = 'player#' . $self->{uuid} unless $self->{name};
+    if ($self) {
+        $self = bless $self, $class;
+    }
+
+    $self = bless { _id => $uuid }, $class unless $self;
+    $self->{name} = 'player#' . $self->{_id} unless $self->{name};
     $self->{password} = '' unless $self->{password};
     $self->{noSound} = 0 unless $self->{noSound};
     $self->{activated} = 0 unless $self->{activated};
 
     return $self;
-}
-
-sub loadFromStorage {
-    my $uuid = shift;
-    my $player = mongo->ttd->players->find_one({ id => $uuid });
-    return 0;
 }
 
 sub setName {
@@ -54,28 +54,12 @@ sub makePassword {
     return md5_base64 shift;
 }
 
-sub update {
-    my $self = shift;
-
-    unless ($self->{activated}) {
-        $self->{activated} = 1;
-        $self->addAchievement(PlayTTD::Achievement::ActivatedProfile());
-    }
-
-    redis->set($self->{uuid}, to_yaml($self));
-    redis->set($self->{name}, $self->{uuid});
-}
-
 sub nameIsUsed {
-    return defined redis->get(shift);
+    return defined playerByName(shift);
 }
 
 sub nameIsNotUsed {
     return !nameIsUsed(shift);
-}
-
-sub uuidByName {
-    return redis->get(shift);
 }
 
 sub name {
@@ -85,9 +69,47 @@ sub name {
 
 sub uuid {
     my $self = shift;
-    return $self->{uuid};
+    return $self->{_id};
 }
 
-1;
+#
+# DAO
+#
+
+sub collection {
+    return mongo
+        ->get_database('play')
+        ->get_collection('players');
+}
+
+sub playerByUUID {
+    return collection()
+        ->find_one({ _id => shift });
+}
+
+sub playerByName {
+    return collection()
+        ->find_one({ name => shift });
+}
+
+sub uuidByName {
+    my $player = playerByName(shift);
+    return unless $player;
+    return $player->{_id};
+}
+
+sub update {
+    my $self = shift;
+
+    unless ($self->{activated}) {
+        $self->{activated} = 1;
+    }
+
+    collection()->update(
+        {'_id' => $self->{_id} },
+        $self,
+        {'upsert' => 1}
+    );
+}
 
 true;

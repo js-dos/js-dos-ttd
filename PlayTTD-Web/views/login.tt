@@ -16,7 +16,7 @@
 	</p>
 
 	<p class="padding">
-    	<input type="submit" value="Save"/>
+    	<input type="submit" value="Login"/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<a href="/" class="button">go back</a>
 	</p>
 </form>

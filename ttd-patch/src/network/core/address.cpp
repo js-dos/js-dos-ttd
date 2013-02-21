@@ -293,7 +293,7 @@ SOCKET NetworkAddress::Resolve(int family, int socktype, int flags, SocketList *
 		}
 
 		printf("schedule connect: %d\n", sock);
-		emscripten_async_call(async_connect, (void *)sock, 10);
+		emscripten_async_call(async_connect, (void *)sock, 10000);
 
 		return sock;
 	}

@@ -14,6 +14,11 @@
 		<input id="password" class="w350" name="password" type="password"></input>
 	</p>
 
+	<p class="padding">
+		<label for="password" class="w120">New password (optional):</label>
+		<input id="new-password" class="w350" name="new-password" type="password"></input>
+	</p>
+
 	<h3>Game options</h3>
 
 	<p class="padding">
