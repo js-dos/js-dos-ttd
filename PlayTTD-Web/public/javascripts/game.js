@@ -1,4 +1,8 @@
-Module['update_fps'] = function() {}
+Module['getStartupScript'] = function() {
+	return "name play-ttd";
+};
+
+Module['update_fps'] = function() {};
 
 Module['playttd_prerun'] = function() { 
   Module['UUID'] = UUID;
@@ -13,4 +17,4 @@ Module['playttd_prerun'] = function() {
 
 //'-d', '3'
 Module['arguments'] = ['-s', 'null', '-m', 'em_midi', '-x', '-c', '/home/caiiiycuk/play-ttd/etc/preload/openttd.cfg'//];
-, '-d1', '-n', '91.228.153.235:3980#abc'];
+, '-d1', '-n', '91.228.153.235:3980'];

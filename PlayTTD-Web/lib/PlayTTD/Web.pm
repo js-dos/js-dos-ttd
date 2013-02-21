@@ -13,6 +13,5 @@ use PlayTTD::Index;
 use PlayTTD::Pre;
 use PlayTTD::Customize;
 use PlayTTD::Login;
-use PlayTTD::Achievement;
 
 true;

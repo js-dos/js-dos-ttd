@@ -226,20 +226,23 @@ Packet *NetworkTCPSocketHandler::ReceivePacket()
  */
 bool NetworkTCPSocketHandler::CanSendReceive()
 {
-	fd_set read_fd;
+	fd_set read_fd, write_fd;
 	struct timeval tv;
 
 	FD_ZERO(&read_fd);
+	FD_ZERO(&write_fd);
+
 	FD_SET(this->sock, &read_fd);
+	FD_SET(this->sock, &write_fd);
 
 	tv.tv_sec = tv.tv_usec = 0; // don't block at all.
 #if !defined(__MORPHOS__) && !defined(__AMIGA__)
-	select(FD_SETSIZE, &read_fd, NULL, NULL, &tv);
+	select(FD_SETSIZE, &read_fd, &write_fd, NULL, &tv);
 #else
 	WaitSelect(FD_SETSIZE, &read_fd, &write_fd, NULL, &tv, NULL);
 #endif
 
-	this->writable = true;
+	this->writable = !!FD_ISSET(this->sock, &write_fd);
 	return FD_ISSET(this->sock, &read_fd) != 0;
 }
 

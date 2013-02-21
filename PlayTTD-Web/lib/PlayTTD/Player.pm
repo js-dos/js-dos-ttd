@@ -1,10 +1,8 @@
 package Player;
 
 use Dancer ':syntax';
-use Dancer::Plugin::Redis;
+use Dancer::Plugin::Mongo;
 use Digest::MD5 qw(md5_base64);
-
-use PlayTTD::Achievement;
 
 sub new {
     my $class = shift;
@@ -16,7 +14,6 @@ sub new {
     $self->{name} = 'player#' . $self->{uuid} unless $self->{name};
     $self->{password} = '' unless $self->{password};
     $self->{noSound} = 0 unless $self->{noSound};
-    $self->{achievements} = [] unless $self->{achievements};
     $self->{activated} = 0 unless $self->{activated};
 
     return $self;
@@ -24,11 +21,8 @@ sub new {
 
 sub loadFromStorage {
     my $uuid = shift;
-    my $yaml = redis->get($uuid);
-    
-    return 0 unless $yaml;
-
-    return from_yaml($yaml);
+    my $player = mongo->ttd->players->find_one({ id => $uuid });
+    return 0;
 }
 
 sub setName {
@@ -72,12 +66,6 @@ sub update {
     redis->set($self->{name}, $self->{uuid});
 }
 
-sub addAchievement {
-    my ($self, $achievement) = @_;
-    push @{ $self->{achievements} }, $achievement;
-    redis->set('lastAchievement#' . $self->{uuid}, $achievement);
-}
-
 sub nameIsUsed {
     return defined redis->get(shift);
 }
@@ -98,13 +86,6 @@ sub name {
 sub uuid {
     my $self = shift;
     return $self->{uuid};
-}
-
-sub popLastAchievement {
-    my ($self) = @_;
-    my $achievement = redis->get('lastAchievement#' . $self->{uuid});
-    redis->del('lastAchievement#' . $self->{uuid}) if ($achievement);
-    return PlayTTD::Achievement::LongName( $achievement );
 }
 
 1;

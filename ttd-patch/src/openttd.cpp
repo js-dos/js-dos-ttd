@@ -68,6 +68,11 @@
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
 #include <string>
+
+extern "C" {
+	const char* getStartupScript();
+}
+
 #endif
 
 
@@ -459,7 +464,7 @@ struct AfterNewGRFScan : NewGRFScanCallback {
 			const char *port = NULL;
 			const char *company = NULL;
 			uint16 rport = NETWORK_DEFAULT_PORT;
-			CompanyID join_as = COMPANY_NEW_COMPANY;
+			CompanyID join_as = COMPANY_SPECTATOR;
 
 			ParseConnectionString(&company, &port, network_conn);
 
@@ -789,7 +794,9 @@ int ttd_main(int argc, char *argv[])
 	}
 #endif /* ENABLE_NETWORK */
 
-	if (!HandleBootstrap()) goto exit;
+	if (!HandleBootstrap()) {
+		abort();
+	}
 
 	_video_driver->ClaimMousePointer();
 
@@ -852,6 +859,9 @@ int ttd_main(int argc, char *argv[])
 	CheckForMissingGlyphs();
 
 	ScanNewGRFFiles(scanner);
+
+	const char *script = getStartupScript();
+	IConsoleCmdExec(script);
 
 	_video_driver->MainLoop();
 

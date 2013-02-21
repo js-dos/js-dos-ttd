@@ -17,13 +17,15 @@
 #include "address.h"
 #include "../../debug.h"
 
-# define NI_NUMERICHOST	1	/* Don't try to look up hostname.  */
-# define AI_ADDRCONFIG	0x0020	/* Use configuration of this host to choose
+#include <emscripten.h>
+
+#define NI_NUMERICHOST	1	/* Don't try to look up hostname.  */
+#define AI_ADDRCONFIG	0x0020	/* Use configuration of this host to choose
 				   returned address type..  */
-# define AI_PASSIVE	0x0001	/* Socket address is intended for `bind'.  */
-# define IPPROTO_IPV6 	41
-# define IPV6_V6ONLY	25
-# define IFF_BROADCAST	0x2
+#define AI_PASSIVE	0x0001	/* Socket address is intended for `bind'.  */
+#define IPPROTO_IPV6 	41
+#define IPV6_V6ONLY	25
+#define IFF_BROADCAST	0x2
 
 extern "C" {
 	int getnameinfo(const struct sockaddr *sa, socklen_t salen,
@@ -236,6 +238,36 @@ bool NetworkAddress::IsInNetmask(char *netmask)
 	return true;
 }
 
+extern "C" {
+
+void async_connect(void *socket) {
+	SOCKET sock = (SOCKET)socket;
+	printf("do connect: %d\n", sock);
+	struct sockaddr_in stSockAddr;
+	memset(&stSockAddr, 0, sizeof(stSockAddr));
+
+	stSockAddr.sin_family = AF_INET;
+	stSockAddr.sin_port = htons(3980);
+	int res = inet_pton(AF_INET, "91.228.153.235", &stSockAddr.sin_addr);
+
+	if (0 > res) {
+		throw "Unable to connect";
+	} else if (0 == res) {
+		throw "Unable to connect";
+	}
+
+	if (connect(sock, (struct sockaddr *)&stSockAddr, sizeof(stSockAddr)) != 0) {
+		throw "Unable to connect";
+	}
+
+	/* Connection succeeded */
+	if (!SetNonBlocking(sock)) {
+		DEBUG(net, 0, "setting non-blocking mode failed");
+	}
+}
+
+}
+
 /**
  * Resolve this address into a socket
  * @param family the type of 'protocol' (IPv4, IPv6)
@@ -253,33 +285,15 @@ SOCKET NetworkAddress::Resolve(int family, int socktype, int flags, SocketList *
 		SOCKET sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
 		if (sock == INVALID_SOCKET) {
-			throw 0;
+			throw "Unable to connect";
 		}
 
-		if (!SetNoDelay(sock)) DEBUG(net, 1, "setting TCP_NODELAY failed");
-
-		struct sockaddr_in stSockAddr;
-		memset(&stSockAddr, 0, sizeof(stSockAddr));
-
-		stSockAddr.sin_family = AF_INET;
-		stSockAddr.sin_port = htons(3980);
-		int res = inet_pton(AF_INET, "91.228.153.235", &stSockAddr.sin_addr);
-
-		if (0 > res) {
-			throw 0;
-		} else if (0 == res) {
-			throw 0;
+		if (!SetNoDelay(sock)) {
+			DEBUG(net, 1, "setting TCP_NODELAY failed");
 		}
 
-
-		if (connect(sock, (struct sockaddr *)&stSockAddr, sizeof(stSockAddr)) != 0) {
-			throw 1;
-		}
-
-		/* Connection succeeded */
-		if (!SetNonBlocking(sock)) DEBUG(net, 0, "setting non-blocking mode failed");
-
-		DEBUG(net, 1, "connected to !!!!");
+		printf("schedule connect: %d\n", sock);
+		emscripten_async_call(async_connect, (void *)sock, 10);
 
 		return sock;
 	}

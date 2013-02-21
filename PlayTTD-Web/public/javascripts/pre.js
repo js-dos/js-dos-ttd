@@ -9,6 +9,17 @@ Module['preRun'] = function() {
 }
 
 // --
+// -- SCRIPT 
+// --
+
+function _getStartupScript() {
+  var script = Module['getStartupScript']();
+  var buffer = _malloc(script.length + 1);
+  Module['writeStringToMemory'](script, buffer);
+  return buffer;
+}
+
+// --
 // -- EM_MIDI --
 // --
 

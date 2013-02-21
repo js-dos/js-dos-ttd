@@ -1,6 +1,10 @@
+Module['getStartupScript'] = function() {
+	return "name play-ttd";
+};
+
 Module['update_fps'] = function(fps) {
 	document.getElementById('fps').innerHTML = 'FPS: ' + Math.round(fps);
-}
+};
 
 Module['playttd_prerun'] = function() { 
   Module['UUID'] = -1;
