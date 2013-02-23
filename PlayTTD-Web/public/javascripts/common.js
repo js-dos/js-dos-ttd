@@ -57,29 +57,8 @@ function createMusicFiles() {
 
 // ----------
 
-Module['SAVE_GAME'] = function(file) {
-  file = file.replace(/\/\//g, "/");
-  
-  if (file != "/home/caiiiycuk/play-ttd/etc/preload/save/saved_on_server.sav") {
-    alert('This game saved in memory! You can save game on server with saved_on_server.sav file.');
-    return;
-  }
-
-  var fs_object = Module["FS_findObject"](file);
-  var contents = fs_object.v || fs_object.contents;
-  var array = new Uint8Array(contents);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/push-save/" + Module['UUID'] + "/saved_on_server.sav", true);
-  xhr.setRequestHeader('X-UUID', Module['UUID']);
-  xhr.onload = function(e) { 
-    alert('This game is saved on the server!');
-  };
-  xhr.send(array.buffer);
-};
-
 Module['print'] = function(text) {
   console.log(text);
 };
 
-//Module['noInitialRun'] = true;
+// Module['noInitialRun'] = true;
