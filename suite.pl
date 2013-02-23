@@ -51,7 +51,7 @@ if ($opts{e}) {
 		'emcc-build', 
 		$emscripten, 
 		$etc, 
-		"$root/gcc-build/objs/debug/endian_check",
+		"$root/gcc-build/objs/release/endian_check",
 		"$root/gcc-build/objs/lang/strgen",
 		"$root/gcc-build/objs/setting/settings_gen");
 }
