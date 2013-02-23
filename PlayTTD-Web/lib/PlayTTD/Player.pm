@@ -72,6 +72,11 @@ sub uuid {
     return $self->{_id};
 }
 
+sub invited {
+    my $self = shift;
+    return $self->{invited};
+}
+
 #
 # DAO
 #

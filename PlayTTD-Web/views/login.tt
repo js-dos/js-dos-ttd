@@ -3,6 +3,10 @@
 	<p class="error"><% error %></p>
 	<% END %>
 
+	<p>You logged in as <strong><% vars.player.name %></strong></p>
+
+	<p>You can <noindex><a href="/customize/">customize</a></noindex> you profile or login</p>
+
 	<h3>Login</h3>
 
 	<p class="padding">

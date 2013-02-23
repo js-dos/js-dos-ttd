@@ -1,4 +1,4 @@
-<h3>Edit your profile [<noindex><a href="/login/">logout</a></noindex>]</h3>
+<h3>Edit your profile</h3>
 <form id="customize-form" class="form" method="POST">
 	<% IF error %>
 	<p class="error"><% error %></p>

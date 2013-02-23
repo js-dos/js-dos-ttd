@@ -46,13 +46,13 @@
       <div id="banner">
         <span id="logo"></span>
 
-        <noindex><a href="/customize/" class="button fork"><strong><% vars.player.name %></strong></a></noindex>
+        <noindex><a href="/login/" class="button fork"><strong><% vars.player.name %></strong></a></noindex>
 
         <div class="downloads">
           <span>Play:</span>
           <ul>
             <li><a href="/play/" class="button">Single-player</a></li>
-            <li><a href="#" class="button">Multiplayer</a></li>
+            <li><a href="/multiplayer/" class="button">Multiplayer</a></li>
           </ul>
         </div>
       </div><!-- end banner -->

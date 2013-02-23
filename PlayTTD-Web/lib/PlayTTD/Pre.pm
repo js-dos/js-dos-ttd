@@ -15,6 +15,7 @@ hook before => sub {
 
 	my $player = new Player($uuid);
 	var 'player' => $player;
+	var 'arguments' => '[]';
 };
 
 true;

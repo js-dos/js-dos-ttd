@@ -25,7 +25,8 @@
     <script type="text/javascript">
       var Engine = {
         'player-name': '<% vars.player.name %>',
-        'player-uuid': '<% vars.player.uuid %>'  
+        'player-uuid': '<% vars.player.uuid %>',  
+        'arguments': <% vars.arguments %>
       };
     </script>
     <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
