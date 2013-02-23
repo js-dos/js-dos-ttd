@@ -55,9 +55,11 @@ SETTINGSGEN
 
 #O2
 #catching (settings.js)
-#__ZN14ScriptInstance8GameLoopEv
-#__ZN4SQVM10CallNativeEP15SQNativeClosureiiR11SQObjectPtrRb
-#__ZN4SQVM7ExecuteER11SQObjectPtriiiS1_jNS_13ExecutionTypeE
+# var EXCEPTION_CATCHING_WHITELIST = [
+#   '__ZN14ScriptInstance8GameLoopEv',
+#   '__ZN4SQVM10CallNativeEP15SQNativeClosureiiR11SQObjectPtrRb',
+#   '__ZN4SQVM7ExecuteER11SQObjectPtriiiS1_jNS_13ExecutionTypeE'
+# ];
 
 #-s PRECISE_I64_MATH=0 - break code
 #java -Xmx2024m -jar /home/caiiiycuk/em-sandbox/emscripten/third_party/closure-compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js openttd.js --js_output_file closured.js
