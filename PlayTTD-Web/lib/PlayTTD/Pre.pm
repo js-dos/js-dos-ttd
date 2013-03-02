@@ -10,7 +10,7 @@ hook before => sub {
 
 	unless ($uuid) {
 		$uuid = create_UUID_as_string(UUID_V1);
-		cookie 'ttd-save-uuid' => $uuid;
+		cookie 'ttd-save-uuid' => $uuid, expires => "1 year";
 	}
 
 	my $player = new Player($uuid);
