@@ -22,7 +22,7 @@ post '/login/' => sub {
 		my $player = new Player($uuid);	
 		die "Wrong login or password\n" unless ($player->matchPassword($password));
 
-		cookie 'ttd-save-uuid' => $player->uuid();
+		cookie 'ttd-save-uuid' => $player->uuid(), expires => "1 year";
 		redirect '/';
 	} catch {
 		template 'login', {error => $_};
