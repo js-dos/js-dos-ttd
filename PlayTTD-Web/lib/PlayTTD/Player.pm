@@ -77,6 +77,11 @@ sub invited {
     return $self->{invited};
 }
 
+sub activated {
+    my $self = shift;
+    return $self->{activated};   
+}
+
 #
 # DAO
 #

@@ -11,7 +11,7 @@ get '/multiplayer' => sub {
 get '/multiplayer/' => sub {
 	my $player =  var 'player';
 	
-	if ($player->invited()) {
+	if ($player->activated()) {
 		var 'arguments', "['-n', '91.228.153.235:3980']";
 		template 'play', {}, { layout => 'empty' };
 	} else {
