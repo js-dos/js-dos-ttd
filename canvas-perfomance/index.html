@@ -7,9 +7,36 @@
 <canvas id="canvas" width="1024px" height="768px" style="border: 1px solid black;"></canvas>
 </div>
 
+<script type="text/javascript" src="datauri.js"></script>
 <script type="text/javascript" src="image.js"></script>
 <script type="text/javascript" src="putImageRender.js"></script>
+<script type="text/javascript" src="webgl-utils.js"></script>
+<script type="text/javascript" src="web-gl.js"></script>
 <script type="text/javascript" src="drawImageRender.js"></script>
+
+<script id="2d-vertex-shader" type="x-shader/x-vertex">
+attribute vec2 a_position;
+attribute vec3 a_color;
+
+varying vec3 v_color;
+
+void main() {
+  gl_Position = vec4(a_position, 0, 1);
+  v_color = a_color;
+}
+</script>
+
+<script id="2d-fragment-shader" type="x-shader/x-fragment">
+#ifdef GL_ES
+precision highp float;
+#endif
+
+varying vec3 v_color;
+
+void main(void) {
+  gl_FragColor = vec4(v_color,1);
+}
+</script>
 
 <script type="text/javascript">
 function requestAnimation (func) {
@@ -40,12 +67,14 @@ var FPSCounter = new function () {
   }
 };
 
-var putRender = new PutImageRender(getImageData(1024, 768), getImageData(1024, 768));
-var drawRender = new DrawImageRender();
+// var putRender = new PutImageRender(getImageData(1024, 768), getImageData(1024, 768));
+var glRender = new WebGlRender(getImageData(1024, 768), getImageData(1024, 768));
+// var drawRender = new DrawImageRender();
 
 function test() {
-  putRender.render();
+  // putRender.render();
   // drawRender.render();
+  glRender.render();
 	FPSCounter.inc();
   requestAnimation(test);
 };

@@ -9,11 +9,10 @@ function getImageData(w, h) {
 	return data;
 }
 
-function toDataURI(buffer) {
-	var size = buffer.length;
+function toDataURI() {
 	var pixs = new Int32Array(1024 * 768);
-	for (var i = 0; i < size; i = i + 4) {
-		pixs[i/4] = 0xFFFFFF;
+	for (var i = 0; i < 1024*768; i = i + 1) {
+		pixs[i] = 0xFFFFFF;
 	}
 	return datauri("image/bmp;", bmp_rgb(1024, 768, pixs));
 }
