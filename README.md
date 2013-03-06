@@ -5,6 +5,10 @@ http://play-ttd.com
 
 Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>
 
+Changes for 1.2.3.p3
+=================
+- Replace putImageData with webgl. Significant perfomance increase (issue#10)
+
 Changes for 1.2.3.p2
 =================
 - Multiplayer mode
