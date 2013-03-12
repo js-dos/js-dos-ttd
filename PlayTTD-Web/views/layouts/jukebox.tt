@@ -2,38 +2,22 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-	<meta http-equiv="Content-type" content="text/html; charset=<% settings.charset %>" />
-    <title>PlayTTD: Transport Tycoon Deluxe game in browser</title>
-    <meta name="description" content="PlayTTD is an open source browser game based upon Transport Tycoon Deluxe." />
-    <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
-    <meta name="author" content="Guryanov Aleksander" />
-    <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <% vars.commons.title %>
+    <% vars.commons.meta %>
+    <% vars.commons.css %>
+    <% vars.commons.script %>
+
     <link rel="stylesheet" href="<% request.uri_base %>/legacy/stylesheets/style.css" />
     <% FOREACH href = css %>
       <link rel="stylesheet" href="<% request.uri_base %>/<% href %>" />
     <% END %>
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32891320-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-
     <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
   </head>
   <body>
 
-  <div class="header">
-    <a href="/">Go back</a>
-  </div>
- 
-		<% content %>
+  <% vars.commons.advertisment %>
+  <% vars.commons.header %>
+	<% content %>
  
   </body>
 </html>

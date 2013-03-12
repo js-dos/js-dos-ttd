@@ -1,6 +1,6 @@
 <h3>Transport Tycoon Deluxe Online</h3>
 <p>
-  This is a open-source recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome of firefox. 
+  This is a open-source recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome or firefox. 
 </p>
 
 <p>
@@ -8,12 +8,16 @@
 </p>
 
 <p>
-  <strong>Multiplayer</strong> mode is highly experimental, server can take up to 255 players in 15 companies.
+  Multiplayer mode is highly experimental, server can take up to 255 players in 15 companies.
 </p>
 
-<p>
-  Play <a href="/play/">single-player</a> | <a href="/multiplayer/">multiplayer</a>
-</p>
+<div>
+	<strong><span>Play:</span></strong>
+	<ul>
+		<li><a href="/play/" class="button">Single-player</a></li>
+		<li><a href="/multiplayer/" class="button">Multiplayer</a></li>
+	</ul>
+</div>
 
 <h3>Game music</h3>
 </p>You can listen  music from game on <noindex><a href="/jukebox/">jukebox</a></noindex> page.</p>

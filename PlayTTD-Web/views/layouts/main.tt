@@ -1,66 +1,23 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Transport Tycoon Deluxe Online</title>
-    <meta name="description" content="PlayTTD is an open source browser game based upon Transport Tycoon Deluxe." />
-    <meta name="keywords" content="PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play" />
-    <meta name="author" content="Guryanov Aleksander" />
-    <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <% vars.commons.title %>
+    <% vars.commons.meta %>
+    <% vars.commons.css %>
+    <% vars.commons.script %>
+
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/styles.css">
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="<% request.uri_base %>/javascripts/style.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32891320-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-    <script type="text/javascript">
-      var Engine = {
-        'player-name': '<% vars.player.name %>',
-        'player-uuid': '<% vars.player.uuid %>'  
-      };
-    </script>
     <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
   </head>
   <body>
 
-      <header>
-        <h1>Transport Tycoon Deluxe</h1>
-        <p>Online game</p>
-      </header>
-
-      <div id="banner">
-        <span id="logo"></span>
-
-        <noindex><a href="/login/" class="button fork"><strong><% vars.player.name %></strong></a></noindex>
-
-        <div class="downloads">
-          <span>Play:</span>
-          <ul>
-            <li><a href="/play/" class="button">Single-player</a></li>
-            <li><a href="/multiplayer/" class="button">Multiplayer</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
+    <% vars.commons.advertisment %>
+    <% vars.commons.header %>
 
     <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
       <section>
       	<% content %>
       </section>

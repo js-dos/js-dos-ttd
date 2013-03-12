@@ -1,6 +1,7 @@
 <div id="canvas-container" class="canvas-container">
+  <% vars.commons.header %>
 	<div id="status" class="loader">Downloading...</div>
-	<canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 100%; height: 100%;"></div>
+	<canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 100%; height: 100%; clear: both;"></div>
 </div>
 
 <script type='text/javascript'>

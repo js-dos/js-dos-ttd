@@ -8,6 +8,18 @@ appname: "PlayTTD::Web"
 # Data directory
 data: "/var/www/data/play-ttd/"
 
+# Google analytics
+analytics: "UA-32891320-1"
+
+# Title
+title: "Transport Tycoon Deluxe Online"
+
+# Description
+description: "PlayTTD is an open source browser game based upon Transport Tycoon Deluxe."
+
+# Keywords
+keywords: "PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play"
+
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
 layout: "main"
