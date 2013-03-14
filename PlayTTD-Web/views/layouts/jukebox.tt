@@ -7,7 +7,7 @@
     <% vars.commons.css %>
     <% vars.commons.script %>
 
-    <link rel="stylesheet" href="<% request.uri_base %>/legacy/stylesheets/style.css" />
+    <link rel="stylesheet" href="<% request.uri_base %>/legacy/stylesheets/style.css?v=1.0" />
     <% FOREACH href = css %>
       <link rel="stylesheet" href="<% request.uri_base %>/<% href %>" />
     <% END %>
