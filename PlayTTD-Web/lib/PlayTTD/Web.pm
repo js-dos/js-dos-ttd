@@ -6,7 +6,6 @@ our $VERSION = '0.1';
 
 use Play::Commons;
 use PlayTTD::OpenTTD;
-use PlayTTD::Save;
 use PlayTTD::Jukebox;
 use PlayTTD::Play;
 use PlayTTD::Multiplayer;

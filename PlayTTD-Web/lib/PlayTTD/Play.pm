@@ -13,7 +13,13 @@ get '/play' => sub {
 };
 
 get '/play/' => sub {
-	template 'play', {}, { layout => 'empty' };
+	my $player =  var 'player';
+	
+	if ($player->activated()) {
+		template 'play', {}, { layout => 'empty' };
+	} else {
+		redirect '/commons/login/?go=/play/';
+	}
 };
 
 true;

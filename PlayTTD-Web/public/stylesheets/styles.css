@@ -556,7 +556,9 @@ a small {
 }
 
 ul {
-  list-style-image: url("../images/bullet.png");
+  /*list-style-image: url("../images/bullet.png");*/
+  list-style-image: none;
+  list-style-type: none;
 }
 
 strong {

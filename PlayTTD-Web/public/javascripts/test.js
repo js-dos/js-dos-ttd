@@ -9,7 +9,7 @@ Module['playttd_prerun'] = function() {
   Module["FS_createPreloadedFile"](
   	'/home/caiiiycuk/play-ttd/etc/preload/save', 
   	'perfomacne_test.sav', 
-  	'http://play-ttd.com/save/perfomance_test.sav', 
+  	'/save/perfomance_test.sav', 
   	true, true);
 };
 

@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/pygment_trac.css">
     <script src="<% request.uri_base %>/javascripts/style.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
+    <script type='text/javascript'>
+      var UUID = Engine['player-uuid'];
+    </script>
   </head>
   <body>
 

@@ -23,7 +23,7 @@ get '/openttd.js' => sub {
 # Impl
 
 sub asset {
-	return config->{'data'} . shift;
+	return config->{'data'} . config->{'folder'} . shift;
 }
 
 true;

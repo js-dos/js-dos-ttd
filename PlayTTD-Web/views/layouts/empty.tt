@@ -5,10 +5,12 @@
     <% vars.commons.title %>
     <% vars.commons.meta %>
     <% vars.commons.css %>
-    <% vars.commons.script %>
+    <% vars.commons.script(arguments) %>
 
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/empty.css" />
-    <script type='text/javascript' src='<% request.uri_base %>/javascripts/cookie.js'></script>
+    <script type='text/javascript'>
+      var UUID = Engine['player-uuid'];
+    </script>
   </head>
   <body>
      <% content %>

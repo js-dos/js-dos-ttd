@@ -12,10 +12,9 @@ get '/multiplayer/' => sub {
 	my $player =  var 'player';
 	
 	if ($player->activated()) {
-		var 'arguments', "['-n', '91.228.153.235:3980']";
-		template 'play', {}, { layout => 'empty' };
+		template 'play', { arguments => "['-n', '91.228.153.235:3980']" }, { layout => 'empty' };
 	} else {
-		template 'multiplayer-forbidden';
+		redirect '/commons/login/?go=/multiplayer/';
 	}
 };
 

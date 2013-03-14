@@ -6,7 +6,10 @@
 appname: "PlayTTD::Web"
 
 # Data directory
-data: "/var/www/data/play-ttd/"
+data: "/var/www/data/"
+
+# Portal folder
+folder: "play-ttd/"
 
 # Google analytics
 analytics: "UA-32891320-1"
