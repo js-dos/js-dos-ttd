@@ -5,6 +5,12 @@ http://play-ttd.com
 
 Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>
 
+Changes for 1.2.3.p4
+=================
+- Better web site
+- Multiple saves for single player
+- Page for downloading save games
+
 Changes for 1.2.3.p3
 =================
 - Replace putImageData with webgl. Significant perfomance increase (issue#10)
