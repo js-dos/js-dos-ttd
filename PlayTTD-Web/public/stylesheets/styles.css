@@ -545,7 +545,7 @@ h3 {
 a {
   color: #3399cc;
   font-weight: 400;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 a small {
@@ -852,13 +852,7 @@ nav ul a:hover {
 }
 
 footer {
-  width: 180px;
-  position: fixed;
-  left: 50%;
-  margin-left: -530px;
-  bottom: 20px;
-  text-align: right;
-  line-height: 16px;
+  text-align: center;
 }
 
 @media print, screen and (max-width: 1060px) {

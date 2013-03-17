@@ -1,6 +1,11 @@
+html {
+	height: 100%;
+}
+
 body {
 	font: 1em Verdana,sans-serif;
 	background: #c4cdca;
+	height: 100%;
 }
 
 div { 
@@ -8,13 +13,24 @@ div {
 }
 
 .canvas-container {
-	position: absolute; 
-	top: 0px; 
-	bottom: 0px; 
-	left: 0px;
-	right: 0px;
-	background: #393a3e;
-	overflow: hidden;
+	height: 100%;
+	position: relative;
+}
+
+.canvas {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 43px;
+	bottom: 0;
+}
+
+.canvas #canvas {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	top: 0;
+	height: 100%;
 }
 
 .canvas-test-container {

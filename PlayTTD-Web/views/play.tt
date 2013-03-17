@@ -1,13 +1,16 @@
-<div id="canvas-container" class="canvas-container">
+<div class="canvas-container">
   <% vars.commons.header %>
-	<div id="status" class="loader">Downloading...</div>
-	<canvas id="canvas" oncontextmenu="event.preventDefault()" style="width: 100%; height: 100%; clear: both;"></div>
+  <div id="status" class="loader">Downloading...</div>
+  <div class="canvas">
+    <canvas id="canvas" oncontextmenu="event.preventDefault()">
+  </div>
 </div>
 
 <script type='text/javascript'>
       function bodyLoaded() {
-        var width = Math.round(document.getElementById('canvas-container').clientWidth);
-        var height = Math.round(document.getElementById('canvas-container').clientHeight);
+        var width = Math.round(Module['canvas'].clientWidth);
+        var height = Math.round(Module['canvas'].clientHeight);
+        Module['canvas'].offsetTop = "abc";
         Module['arguments'].push('-r', width+'x'+height);
         Module['removeRunDependency']();
       }

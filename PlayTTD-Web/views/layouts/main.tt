@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/styles.css?v=1.0">
     <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/pygment_trac.css?v=1.0">
-    <script src="<% request.uri_base %>/javascripts/style.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <script type='text/javascript'>
       var UUID = Engine['player-uuid'];
