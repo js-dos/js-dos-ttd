@@ -1,9 +1,22 @@
+*::selection {
+    background:transparent;
+}
+
+*::-moz-selection {
+    background:transparent;
+}
+
+*::-webkit-selection {
+    background:transparent;
+}
+
 html {
 	height: 100%;
 }
 
 body {
-	font: 1em Verdana,sans-serif;
+	font: 14px/22px Helvetica, Arial, sans-serif;
+  font-weight: 300;
 	background: #c4cdca;
 	height: 100%;
 }

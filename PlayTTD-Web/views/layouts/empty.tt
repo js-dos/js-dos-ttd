@@ -7,7 +7,7 @@
     <% vars.commons.css %>
     <% vars.commons.script(arguments) %>
 
-    <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/empty.css?v=1.0" />
+    <link rel="stylesheet" href="<% request.uri_base %>/stylesheets/empty.css?v=2.0" />
     <script type='text/javascript'>
       var UUID = Engine['player-uuid'];
     </script>
