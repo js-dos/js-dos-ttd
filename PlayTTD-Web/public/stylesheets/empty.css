@@ -1,13 +1,5 @@
-*::selection {
-    background:transparent;
-}
+body {
 
-*::-moz-selection {
-    background:transparent;
-}
-
-*::-webkit-selection {
-    background:transparent;
 }
 
 html {
@@ -25,9 +17,28 @@ div {
 	margin: 0px;
 }
 
+.canvas-container::selection {
+    background:transparent;
+}
+
+.canvas-container::-moz-selection {
+    background:transparent;
+}
+
+.canvas-container::-webkit-selection {
+    background:transparent;
+}
+
 .canvas-container {
 	height: 100%;
 	position: relative;
+
+	-webki t-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .canvas {
