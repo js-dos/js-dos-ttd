@@ -62,11 +62,11 @@
       })();
     </script>
 
-<script type='text/javascript' src='<% request.uri_base %>/javascripts/common.js'></script>
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/common.js?v=1.2.3.p5'></script>
 
-<script type='text/javascript' src='<% request.uri_base %>/javascripts/test.js'></script>
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/test.js?v=1.2.3.p5'></script>
 
-<script type='text/javascript' src='<% request.uri_base %>/openttd.js'></script>
+<script type='text/javascript' src='<% request.uri_base %>/openttd.js?v=1.2.3.p5'></script>
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function(){
