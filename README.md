@@ -5,6 +5,11 @@ http://play-ttd.com
 
 Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>
 
+Changes for 1.2.3.p5
+=================
+- Fix issues with saving games
+- Implement logout
+
 Changes for 1.2.3.p4
 =================
 - Better web site
