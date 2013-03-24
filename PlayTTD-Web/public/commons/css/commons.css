@@ -17,7 +17,7 @@ body {
   background: url(/images/body-background.png) #eae6d1;
 }
 
-form {
+form, .games {
 	width: 768px;
 	margin: 2em auto;
 	padding: 1em;
@@ -66,4 +66,20 @@ input[type="submit"] {
   border: 1px solid gray;
   padding: 5px;
   font-weight: bold;
+}
+
+.dune2 {
+  background: url('/commons/images/dune2.png') no-repeat left 5px;
+  min-height: 120px;
+  padding-left: 200px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+}
+
+.ttd {
+  background: url('/commons/images/ttd.png') no-repeat left top;
+  min-height: 120px;
+  padding-left: 200px;
+  margin-left: 20px;
+  margin-bottom: 30px;
 }
