@@ -2,6 +2,9 @@ package PlayTTD::Play;
 
 use Dancer ':syntax';
 
+my $title = "Transport tycoon deluxe - Single-player";
+my $meta  = "In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).";
+
 # Routing
 
 get '/play_just_now.html' => sub {
@@ -18,11 +21,19 @@ get '/play/' => sub {
   if ($player->activated()) {
     if ($player->noSound()) {
       template 'play', 
-        { arguments => "['-m', 'null']" }, 
+        { 
+          pageTitle => $title,
+          pageMeta => $meta,
+          arguments => "['-m', 'null']"
+        }, 
         { layout => 'empty' };
     } else {
       template 'play', 
-        { arguments => "['-m', 'em_midi']" },  
+        { 
+          pageTitle => $title,
+          pageMeta => $meta,
+          arguments => "['-m', 'em_midi']" 
+        },  
         { layout => 'empty' };
     }
   } else {

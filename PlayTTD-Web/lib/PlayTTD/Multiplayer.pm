@@ -2,6 +2,9 @@ package PlayTTD::Play;
 
 use Dancer ':syntax';
 
+my $title = "Transport tycoon deluxe - Multiplayer";
+my $meta  = "In multiplayer mode you can play in Transport Tycoon against other players.";
+
 # Routing
 
 get '/multiplayer' => sub {
@@ -14,11 +17,19 @@ get '/multiplayer/' => sub {
   if ($player->activated()) {
     if ($player->noSound()) {
       template 'play', 
-        { arguments => "['-m', 'null', '-n', '91.228.153.235:3980']" }, 
+        { 
+          pageTitle => $title,
+          pageMeta => $meta,
+          arguments => "['-m', 'null', '-n', '91.228.153.235:3980']" 
+        }, 
         { layout => 'empty' };
     } else {
       template 'play', 
-        { arguments => "['-m', 'em_midi', '-n', '91.228.153.235:3980']" }, 
+        { 
+          pageTitle => $title,
+          pageMeta => $meta,
+          arguments => "['-m', 'em_midi', '-n', '91.228.153.235:3980']" 
+        }, 
         { layout => 'empty' };
     }
   } else {
