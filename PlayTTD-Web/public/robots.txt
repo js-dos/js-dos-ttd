@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /commons
+Disallow: /login
+Disallow: /performance-test
