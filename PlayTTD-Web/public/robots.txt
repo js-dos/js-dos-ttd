@@ -3,3 +3,4 @@ Allow: /
 Disallow: /commons
 Disallow: /login
 Disallow: /perfomance-test
+Disallow: /performance-test
