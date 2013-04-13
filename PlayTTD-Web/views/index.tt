@@ -1,36 +1,22 @@
-<h1>Transport Tycoon Deluxe Online</h1>
-<p>
-  This is a open-source recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome or firefox. 
-</p>
-
-<p>
-  In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).
-</p>
-
-<p>
-  Multiplayer mode is highly experimental, server can take up to 255 players in 15 companies.
-</p>
+<h1><% vars.i18n.title %></h1>
+<% vars.i18n.project_info %>
 
 <div>
-	<h2>Play</h2>
+	<h2><% vars.i18n.play %></h2>
 	<ul>
-		<li><h2><a href="/play/" class="button">Single-player</a></h2></li>
-		<li><h2><a href="/multiplayer/" class="button">Multiplayer</a></h2></li>
+		<li><h2><a href="/play/" class="button"><% vars.i18n.single_player %></a></h2></li>
+		<li><h2><a href="/multiplayer/" class="button"><% vars.i18n.multiplayer %></a></h2></li>
 	</ul>
 </div>
 
-<h3>Game music</h3>
-<p>You can listen  music from game on <a href="/jukebox/">jukebox</a> page.</p>
+<h3><% vars.i18n.game_music %></h3>
+<p><% vars.i18n.jukebox %></p>
 
-<h3>Performance</h3>
-
+<h3><% vars.i18n.support %></h3>
+<noindex>
 <p>
-  You can run <noindex><a href="/performance-test/">performance test</a></noindex> based on game sources.
+  <% vars.i18n.performance_test %><br/>
+  <% vars.i18n.subscribe %><br/>
+  <% vars.i18n.powered %><br/>
 </p>
-
-<h3>Support</h3>
-
-<p>
-	Subscribe to <a href="http://groups.google.com/group/caiiiycuk">mailing list</a>, <a href="https://github.com/caiiiycuk/play-ttd">report a bug</a> or contact <a href="mailto:caiiiycuk@gmail.com">caiiiycuk@gmail.com</a>
-</p>
-<noindex><p>Powered by <a href="https://github.com/kripken/emscripten">emscripten</a> and <a href="http://www.openttd.org/">openttd</a></p></noindex>
+</noindex>

@@ -1,5 +1,6 @@
-<!doctype html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="<% vars.locale %>" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <% vars.commons.title %>
     <% vars.commons.meta %>
@@ -23,8 +24,7 @@
       	<% content %>
       </section>
       <footer>
-        <p>Project maintained by <noindex><a href="https://github.com/caiiiycuk">Guryanov Aleksander
- (caiiiycuk)</a></noindex></p>
+        <p><% vars.i18n.lang %></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->

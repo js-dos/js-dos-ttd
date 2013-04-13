@@ -14,14 +14,8 @@ folder: "play-ttd/"
 # Google analytics
 analytics: "UA-32891320-1"
 
-# Title
-title: "Transport Tycoon Deluxe Online"
-
-# Description
-description: "This is a open-source recreation of the Transport Tycoon Deluxe. Game is HTML5 compliant and can be run on every major browser."
-
-# Keywords
-keywords: "PlayTTD,play ttd,TTD,Transport Tycoon Deluxe,game,browser,online,play"
+# Yandex metrika
+metrika: 20958994
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)

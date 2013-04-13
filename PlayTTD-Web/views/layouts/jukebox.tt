@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en-us" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="<% vars.locale %>" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <% vars.commons.title("Music from the transport tycoon deluxe") %>
-    <% vars.commons.meta("Here you can listen music from the transport tycoon deluxe in high quality", "Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On") %>
+    <% vars.commons.title %>
+    <% vars.commons.meta %>
     <% vars.commons.css %>
     <% vars.commons.script %>
 

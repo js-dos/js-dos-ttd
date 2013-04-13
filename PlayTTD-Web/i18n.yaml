@@ -1,0 +1,78 @@
++:
+  en:
+    title: Transport Tycoon - online
+    description: Here you can play Transport Tycoon Deluxe online on every major browser.
+    keywords: ttd,Transport Tycoon,Transport Tycoon Deluxe,browser,online,play,game
+    project_mantained: Project maintained by <a href="https://github.com/caiiiycuk" rel="nofollow">Guryanov Aleksander (caiiiycuk)</a>
+    lang: <a href="http://play-ttd.com/" lang="en">EN</a>&nbsp<a href="http://ru.play-ttd.com/" lang="ru">RU</a>
+  ru:
+    title: Transport Tycoon - онлайн
+    description: Здесь вы можете поиграть в игру Transport Tycoon Deluxe прямо в вашем браузере.
+    keywords: ttd,Transport Tycoon,Transport Tycoon Deluxe,браузер,онлайн,играть
+    project_mantained: Поддержка <a href="https://github.com/caiiiycuk" rel="nofollow">Гурьянов Александр (caiiiycuk)</a>
+
+/:
+  en:
+    project_info: <p>This is a recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome or firefox.</p><p>In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).</p><p>Multiplayer mode is highly experimental, server can take up to 255 players in 15 companies.</p>
+    play: Play
+    single_player: Single-player
+    multiplayer: Multiplayer
+    game_music: Game music
+    jukebox: <a href="/jukebox/">Here</a> you can listen music from the Transport Tycoon in high quality.
+    support: Support
+    performance_test: You can run <a href="/performance-test/" rel="nofollow">performance test</a>.
+    subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Report a bug</a>; feedback <a href="mailto:caiiiycuk@gmail.com">Guryanov Aleksander (caiiiycuk)</a>
+    powered: Powered by <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> and <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
+  ru:
+    project_info: <p>Классическая экономическая стратегия Transport Tycoon воссоздана для игры в браузере.</p><p>В одиночном режиме вы можете играть в Transport Tycoon против компьютера (список AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).</p><p>В сетевой игре могут играть до 255 игроков в 15 компаниях.</p>
+    play: Играть
+    single_player: Один игрок
+    multiplayer: Игра по сети
+    game_music: Музыка из игры
+    jukebox: <a href="/jukebox/">Здесь</a> вы можете послушать музыку из Transport Tycoon в высоком качестве.
+    support: Поддержка
+    performance_test: Запустить <a href="/performance-test/" rel="nofollow">тест производительности</a>.
+    subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Отправить ошибку</a>; обратная связь <a href="mailto:caiiiycuk@gmail.com">Гурьянов Александр (caiiiycuk)</a>
+    powered: Основанно на <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> и <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
+
+/jukebox/:
+  en:
+    title: Music from the Transport Tycoon
+    description: Here you can listen music from the Transport Tycoon in high quality
+    keywords: listen,music,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
+    play: Press play button to listen transport tycoon music in high quality
+  ru:
+    title: Музыка из Transport Tycoon
+    description: Здесь вы можете послушать музыку из Transport Tycoon в высоком качестве
+    keywords: слушать,музыка,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
+    play: Нажимите кнопку что бы начать воспроизведение
+
+/performance-test/:
+  en:
+    title: Transport Tycoon - Performance Test
+    description: Test browser speed in the Transport Tycoon game
+    keywords: performance,browser,javascript,canvas,test
+  ru:
+    title: Transport Tycoon - Тест производительности
+    description: Оценить производительность браузера в игре Transport Tycoon
+    keywords: производительность,браузер,javascript,canvas,тест
+
+/play/:
+  en:
+    title: Transport Tycoon - Single-player
+    description: Here you can play Transport Tycoon Deluxe in single-player mode against computer.
+    keywords: ttd,Transport Tycoon,browser,single-player,play
+  ru:
+    title: Transport Tycoon - Одиночный режим
+    description: Здесь вы можете поиграть в Transport Tycoon Deluxe против компьютера.
+    keywords: ttd,Transport Tycoon,браузер,один игрок,одиночный режим,играть
+
+/multiplayer/:
+  en:
+    title: Transport Tycoon - Multiplayer
+    description: Here you can play Transport Tycoon Deluxe in multiplayer mode against other players.
+    keywords: ttd,Transport Tycoon,browser,multiplayer,network game
+  ru:
+    title: Transport Tycoon - Игра по сети
+    description: Здесь вы можете поиграть в Transport Tycoon Deluxe против других игроков по сети.
+    keywords: ttd,Transport Tycoon,браузер,многопользовательский режим,игра по сети,сетевая игра

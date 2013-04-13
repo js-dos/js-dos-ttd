@@ -138,10 +138,9 @@
 
 <div id="jp_container_1" class="jp-video jp-video-270p jukebox">
 	<h1 id="header">
-		Press play button to listen transport tycoon music in high quality
+		<% vars.i18n.play %>
 	</h1>
 	<h1 id="header-adv" style="display: none;">
-		<a href="/" target="_self">Here you can play Transport Tycoon Deluxe online</a>
 	</h1>
 	<div class="jp-type-playlist">
 		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
