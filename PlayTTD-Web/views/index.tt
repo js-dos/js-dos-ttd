@@ -14,7 +14,7 @@
     <noindex>
     <h3><% vars.i18n.server_status %></h3>
       <ul>
-      <li><% vars.i18n.active_players %> <% vars.status.clients + vars.status.spectators %></li>
+      <li><% vars.i18n.active_players %> <% vars.status.clients %></li>
       <li><% vars.i18n.companies %> <% vars.status.companies %></li>
       </ul>
     </noindex>
