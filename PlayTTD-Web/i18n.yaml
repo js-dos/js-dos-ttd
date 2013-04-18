@@ -23,7 +23,7 @@
     performance_test: You can run <a href="/performance-test/" rel="nofollow">performance test</a>.
     subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Report a bug</a>; feedback <a href="mailto:caiiiycuk@gmail.com">Guryanov Aleksander (caiiiycuk)</a>
     powered: Powered by <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> and <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
-    server_status: Server status
+    server_status: Server status (last 5 minutes)
     active_players: Active players:
     companies: Companies:
   ru:
@@ -37,7 +37,7 @@
     performance_test: Запустить <a href="/performance-test/" rel="nofollow">тест производительности</a>.
     subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Отправить ошибку</a>; обратная связь <a href="mailto:caiiiycuk@gmail.com">Гурьянов Александр (caiiiycuk)</a>
     powered: Основанно на <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> и <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
-    server_status: Состояние сервера
+    server_status: Состояние сервера (за последние 5 минут)
     active_players: Активных игроков:
     companies: Компаний:    
 
