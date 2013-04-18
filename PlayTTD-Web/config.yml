@@ -26,6 +26,7 @@ layout: "main"
 # about unicode within your app when this setting is set (recommended).
 charset: "UTF-8"
 
+server-log: /var/www/logs/ttd-server-log
 # template engine
 # simple: default and very basic template engine
 # template_toolkit: TT

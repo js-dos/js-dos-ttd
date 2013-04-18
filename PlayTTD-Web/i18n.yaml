@@ -4,7 +4,7 @@
     description: Here you can play Transport Tycoon Deluxe online on every major browser.
     keywords: ttd,Transport Tycoon,Transport Tycoon Deluxe,browser,online,play,game
     project_mantained: Project maintained by <a href="https://github.com/caiiiycuk" rel="nofollow">Guryanov Aleksander (caiiiycuk)</a>
-    lang: <a href="http://play-ttd.com/" lang="en">EN</a>&nbsp<a href="http://ru.play-ttd.com/" lang="ru">RU</a>
+    lang: <a href="http://play-ttd.com/" lang="en">en</a>&nbsp<a href="http://ru.play-ttd.com/" lang="ru">ru</a>
   ru:
     title: Transport Tycoon - онлайн
     description: Здесь вы можете поиграть в игру Transport Tycoon Deluxe прямо в вашем браузере.
@@ -23,6 +23,9 @@
     performance_test: You can run <a href="/performance-test/" rel="nofollow">performance test</a>.
     subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Report a bug</a>; feedback <a href="mailto:caiiiycuk@gmail.com">Guryanov Aleksander (caiiiycuk)</a>
     powered: Powered by <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> and <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
+    server_status: Server status
+    active_players: Active players:
+    companies: Companies:
   ru:
     project_info: <p>Классическая экономическая стратегия Transport Tycoon воссоздана для игры в браузере.</p><p>В одиночном режиме вы можете играть в Transport Tycoon против компьютера (список AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).</p><p>В сетевой игре могут играть до 255 игроков в 15 компаниях.</p>
     play: Играть
@@ -34,6 +37,9 @@
     performance_test: Запустить <a href="/performance-test/" rel="nofollow">тест производительности</a>.
     subscribe: <a href="https://github.com/caiiiycuk/play-ttd" rel="nofollow">Отправить ошибку</a>; обратная связь <a href="mailto:caiiiycuk@gmail.com">Гурьянов Александр (caiiiycuk)</a>
     powered: Основанно на <a href="https://github.com/kripken/emscripten" rel="nofollow">emscripten</a> и <a href="http://www.openttd.org/" rel="nofollow">openttd</a>
+    server_status: Состояние сервера
+    active_players: Активных игроков:
+    companies: Компаний:    
 
 /jukebox/:
   en:

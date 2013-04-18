@@ -2,11 +2,23 @@
 <% vars.i18n.project_info %>
 
 <div>
-	<h2><% vars.i18n.play %></h2>
-	<ul>
-		<li><h2><a href="/play/" class="button"><% vars.i18n.single_player %></a></h2></li>
-		<li><h2><a href="/multiplayer/" class="button"><% vars.i18n.multiplayer %></a></h2></li>
-	</ul>
+  <div>
+    <h2><% vars.i18n.play %></h2>
+    <ul>
+      <li><h2><a href="/play/" class="button"><% vars.i18n.single_player %></a></h2></li>
+      <li><h2><a href="/multiplayer/" class="button"><% vars.i18n.multiplayer %></a></h2></li>
+    </ul>
+  </div>
+
+  <div>
+    <noindex>
+    <h3><% vars.i18n.server_status %></h3>
+      <ul>
+      <li><% vars.i18n.active_players %> <% vars.status.clients + vars.status.spectators %></li>
+      <li><% vars.i18n.companies %> <% vars.status.companies %></li>
+      </ul>
+    </noindex>
+  </div>
 </div>
 
 <h3><% vars.i18n.game_music %></h3>
