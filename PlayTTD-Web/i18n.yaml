@@ -13,7 +13,7 @@
 
 /:
   en:
-    project_info: <p>This is a recreation of the Transport Tycoon. Game is HTML5 compliant and can be run on every major browser like chrome or firefox.</p><p>In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).</p><p>Multiplayer mode is highly experimental, server can take up to 255 players in 15 companies.</p>
+    project_info: <p>This is a recreation of the Transport Tycoon. Game is HTML5 compliant and can be played in every major browser like chrome or firefox.</p><p>In single-player mode you can play in Transport Tycoon against computer (AI: AdmiralAI, AIAI, NoCAB, SimpleAI, Trans AI).</p><p>Multiplayer mode is highly experimental, server can take up to 255 players in 15 companies.</p>
     play: Play
     single_player: Single-player
     multiplayer: Multiplayer
