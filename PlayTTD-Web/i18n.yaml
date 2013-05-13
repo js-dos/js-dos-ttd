@@ -1,13 +1,13 @@
 +:
   en:
-    title: Transport Tycoon - online
-    description: Here you can play Transport Tycoon Deluxe online on every major browser.
+    title: Transport Tycoon Deluxe (TTD) - Online
+    description: Browser version of classic game Transport Tycoon Deluxe (TTD). Here you can play into Transport Tycoon Deluxe online in your browser.
     keywords: ttd,Transport Tycoon,Transport Tycoon Deluxe,browser,online,play,game
     project_mantained: Project maintained by <a href="https://github.com/caiiiycuk" rel="nofollow">Guryanov Aleksander (caiiiycuk)</a>
     lang: <a href="http://play-ttd.com/" lang="en">en</a>&nbsp<a href="http://ru.play-ttd.com/" lang="ru">ru</a>
   ru:
-    title: Transport Tycoon - онлайн
-    description: Здесь вы можете поиграть в игру Transport Tycoon Deluxe прямо в вашем браузере.
+    title: Transport Tycoon Deluxe (TTD) - Онлайн
+    description: Браузерная версия классической игры Transport Tycoon Deluxe (TTD). Здесь вы можете играть в Transport Tycoon Deluxe онлайн в вашем браузере.
     keywords: ttd,Transport Tycoon,Transport Tycoon Deluxe,браузер,онлайн,играть
     project_mantained: Поддержка <a href="https://github.com/caiiiycuk" rel="nofollow">Гурьянов Александр (caiiiycuk)</a>
 
@@ -43,25 +43,25 @@
 
 /jukebox/:
   en:
-    title: Music from the Transport Tycoon
+    title: Music from the Transport Tycoon Deluxe (TTD)
     description: Here you can listen music from the Transport Tycoon in high quality
-    keywords: listen,music,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
+    keywords: listen,music,ttd,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
     play: Press play button to listen transport tycoon music in high quality
   ru:
-    title: Музыка из Transport Tycoon
+    title: Музыка из Transport Tycoon Deluxe (TTD)
     description: Здесь вы можете послушать музыку из Transport Tycoon в высоком качестве
-    keywords: слушать,музыка,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
+    keywords: слушать,музыка,ttd,Tycoon DELUXE Theme,Snarl Up,Easy Driver,Little Red Diesel,City Groove,Aliens Ate My Railway,Stoke It,Don't Walk!,Sawyer's Tune,Fell Apart On Me,Can't Get There From Here,Hard Drivin',Road Hog,Hold That Train!,Broomer's Oil Rag,Goss Groove,Small Town,Cruise Control,Stroll On,Funk Central,Jammit,Movin' On
     play: Нажимите кнопку что бы начать воспроизведение
 
 /performance-test/:
   en:
-    title: Transport Tycoon - Performance Test
+    title: Performance Test - Transport Tycoon Deluxe (TTD) - Online
     description: Test browser speed in the Transport Tycoon game
-    keywords: performance,browser,javascript,canvas,test
+    keywords: performance,ttd,browser,javascript,canvas,test
   ru:
-    title: Transport Tycoon - Тест производительности
+    title: Тест производительности - Transport Tycoon Deluxe (TTD) - Онлайн
     description: Оценить производительность браузера в игре Transport Tycoon
-    keywords: производительность,браузер,javascript,canvas,тест
+    keywords: производительность,ttd,браузер,javascript,canvas,тест
 
 /play/:
   en:
