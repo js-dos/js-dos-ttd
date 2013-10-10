@@ -8,7 +8,7 @@
 
 <script type='text/javascript'>
       function bodyLoaded() {
-        Module['removeRunDependency']();
+		//do nothing
       }
 
       // connect to canvas
@@ -52,6 +52,7 @@
       Module.setStatus('Downloading...');
       //FIXME: should move to pre-js
       Module['kNb'] = Module.setStatus;
+      var t = Module;
     </script>
 
 <script type="text/javascript">

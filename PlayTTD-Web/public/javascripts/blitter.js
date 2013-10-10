@@ -1,4 +1,4 @@
-function _playttd_blitter_skipTopPixels(src, skipLineCount) {
+_playttd_blitter_skipTopPixels = function(src, skipLineCount) {
   var y;
   var trans;
   var pixels;
@@ -19,7 +19,7 @@ function _playttd_blitter_skipTopPixels(src, skipLineCount) {
   return src;
 }
 
-function _playttd_blitter_drawLine(dst, src, width, skip_left, mode, bp_remap) {
+_playttd_blitter_drawLine = function(dst, src, width, skip_left, mode, bp_remap) {
   var trans;
   var pixels;
   var skipCount;
@@ -82,7 +82,7 @@ function _playttd_blitter_drawLine(dst, src, width, skip_left, mode, bp_remap) {
   return src;
 }
 
-function __draw(mode, dst, src, pixels, bp_remap) {
+__draw = function(mode, dst, src, pixels, bp_remap) {
   switch (mode) {
     case 1/*BM_COLOUR_REMAP*/: {
       __drawWithRemap(dst, src, pixels, bp_remap);
@@ -100,7 +100,7 @@ function __draw(mode, dst, src, pixels, bp_remap) {
   }
 }
 
-function __drawWithRemap(dst, src, pixels, bp_remap) {
+__drawWithRemap = function(dst, src, pixels, bp_remap) {
   var m;
   while (pixels > 0) {
     m = HEAPU8[bp_remap + HEAPU8[src]];
@@ -115,7 +115,7 @@ function __drawWithRemap(dst, src, pixels, bp_remap) {
   }
 }
 
-function __drawTransparent(dst, src, pixels, bp_remap) {
+__drawTransparent = function(dst, src, pixels, bp_remap) {
   src += pixels;
   
   while (pixels > 0) {
@@ -125,7 +125,7 @@ function __drawTransparent(dst, src, pixels, bp_remap) {
   }
 }
 
-function __drawCopy(dst, src, pixels) {
+__drawCopy = function(dst, src, pixels) {
   while (pixels > 0) {
     HEAPU8[dst] = HEAPU8[src];
     ++dst; 

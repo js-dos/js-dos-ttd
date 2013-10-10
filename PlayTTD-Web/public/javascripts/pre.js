@@ -4,6 +4,7 @@
 
 Module['preRun'] = function() { 
     SDL.defaults.copyOnLock = false;
+    Module.screenIsReadOnly = true;
     Module["FS_findObject"] = FS.findObject;
     Module['playttd_prerun']();
 }
@@ -12,7 +13,7 @@ Module['preRun'] = function() {
 // -- SCRIPT 
 // --
 
-function _getStartupScript() {
+_getStartupScript = function() {
   var script = Module['getStartupScript']();
   var buffer = _malloc(script.length + 1);
   Module['writeStringToMemory'](script, buffer);
@@ -25,7 +26,7 @@ function _getStartupScript() {
 
 Module['EM_MIDI_AUDIO'] = new Audio();
 
-var _em_midi_play = function(ptr) {
+_em_midi_play = function(ptr) {
   var filename = Pointer_stringify(ptr);
   var url = 'http://play-ttd.com/gm/' + filename.substr(-11);
   console.log('Playing song: ' + url);
@@ -34,16 +35,16 @@ var _em_midi_play = function(ptr) {
   Module['EM_MIDI_AUDIO'].play();
 };
 
-var _em_midi_stop = function() {
+_em_midi_stop = function() {
   Module['EM_MIDI_AUDIO'].src = Module['EM_MIDI_AUDIO'].src; // rewind
   Module['EM_MIDI_AUDIO'].pause();
 };
 
-var _em_midi_is_playing = function() {
+_em_midi_is_playing = function() {
   return !(Module['EM_MIDI_AUDIO'].paused || Module['EM_MIDI_AUDIO'].ended);
 };
 
-var _em_midi_volume = function(vol) {
+_em_midi_volume = function(vol) {
   Module['EM_MIDI_AUDIO'].volume = vol / 256;
 };
 
@@ -51,7 +52,7 @@ var _em_midi_volume = function(vol) {
 // -- MISC --
 // --
 
-var _playttd_set_canvas_size = function(width, height) {
+_playttd_set_canvas_size = function(width, height) {
   width = width + 'px';
   height = height + 'px';
 
@@ -62,7 +63,7 @@ var _playttd_set_canvas_size = function(width, height) {
   }
 }
 
-var _playttd_fps_counter = function () {
+_playttd_fps_counter = function () {
   _this = this;
   this.startTime = Date.now();
   this.frameCount = 0;
@@ -78,20 +79,17 @@ var _playttd_fps_counter = function () {
   }
 }
 
-var _playttd_set_main_loop = function(func) {
+_playttd_set_main_loop = function(func) {
   Module['noExitRuntime'] = true;
 
-  var loop = FUNCTION_TABLE[func];
   var fps = new _playttd_fps_counter();
-
-  FUNCTION_TABLE[func] = function() {
-    loop();
+  var loop = function () {
+    Module.dynCall_v(func);
     fps.inc();
-  }
+  };
   
-  var cLoop = FUNCTION_TABLE[func];
   var jsLoop = function() {
-    cLoop();
+    loop();
     Browser.requestAnimationFrame(jsLoop);
   }
 
