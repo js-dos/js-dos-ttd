@@ -84,7 +84,7 @@ _playttd_set_main_loop = function(func) {
 
   var fps = new _playttd_fps_counter();
   var loop = function () {
-    Module.dynCall_v(func);
+    Module['dynCall_v'](func);
     fps.inc();
   };
   
