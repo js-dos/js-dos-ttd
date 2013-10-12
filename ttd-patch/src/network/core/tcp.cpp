@@ -18,6 +18,10 @@
 
 #include "tcp.h"
 
+extern "C" {
+	bool isConnected();
+}
+
 /**
  * Construct a socket handler for a TCP connection.
  * @param s The just opened TCP connection.
@@ -226,6 +230,10 @@ Packet *NetworkTCPSocketHandler::ReceivePacket()
  */
 bool NetworkTCPSocketHandler::CanSendReceive()
 {
+	if (!isConnected()) {
+		return false;
+	}
+
 	fd_set read_fd, write_fd;
 	struct timeval tv;
 
@@ -237,9 +245,9 @@ bool NetworkTCPSocketHandler::CanSendReceive()
 
 	tv.tv_sec = tv.tv_usec = 0; // don't block at all.
 #if !defined(__MORPHOS__) && !defined(__AMIGA__)
-	select(FD_SETSIZE, &read_fd, &write_fd, NULL, &tv);
+	select(64, &read_fd, &write_fd, NULL, &tv);
 #else
-	WaitSelect(FD_SETSIZE, &read_fd, &write_fd, NULL, &tv, NULL);
+	WaitSelect(64, &read_fd, &write_fd, NULL, &tv, NULL);
 #endif
 
 	this->writable = !!FD_ISSET(this->sock, &write_fd);

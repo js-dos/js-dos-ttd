@@ -2,7 +2,7 @@ Module['update_fps'] = function(fps) {
 	document.getElementById('fps').innerHTML = 'FPS: ' + Math.round(fps);
 };
 
-Module['playttd_prerun'] = function() { 
+Module['playttd_prerun'] = function() {
   Module['UUID'] = -1;
   createMusicFiles();
   Module["FS_createPath"]('/', 'home/caiiiycuk/play-ttd/etc/preload/save', true, true);

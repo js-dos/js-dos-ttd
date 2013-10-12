@@ -39,6 +39,8 @@ extern "C" {
 	void freeaddrinfo(struct addrinfo *res);
 
 	const char *gai_strerror(int errcode);
+
+	void setConnected();
 }
 
 static SOCKET ConnectLoopProc(addrinfo *runp);
@@ -256,14 +258,13 @@ void async_connect(void *socket) {
 		throw "Unable to connect";
 	}
 
-	if (connect(sock, (struct sockaddr *)&stSockAddr, sizeof(stSockAddr)) != 0) {
-		throw "Unable to connect";
-	}
+	connect(sock, (struct sockaddr *)&stSockAddr, sizeof(stSockAddr));
 
-	/* Connection succeeded */
 	if (!SetNonBlocking(sock)) {
 		DEBUG(net, 0, "setting non-blocking mode failed");
 	}
+
+	setConnected();
 }
 
 }

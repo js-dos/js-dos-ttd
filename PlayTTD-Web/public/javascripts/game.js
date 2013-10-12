@@ -1,6 +1,11 @@
 Module['update_fps'] = function() {};
 
 Module['playttd_prerun'] = function() { 
+  var width = Math.round(Module['canvas'].clientWidth);
+  var height = Math.round(Module['canvas'].clientHeight);
+  Module['canvas'].offsetTop = "abc";
+  Module['arguments'].push('-r', width+'x'+height);
+  
   Module['UUID'] = UUID;
   createMusicFiles();
 

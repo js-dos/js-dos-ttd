@@ -10,6 +10,18 @@ Module['preRun'] = function() {
 }
 
 // --
+// -- NETWORKING
+// --
+
+_setConnected = function() {
+  setTimeout(function() {Module['isConnected'] = true;}, 5000);
+}
+
+_isConnected = function() {
+  return Module['isConnected'] == true;
+}
+
+// --
 // -- SCRIPT 
 // --
 

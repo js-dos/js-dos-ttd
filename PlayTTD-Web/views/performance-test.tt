@@ -7,10 +7,6 @@
 </center>
 
 <script type='text/javascript'>
-      function bodyLoaded() {
-		//do nothing
-      }
-
       // connect to canvas
       var Module = {
         fullScreen: false,
@@ -52,25 +48,18 @@
       Module.setStatus('Downloading...');
       //FIXME: should move to pre-js
       Module['kNb'] = Module.setStatus;
-      var t = Module;
     </script>
 
 <script type="text/javascript">
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/plusone.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
-    </script>
-
-<script type='text/javascript' src='<% request.uri_base %>/javascripts/common.js?v=1.2.3.p5'></script>
-
-<script type='text/javascript' src='<% request.uri_base %>/javascripts/test.js?v=1.2.3.p5'></script>
-
-<script type='text/javascript' src='<% request.uri_base %>/openttd.js?v=1.2.3.p5'></script>
-
-<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(){
-      bodyLoaded();
-    }, false);
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
 </script>
+
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/common.js?v=1.2.3.p6'></script>
+
+<script type='text/javascript' src='<% request.uri_base %>/javascripts/test.js?v=1.2.3.p6'></script>
+
+<script type='text/javascript' src='<% request.uri_base %>/openttd.js?v=1.2.3.p6'></script>
