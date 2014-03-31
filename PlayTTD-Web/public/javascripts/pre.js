@@ -2,12 +2,9 @@
 // -- PRE RUN 
 // --
 
-Module['preRun'] = function() { 
-    SDL.defaults.copyOnLock = false;
-    Module.screenIsReadOnly = true;
-    Module["FS_findObject"] = FS.findObject;
+Module['preRun'].push(function() { 
     Module['playttd_prerun']();
-}
+});
 
 // --
 // -- NETWORKING
@@ -96,7 +93,8 @@ _playttd_set_main_loop = function(func) {
 
   var fps = new _playttd_fps_counter();
   var loop = function () {
-    Module['dynCall_v'](func);
+    Module['dynCall']('v', func);
+    // Runtime.dynCall('v', func);
     fps.inc();
   };
   
@@ -108,29 +106,49 @@ _playttd_set_main_loop = function(func) {
   Browser.requestAnimationFrame(jsLoop);
 }
 
-// --
-// -- SAVE GAME
-// --
 
-Module['SAVE_GAME'] = function(file) {
-  file = file.replace(/\/\//g, "/");
-  
-  // if (file != "/home/caiiiycuk/play-ttd/etc/preload/save/saved_on_server.sav") {
-  //   alert('This game saved in memory! You can save game on server with saved_on_server.sav file.');
-  //   return;
-  // }
+Module['update_fps'] = function(fps) {};
 
-  var fileName = /\/([^/]+)$/.exec(file)[1]
-
-  var fs_object = Module["FS_findObject"](file);
-  var contents = fs_object.contents;
-  var array = new Uint8Array(contents);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/save/" + Module['UUID'] + "/" + fileName, true);
-  xhr.setRequestHeader('X-UUID', Module['UUID']);
-  xhr.onload = function(e) { 
-    alert('This game is saved on the server!');
-  };
-  xhr.send(array.buffer);
+Module['playttd_prerun'] = function() {
+  createMusicFiles();
 };
+
+//
+// -- STARTUP SCRIPT
+//
+
+Module['getStartupScript'] = function() {
+  return 'name caiiiycuk';
+};
+
+// --
+// -- MUSIC MOCKS
+// --
+
+function createMusicFiles() {
+  var emptyDataFile = new Uint8Array(0);
+  
+  Module["FS_createPath"]('/', 'home/caiiiycuk/play-ttd/etc/preload/gm', true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt00.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt01.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt02.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt03.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt04.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt05.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt06.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt07.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt08.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt09.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt10.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt11.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt12.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt13.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt14.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt15.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt16.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt17.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt18.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt19.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt20.ogg', emptyDataFile, true, true);
+  Module["FS_createDataFile"]('/home/caiiiycuk/play-ttd/etc/preload/gm', 'gm_tt21.ogg', emptyDataFile, true, true);
+}

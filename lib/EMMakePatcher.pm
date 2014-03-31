@@ -9,7 +9,8 @@ use Cwd;
 @EXPORT = qw (patch);
 
 sub patchMakeFile {
-	my ($fileName, $emscripten, $etc, $endian_check, $strgen, $settings_gen) = @_;
+	my ($fileName, $emscripten, $etc, $endian_check, $strgen, $settings_gen,
+		$apiCppInclude, $apiJs, $jsTransform) = @_;
 
 	$endian_check = File::Spec->abs2rel($endian_check, getcwd);
 	$strgen = File::Spec->abs2rel($strgen, getcwd);
@@ -69,9 +70,9 @@ SETTINGSGEN
 		$_ =~ s|^TTD.*|TTD            = openttd.js|;
 		$_ =~ s|-lSDL||g;
 		$_ =~ s|-lpthread||g;
-		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL|;
+		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL -I$apiCppInclude|;
 		$_ =~ s|^STRIP.*||;
-		$_ =~ s|(^LIBS.*=).*|$1 -O2 --closure 0 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2 -s TOTAL_MEMORY=268435456 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/vfs@/|;
+		$_ =~ s|(^LIBS.*=).*|$1 -O0 --closure 0 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2 -s TOTAL_MEMORY=268435456 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/vfs@/ --pre-js $apiJs --js-transform "$jsTransform"|;
 
 #		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
 #		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;

@@ -67,6 +67,7 @@
 
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
+#include <epicport/api.h>
 #include <string>
 
 extern "C" {
@@ -1135,10 +1136,9 @@ void SwitchToMode(SwitchMode new_mode)
 				ShowErrorMessage(STR_JUST_RAW_STRING, INVALID_STRING_ID, WL_ERROR);
 			} else {
 				#ifdef EMSCRIPTEN
-				std::string script("Module['SAVE_GAME']('");
-				script.append(_file_to_saveload.name)
-					.append("');");
-				emscripten_run_script_int(script.c_str());
+					if (Epicport_CanSave()) {
+						Epicport_PushSave(_file_to_saveload.name);
+					}
 				#endif
 				DeleteWindowById(WC_SAVELOAD, 0);
 			}

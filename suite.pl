@@ -16,6 +16,10 @@ my $em_source	= "$FindBin::Bin/ttd-emscripten";
 my $etc 		= "$FindBin::Bin/etc";
 my $root 		= $FindBin::Bin;
 
+my $apiCppInclude = '/home/caiiiycuk/scala/epicport/native/includes';
+my $apiJs = '/home/caiiiycuk/scala/epicport/emscripten/pre/pre-api.js';
+my $jsTransform = 'perl /home/caiiiycuk/scala/epicport/emscripten/js-transform.pl';
+
 my %opts = ();
 getopts('gne', \%opts);
 
@@ -53,7 +57,12 @@ if ($opts{e}) {
 		$etc, 
 		"$root/gcc-build/objs/release/endian_check",
 		"$root/gcc-build/objs/lang/strgen",
-		"$root/gcc-build/objs/setting/settings_gen");
+		"$root/gcc-build/objs/setting/settings_gen",
+		$apiCppInclude,
+		$apiJs,
+		$jsTransform);
+
+	print "There are some problem with --js-transform, delete it from make file and then paste again\n";
 }
 
 if ($opts{n}) {
