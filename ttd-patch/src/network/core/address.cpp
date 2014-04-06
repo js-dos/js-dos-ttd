@@ -250,7 +250,7 @@ void async_connect(void *socket) {
 
 	stSockAddr.sin_family = AF_INET;
 	stSockAddr.sin_port = htons(3980);
-	int res = inet_pton(AF_INET, "91.228.153.235", &stSockAddr.sin_addr);
+	int res = inet_pton(AF_INET, "23.92.28.238", &stSockAddr.sin_addr);
 
 	if (0 > res) {
 		throw "Unable to connect";

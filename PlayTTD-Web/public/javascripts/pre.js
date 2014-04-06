@@ -37,7 +37,7 @@ Module['EM_MIDI_AUDIO'] = new Audio();
 
 _em_midi_play = function(ptr) {
   var filename = Pointer_stringify(ptr);
-  var url = 'http://play-ttd.com/gm/' + filename.substr(-11);
+  var url = 'http://epicport.com/ttd/music/' + filename.substr(-11);
   console.log('Playing song: ' + url);
   
   Module['EM_MIDI_AUDIO'].src = url;
@@ -118,7 +118,7 @@ Module['playttd_prerun'] = function() {
 //
 
 Module['getStartupScript'] = function() {
-  return 'name caiiiycuk';
+  return 'name unknow';
 };
 
 // --

@@ -72,7 +72,7 @@ SETTINGSGEN
 		$_ =~ s|-lpthread||g;
 		$_ =~ s|-I/usr/include/SDL|-I$emscripten/system/include/SDL -I$apiCppInclude|;
 		$_ =~ s|^STRIP.*||;
-		$_ =~ s|(^LIBS.*=).*|$1 -O0 --closure 0 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2 -s TOTAL_MEMORY=268435456 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/vfs@/ --pre-js $apiJs --js-transform "$jsTransform"|;
+		$_ =~ s|(^LIBS.*=).*|$1 -O0 --closure 0 -s DOUBLE_MODE=0 -s CORRECT_OVERFLOWS=0 -s CORRECT_ROUNDINGS=0 -s DISABLE_EXCEPTION_CATCHING=2 -s TOTAL_MEMORY=268435456 --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/pre.js --pre-js /home/caiiiycuk/play-ttd/PlayTTD-Web/public/javascripts/blitter.js --preload-file /home/caiiiycuk/play-ttd/etc/vfs@/ --pre-js $apiJs --js-transform '$jsTransform'|;
 
 #		$_ =~ s|video/sdl_v.o|video/sdl_v_patched.o|;
 #		$_ =~ s|video/sdl_v.cpp|video/sdl_v_patched.cpp|;
