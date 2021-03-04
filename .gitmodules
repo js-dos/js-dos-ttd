@@ -1,0 +1,3 @@
+[submodule "OpenTTD"]
+	path = OpenTTD
+	url = https://github.com/OpenTTD/OpenTTD
