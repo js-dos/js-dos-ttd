@@ -1,20 +1,95 @@
 cmake_minimum_required(VERSION 3.5)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS NO)
+
+add_compile_options(
+        -W
+        -Wall
+        -Wcast-qual
+        -Wextra
+        -Wsign-compare
+        -Wundef
+        -Wpointer-arith
+        -Wwrite-strings
+        -Wredundant-decls
+        -Wformat-security
+        -Wformat=2
+        -Winit-self
+        -Wnon-virtual-dtor
+
+        # Often parameters are unused, which is fine.
+        -Wno-unused-parameter
+        # We use 'ABCD' multichar for SaveLoad chunks identifiers
+        -Wno-multichar
+
+        # Compilers complains about that we break strict-aliasing.
+        #  On most places we don't see how to fix it, and it doesn't
+        #  break anything. So disable strict-aliasing to make the
+        #  compiler all happy.
+        -fno-strict-aliasing
+)
+
+if(${EMSCRIPTEN})
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Oz")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
+        -Oz \
+        --emit-symbol-map \
+        -s ASSERTIONS=0 \
+        -s SAFE_HEAP=0 \
+        -s TOTAL_MEMORY=134217728 \
+        -s WASM_MEM_MAX=134217728 \
+        -s INVOKE_RUN=0 \
+        -s EXPORTED_FUNCTIONS='[\"_main\", \"_em_openttd_add_server\"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' \
+        -s NO_EXIT_RUNTIME=1 \
+        -s FORCE_FILESYSTEM=1 \
+        -s DISABLE_EXCEPTION_CATCHING=0 \
+        -s ERROR_ON_UNDEFINED_SYMBOLS=1")
+
+    add_definitions(-DNDEBUG)
+else()
+    set(CMAKE_C_COMPILER "/usr/bin/clang")
+    set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+
+    set(CMAKE_C_FLAGS "")
+    set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} --std=c++11")
+
+    add_definitions(-D_DEBUG)
+endif()
+
+# -D_FORTIFY_SOURCE=2
+# -DWITH_PNG
+# -DWITH_ZLIB
+# -DWITH_PERSONAL_DIR
+# -DPERSONAL_DIR=\".openttd\"
+# -DGLOBAL_DATA_DIR=\"/usr/local/share/games/openttd\"
+
 add_definitions(
-        -D_DEBUG
-        -DNDEBUG
         -DNO_THREADS
-        -DGLOBAL_DATA_DIR=\"/usr/local/share/games/openttd\"
-        -DPERSONAL_DIR=\".openttd\"
         -DTTD_ENDIAN=TTD_LITTLE_ENDIAN
         -DUNIX
-        -DWITH_PERSONAL_DIR
-        -DWITH_PNG
-        -DWITH_SDL2
-        -DWITH_ZLIB
+        -DWITH_SDL
+)
+
+include_directories(
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/3rdparty/squirrel/include"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/ai"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/game"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/template"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/ai"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/game"
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/template"
 )
 
 set(SOURCES
+        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/rev.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_accounting.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_admin.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_airport.cpp"
@@ -211,11 +286,11 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/town_sl.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/vehicle_sl.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/waypoint_sl.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/sdl2_s.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/sdl_s.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/null_s.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/spriteloader/grf.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_v.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_default_v.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl_v.cpp"
+        #"${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_default_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/dedicated_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/null_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/video_driver.cpp"
@@ -408,4 +483,24 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/window.cpp"
         )
 
-add_executable(bin ${SOURCES})
+if(${EMSCRIPTEN})
+    add_custom_target(data
+            COMMAND rm -rf "${CMAKE_CURRENT_LIST_DIR}/res_gen"
+            COMMAND rm -rf "${CMAKE_CURRENT_LIST_DIR}/res_linux"
+            COMMAND mkdir "${CMAKE_CURRENT_LIST_DIR}/res_gen"
+            COMMAND mkdir "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_src/*" "${CMAKE_CURRENT_LIST_DIR}/res_gen"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/ai" "${CMAKE_CURRENT_LIST_DIR}/res_gen/ai"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/game" "${CMAKE_CURRENT_LIST_DIR}/res_gen/game"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/native-build/lang/english.lng" "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang/english.lng"
+
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_gen" "${CMAKE_CURRENT_LIST_DIR}/res_linux"
+            COMMAND python "${EMSCRIPTEN_ROOT_PATH}/tools/file_packager.py" bin.data._.js --no-heap-copy --from-emcc --preload "${CMAKE_CURRENT_LIST_DIR}/res_gen@" --js-output=bin.data.js)
+
+    add_executable(wbin ${SOURCES})
+    set_target_properties(wbin PROPERTIES SUFFIX .js)
+    set_target_properties(wbin PROPERTIES LINK_FLAGS "-s WASM=1")
+else()
+    add_executable(bin ${SOURCES})
+    target_link_libraries(bin SDL)
+endif()

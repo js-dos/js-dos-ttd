@@ -2,3 +2,7 @@
 build
 cmake-build-debug
 cmake-build-release
+res_linux
+res_gen
+res_src/baseset
+native-build
