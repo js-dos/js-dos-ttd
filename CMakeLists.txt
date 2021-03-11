@@ -34,21 +34,25 @@ add_compile_options(
 if(${EMSCRIPTEN})
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Oz")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
+    # -s WASM_MEM_MAX=134217728 \
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-        -Oz \
+        -Oz -g \
         --emit-symbol-map \
         -s ASSERTIONS=0 \
         -s SAFE_HEAP=0 \
         -s TOTAL_MEMORY=134217728 \
-        -s WASM_MEM_MAX=134217728 \
-        -s INVOKE_RUN=0 \
+        -s ALLOW_MEMORY_GROWTH=0 \
+        -s INVOKE_RUN=1 \
         -s EXPORTED_FUNCTIONS='[\"_main\", \"_em_openttd_add_server\"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' \
         -s NO_EXIT_RUNTIME=1 \
         -s FORCE_FILESYSTEM=1 \
         -s DISABLE_EXCEPTION_CATCHING=0 \
         -s ERROR_ON_UNDEFINED_SYMBOLS=1")
 
-    add_definitions(-DNDEBUG)
+    add_definitions(
+            -DNDEBUG
+            -DSDL_GetKeyState=SDL_GetKeyboardState
+    )
 else()
     set(CMAKE_C_COMPILER "/usr/bin/clang")
     set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
@@ -497,9 +501,16 @@ if(${EMSCRIPTEN})
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_gen" "${CMAKE_CURRENT_LIST_DIR}/res_linux"
             COMMAND python "${EMSCRIPTEN_ROOT_PATH}/tools/file_packager.py" bin.data._.js --no-heap-copy --from-emcc --preload "${CMAKE_CURRENT_LIST_DIR}/res_gen@" --js-output=bin.data.js)
 
-    add_executable(wbin ${SOURCES})
+    add_library(bin-obj OBJECT ${SOURCES})
+
+    add_executable(wbin $<TARGET_OBJECTS:bin-obj>)
     set_target_properties(wbin PROPERTIES SUFFIX .js)
     set_target_properties(wbin PROPERTIES LINK_FLAGS "-s WASM=1")
+
+    add_executable(hbin $<TARGET_OBJECTS:bin-obj>)
+    set_target_properties(hbin PROPERTIES SUFFIX .html)
+    set_target_properties(hbin PROPERTIES LINK_FLAGS "-s WASM=1 \
+        --preload-file ${CMAKE_CURRENT_LIST_DIR}/res_gen@")
 else()
     add_executable(bin ${SOURCES})
     target_link_libraries(bin SDL)
