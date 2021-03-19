@@ -32,14 +32,14 @@ add_compile_options(
 )
 
 if(${EMSCRIPTEN})
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Oz")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz")
-    # -s WASM_MEM_MAX=134217728 \
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Oz -s USE_SDL=2")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Oz -s USE_SDL=2")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} \
-        -Oz -g \
+        -Oz -s USE_SDL=2 \
         --emit-symbol-map \
         -s ASSERTIONS=0 \
         -s SAFE_HEAP=0 \
+        -s WASM_MEM_MAX=134217728 \
         -s TOTAL_MEMORY=134217728 \
         -s ALLOW_MEMORY_GROWTH=0 \
         -s INVOKE_RUN=1 \
@@ -49,32 +49,26 @@ if(${EMSCRIPTEN})
         -s DISABLE_EXCEPTION_CATCHING=0 \
         -s ERROR_ON_UNDEFINED_SYMBOLS=1")
 
-    add_definitions(
-            -DNDEBUG
-            -DSDL_GetKeyState=SDL_GetKeyboardState
-    )
+    add_definitions(-DNDEBUG)
 else()
     set(CMAKE_C_COMPILER "/usr/bin/clang")
     set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
-    set(CMAKE_C_FLAGS "")
-    set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} --std=c++11")
-
     add_definitions(-D_DEBUG)
 endif()
 
+
 # -D_FORTIFY_SOURCE=2
-# -DWITH_PNG
-# -DWITH_ZLIB
-# -DWITH_PERSONAL_DIR
 # -DPERSONAL_DIR=\".openttd\"
 # -DGLOBAL_DATA_DIR=\"/usr/local/share/games/openttd\"
-
+# -DWITH_PERSONAL_DIR
+# -DWITH_PNG
+# -DWITH_ZLIB
 add_definitions(
         -DNO_THREADS
         -DTTD_ENDIAN=TTD_LITTLE_ENDIAN
         -DUNIX
-        -DWITH_SDL
+        -DWITH_SDL2
 )
 
 include_directories(
@@ -84,16 +78,16 @@ include_directories(
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/ai"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/game"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/template"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/ai"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/game"
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/script/api/template"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated/script"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated/script/api"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated/script/api/ai"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated/script/api/game"
+        "${CMAKE_CURRENT_LIST_DIR}/build-host/generated/script/api/template"
 )
 
 set(SOURCES
-        "${CMAKE_CURRENT_LIST_DIR}/native-build/generated/rev.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/build/generated/rev.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_accounting.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_admin.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/script/api/script_airport.cpp"
@@ -290,11 +284,11 @@ set(SOURCES
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/town_sl.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/vehicle_sl.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/saveload/waypoint_sl.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/sdl_s.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/sdl2_s.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/sound/null_s.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/spriteloader/grf.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl_v.cpp"
-        #"${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_default_v.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_v.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/sdl2_default_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/dedicated_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/null_v.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/video/video_driver.cpp"
@@ -496,7 +490,7 @@ if(${EMSCRIPTEN})
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_src/*" "${CMAKE_CURRENT_LIST_DIR}/res_gen"
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/ai" "${CMAKE_CURRENT_LIST_DIR}/res_gen/ai"
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/game" "${CMAKE_CURRENT_LIST_DIR}/res_gen/game"
-            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/native-build/lang/english.lng" "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang/english.lng"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/build/lang/english.lng" "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang/english.lng"
 
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_gen" "${CMAKE_CURRENT_LIST_DIR}/res_linux"
             COMMAND python "${EMSCRIPTEN_ROOT_PATH}/tools/file_packager.py" bin.data._.js --no-heap-copy --from-emcc --preload "${CMAKE_CURRENT_LIST_DIR}/res_gen@" --js-output=bin.data.js)
@@ -509,9 +503,8 @@ if(${EMSCRIPTEN})
 
     add_executable(hbin $<TARGET_OBJECTS:bin-obj>)
     set_target_properties(hbin PROPERTIES SUFFIX .html)
-    set_target_properties(hbin PROPERTIES LINK_FLAGS "-s WASM=1 \
-        --preload-file ${CMAKE_CURRENT_LIST_DIR}/res_gen@")
+    set_target_properties(hbin PROPERTIES LINK_FLAGS "-s WASM=1 --preload-file ${CMAKE_CURRENT_LIST_DIR}/res_gen@")
 else()
     add_executable(bin ${SOURCES})
-    target_link_libraries(bin SDL)
+    target_link_libraries(bin SDL2)
 endif()
