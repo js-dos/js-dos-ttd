@@ -229,8 +229,8 @@ set(SOURCES_F_NO_EXCEPTIONS
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/linkgraph/refresh.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/misc/dbg_helpers.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/misc/getoptdata.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/music/extmidi.cpp"
-        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/music/midifile.cpp"
+#        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/music/extmidi.cpp"
+#        "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/music/midifile.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/music/null_m.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/network/core/address.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/network/core/core.cpp"
@@ -487,6 +487,10 @@ set(SOURCES_F_NO_EXCEPTIONS
         "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/src/window.cpp"
         )
 
+set(SOURCES_OVERRIDES
+        "${CMAKE_CURRENT_LIST_DIR}/src/emmidi.cpp"
+        )
+
 if(${EMSCRIPTEN})
     set_source_files_properties(${SOURCES_F_NO_EXCEPTIONS} PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions -s DISABLE_EXCEPTION_CATCHING=1")
     set_source_files_properties(${SOURCES_F_EXCEPTIONS} PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS} -s DISABLE_EXCEPTION_CATCHING=0")
@@ -495,18 +499,21 @@ else()
     set_source_files_properties(${SOURCES_F_EXCEPTIONS} PROPERTIES COMPILE_FLAGS "${CMAKE_CXX_FLAGS}")
 endif()
 
-set(SOURCES ${SOURCES_F_NO_EXCEPTIONS} ${SOURCES_F_EXCEPTIONS})
+set(SOURCES ${SOURCES_F_NO_EXCEPTIONS} ${SOURCES_F_EXCEPTIONS} ${SOURCES_OVERRIDES})
 
 if(${EMSCRIPTEN})
     add_custom_target(data
             COMMAND rm -rf "${CMAKE_CURRENT_LIST_DIR}/res_gen"
             COMMAND rm -rf "${CMAKE_CURRENT_LIST_DIR}/res_linux"
+            COMMAND rm -rf "${CMAKE_CURRENT_LIST_DIR}/emscripten/async"
             COMMAND mkdir "${CMAKE_CURRENT_LIST_DIR}/res_gen"
             COMMAND mkdir "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang"
-            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_src/*" "${CMAKE_CURRENT_LIST_DIR}/res_gen"
+            COMMAND mkdir -p "${CMAKE_CURRENT_LIST_DIR}/emscripten/async"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_src/baseset" "${CMAKE_CURRENT_LIST_DIR}/res_gen/baseset"
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/ai" "${CMAKE_CURRENT_LIST_DIR}/res_gen/ai"
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/OpenTTD/bin/game" "${CMAKE_CURRENT_LIST_DIR}/res_gen/game"
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/build/lang/english.lng" "${CMAKE_CURRENT_LIST_DIR}/res_gen/lang/english.lng"
+            COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_src/open_msx" "${CMAKE_CURRENT_LIST_DIR}/emscripten/async/open_msx"
 
             COMMAND cp -r "${CMAKE_CURRENT_LIST_DIR}/res_gen" "${CMAKE_CURRENT_LIST_DIR}/res_linux"
             COMMAND python "${EMSCRIPTEN_ROOT_PATH}/tools/file_packager.py" bin.data._.js --no-heap-copy --from-emcc --preload "${CMAKE_CURRENT_LIST_DIR}/res_gen@" --js-output=bin.data.js)

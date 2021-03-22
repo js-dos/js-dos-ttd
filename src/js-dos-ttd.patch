@@ -1,0 +1,36 @@
+From fe4667ad3d752300b018e29ae8f397378d6b8d0d Mon Sep 17 00:00:00 2001
+From: Alexander Guryanov <caiiiycuk@gmail.com>
+Date: Mon, 22 Mar 2021 13:43:59 +0700
+Subject: [PATCH] js-dos-ttd patch
+
+---
+ src/base_media_func.h | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/src/base_media_func.h b/src/base_media_func.h
+index 8491f0e51..e82e6d148 100644
+--- a/src/base_media_func.h
++++ b/src/base_media_func.h
+@@ -140,9 +140,16 @@ bool BaseSet<T, Tnum_files, Tsearch_in_tars>::FillSetDetails(IniFile *ini, const
+ 				this->found_files++;
+ 				break;
+ 
+-			case MD5File::CR_NO_FILE:
+-				DEBUG(grf, 1, "The file %s specified in %s is missing", filename, full_filename);
+-				break;
++			case MD5File::CR_NO_FILE: {
++			    // @caiiiycuk: Workaround for async sounds & music
++			    if (std::string(filename).find(".mid") != std::string::npos) {
++                    file->check_result =  MD5File::CR_MATCH;
++			        this->valid_files++;
++			        this->found_files++;
++			    } else {
++                    DEBUG(grf, 1, "The file %s specified in %s is missing", filename, full_filename);
++                }
++            } break;
+ 		}
+ 	}
+ 
+-- 
+2.26.2
+
